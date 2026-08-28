@@ -5,7 +5,8 @@ type: dataset
 authors:
   - given-names: Daniel
     family-names: Leonforte
-    affiliation: Eigenart Filmproduktion, Wiesbaden, Germany
+    affiliation: Independent Researcher, Wiesbaden, Germany
+    email: info@leonforte.de
 repository-code: "https://github.com/dl-eigenart/driven-states-registry"
 url: "https://dl-eigenart.github.io/driven-states-registry/"
 doi: 10.5281/zenodo.22142490

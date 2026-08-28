@@ -102,4 +102,4 @@ documentation.
 
 Code MIT, data CC-BY-4.0.
 
-(c) 2026 Daniel Leonforte / Eigenart Filmproduktion
+(c) 2026 Daniel Leonforte

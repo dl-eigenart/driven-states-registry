@@ -16,7 +16,7 @@ CLI:
     python3 rpt_eval.py lint
     python3 rpt_eval.py driven
 
-(c) 2026 Daniel Leonforte / Eigenart Filmproduktion
+(c) 2026 Daniel Leonforte
 """
 
 from __future__ import annotations

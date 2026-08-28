@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eigenart-filmproduktion.de/schema/dsr-registry-0.1.json",
+  "$id": "https://dl-eigenart.github.io/driven-states-registry/schema/dsr-registry-0.1.json",
   "title": "Driven States Registry - registry-only entry",
   "description": "Lightweight entry type for host materials with documented driven states but no full coupling graph. Deliberately separate from the RPT full entry: inventing a graph just to satisfy the schema would be data fabrication.",
   "type": "object",

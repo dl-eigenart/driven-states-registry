@@ -143,4 +143,4 @@ back negative and the counter-position of Dodge et al. has not been cleared. Bi�
 though the phenomenon is independently confirmed elsewhere. A collection that levels such
 differences would be worse than none.
 
-© 2026 Daniel Leonforte / Eigenart Filmproduktion
+© 2026 Daniel Leonforte

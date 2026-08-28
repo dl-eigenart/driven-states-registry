@@ -109,4 +109,4 @@ latest version - cite this one unless you depend on a specific snapshot.
 
 Everything here is English — data, identifiers, code comments, CLI output, documentation.
 
-© 2026 Daniel Leonforte / Eigenart Filmproduktion
+© 2026 Daniel Leonforte

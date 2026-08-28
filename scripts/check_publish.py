@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 """List exactly what would be published, and refuse anything that should not be.
 
-The project directory also holds confidential material - the Eigenart working paper,
-the prior-art gate and the CI build engine. The .gitignore uses a deny-by-default
+The project directory also holds confidential material - the working paper, the
+prior-art gate and the corporate document build engine. The .gitignore uses a deny-by-default
 allowlist, but a mistake there would be expensive and silent. This script states the
 result in plain terms instead, and fails loudly on anything unexpected.
 

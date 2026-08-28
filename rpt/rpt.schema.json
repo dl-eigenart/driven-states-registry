@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eigenart-filmproduktion.de/schema/rpt-0.1.json",
+  "$id": "https://dl-eigenart.github.io/driven-states-registry/schema/rpt-0.1.json",
   "title": "Reactive Periodic Table – Element/Material Descriptor",
   "description": "Description layer for the controllable degrees of freedom of elements and materials. The defensible core is not the catalogue but the evaluable coupling graph with energy and latency costs.",
   "type": "object",
