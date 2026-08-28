@@ -1,5 +1,10 @@
 # Driven States Registry & Reactive Periodic Table
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22142490.svg)](https://doi.org/10.5281/zenodo.22142490)
+[![validate](https://github.com/dl-eigenart/driven-states-registry/actions/workflows/validate.yml/badge.svg)](https://github.com/dl-eigenart/driven-states-registry/actions/workflows/validate.yml)
+[![Code: MIT](https://img.shields.io/badge/code-MIT-blue.svg)](LICENSE)
+[![Data: CC BY 4.0](https://img.shields.io/badge/data-CC%20BY%204.0-lightgrey.svg)](LICENSE-DATA)
+
 Two connected pieces of open infrastructure for **non-equilibrium materials**:
 
 - **[`driven-states/`](driven-states/)** — a registry of material states that exist *only while a
@@ -91,11 +96,14 @@ because software and data collections are reused differently in research.
 
 ## Citation
 
-See [CITATION.cff](CITATION.cff):
+See [CITATION.cff](CITATION.cff). Archived on Zenodo:
 
-> Driven States Registry (v0.1.0), D. Leonforte, 2026. CC BY 4.0. https://github.com/dl-eigenart/driven-states-registry
+> Leonforte, D. (2026). *Driven States Registry and Reactive Periodic Table* (v0.1.0)
+> [Data set]. Zenodo. https://doi.org/10.5281/zenodo.22142491
 
-A Zenodo DOI will be added here once the first release is deposited.
+Two DOIs exist. **10.5281/zenodo.22142490** is the concept DOI and always resolves to the
+latest version - cite this one unless you depend on a specific snapshot.
+**10.5281/zenodo.22142491** points to v0.1.0 and will never change.
 
 ## Language
 
