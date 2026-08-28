@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "fe3o4",
+  "name": "Magnetite",
+  "formula": "Fe3O4",
+  "class": "compound",
+  "equilibrium_context": "Verwey transition (insulator-metal, charge and orbital order, trimeron network) at 123 K",
+  "driven_states": [
+    {
+      "id": "ds_trimeron_collapse",
+      "emergent_property": "The transition proceeds in two stages: first the destruction of individual trimerons (300 fs), then phase separation (1.5 ps) into remaining insulating and metallic regions. The 1.5 ps set the speed limit of the Verwey transition.",
+      "stability": "driven",
+      "host_state": "Verwey-ordered insulator",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "wavelength_um": 0.8,
+        "pulse_duration_s": 1e-13
+      },
+      "lifetime_s": 1e-10,
+      "switching_time_s": 1.5e-12,
+      "threshold": {
+        "quantity": "Fluence",
+        "value": null,
+        "unit": "mJ/cm^2",
+        "verified": false
+      },
+      "temperature_window_K": [
+        80,
+        123
+      ],
+      "mechanism": "mixed",
+      "evidence_level": "established",
+      "source": "de Jong et al., Nature Materials 12, 882 (2013), doi:10.1038/nmat3718",
+      "further_sources": [
+        "PNAS 121, e2316438121 (2024), doi:10.1073/pnas.2316438121 (two distinct metastable structural hidden phases depending on photon energy)",
+        "Sci. Adv. (2023), doi:10.1126/sciadv.adf8220"
+      ],
+      "caveat": "The work deliberately speaks of a speed limit precisely because the transition is not purely electronic: the 1.5 ps are a phase-separation and nucleation time, hence first order with lattice involvement. The initial electronic stage of 300 fs, by contrast, is well established as non-thermal. The 2024 PNAS work is the strongest non-thermal argument, because the resulting state depends on the photon energy - pure heating cannot do that."
+    }
+  ],
+  "sources": [
+    "de Jong et al., Nature Materials 12, 882 (2013), doi:10.1038/nmat3718",
+    "PNAS 121, e2316438121 (2024), doi:10.1073/pnas.2316438121"
+  ],
+  "gaps": [
+    "Fluence threshold not verified against the full text."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

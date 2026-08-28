@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "al_microwave",
+  "name": "Aluminium, thin films and microbridges",
+  "formula": "Al",
+  "class": "element",
+  "equilibrium_context": "Tc about 1.2 K in the bulk, raised to about 2 K in thin films",
+  "summary": "The only case in the entire superconductivity domain with thermodynamic evidence. Reference point for all high-temperature claims.",
+  "driven_states": [
+    {
+      "id": "ds_microwave_stimulation",
+      "emergent_property": "Continuous microwave irradiation above a critical frequency markedly increases the critical current and raises the critical temperature by up to 16 millikelvin. The cause is the quasiparticle distribution redistributed by the radiation, which enlarges the energy gap (Eliashberg effect, known in microbridges as the Dayem-Wyatt effect).",
+      "stability": "driven",
+      "drive": {
+        "type": "microwave",
+        "photon_energy_eV": 4e-06,
+        "frequency_THz": 0.001
+      },
+      "lifetime_s": 1.0,
+      "evidence_level": "established",
+      "source": "Klapwijk & Mooij, Physica B+C 81, 132 (1976), doi:10.1016/0378-4363(76)90249-7",
+      "caveat": "Reproduced independently many times since 1966, theoretically understood, with transport evidence via critical current and Tc shift. The effect is quantitatively small and acts only in the immediate vicinity of Tc. It does not produce superconductivity in a normal conductor. Relevant as a reference case: here thermodynamic evidence exists, whereas for the high-temperature cases the evidence has so far been almost exclusively optical.",
+      "equivalent_equilibrium_state": "partial",
+      "mechanism": "electronic",
+      "host_state": "superconducting near Tc",
+      "threshold": {
+        "quantity": "critical frequency, set by the inelastic electron scattering rate",
+        "value": null,
+        "unit": "GHz",
+        "verified": true
+      },
+      "temperature_window_K": [
+        1,
+        2
+      ],
+      "further_sources": [
+        "Wyatt et al., Phys. Rev. Lett. 16, 1166 (1966), doi:10.1103/PhysRevLett.16.1166",
+        "Dayem & Wiegand, Phys. Rev. 155, 419 (1967), doi:10.1103/PhysRev.155.419"
+      ],
+      "measured_quantity": "critical current and critical temperature, i.e. transport"
+    }
+  ],
+  "sources": [
+    "Klapwijk & Mooij, Physica B+C 81, 132 (1976), doi:10.1016/0378-4363(76)90249-7"
+  ],
+  "gaps": [
+    "The critical frequency is material-dependent, not a universal value."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

@@ -1,0 +1,271 @@
+{
+  "schema_version": "0.1",
+  "id": "nb",
+  "name": "Niobium",
+  "formula": "Nb",
+  "class": "element",
+  "z": 41,
+  "summary": "Elemental superconductor with the highest transition temperature of all elements at ambient pressure (9.25 K). In the data set it is the reference case for the feedback from QPU to material: niobium is both a qubit material and a magnet material.",
+  "degrees_of_freedom": [
+    {
+      "id": "sc_order",
+      "kind": "electronic",
+      "domain": {
+        "type": "discrete",
+        "values": [
+          "normal",
+          "superconducting"
+        ]
+      }
+    },
+    {
+      "id": "vortex_density",
+      "kind": "topological",
+      "domain": {
+        "type": "continuous",
+        "min": 0,
+        "max": 200000000000000.0,
+        "unit": "m^-2"
+      },
+      "description": "Flux vortex density in the type-II regime; upper bound from B = Hc2 = 0.41 T via n = B/Phi0"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "temperature",
+      "kind": "thermal",
+      "range": {
+        "min": 0.01,
+        "max": 300,
+        "unit": "K"
+      },
+      "latency_s": 1.0,
+      "energy_cost": {
+        "model": "continuous_power",
+        "value": null,
+        "unit": "W"
+      },
+      "reversible": true,
+      "notes": "Cryogenics dominate the operating costs; this is exactly the item that would disappear with a room-temperature superconductor."
+    },
+    {
+      "id": "magnetic_field",
+      "kind": "magnetic_field",
+      "range": {
+        "min": 0,
+        "max": 2,
+        "unit": "T"
+      },
+      "latency_s": 0.01,
+      "energy_cost": {
+        "model": "continuous_power",
+        "value": null,
+        "unit": "W"
+      },
+      "reversible": true
+    },
+    {
+      "id": "transport_current",
+      "kind": "current",
+      "range": {
+        "min": 0,
+        "max": 10000000000.0,
+        "unit": "A/m^2"
+      },
+      "latency_s": 1e-09,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "reversible": true
+    }
+  ],
+  "outputs": [
+    {
+      "id": "resistivity",
+      "quantity": "resistivity",
+      "unit": "Ohm*m",
+      "readout": "transport",
+      "readout_latency_s": 1e-06,
+      "nondestructive": true
+    },
+    {
+      "id": "levitation_force_density",
+      "quantity": "Levitation force density",
+      "unit": "N/m^3",
+      "readout": "mechanical",
+      "readout_latency_s": 0.001,
+      "nondestructive": true
+    }
+  ],
+  "couplings": [
+    {
+      "id": "c_temp_sc",
+      "from": "temperature",
+      "to": "sc_order",
+      "relation": {
+        "type": "threshold",
+        "threshold": 9.25,
+        "low": "superconducting",
+        "high": "normal"
+      },
+      "latency_s": 1.0,
+      "energy_cost": {
+        "model": "continuous_power",
+        "value": null,
+        "unit": "W"
+      },
+      "confidence": "high",
+      "source": "Standard value; Tc = 9.25 K at ambient pressure"
+    },
+    {
+      "id": "c_field_sc",
+      "from": "magnetic_field",
+      "to": "sc_order",
+      "relation": {
+        "type": "threshold",
+        "threshold": 0.41,
+        "low": "superconducting",
+        "high": "normal"
+      },
+      "latency_s": 0.01,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "validity": {
+        "condition": "Hc2 as T approaches 0",
+        "temperature_K": [
+          0,
+          9.25
+        ]
+      },
+      "confidence": "high",
+      "source": "Finnemore et al., Phys. Rev. 149, 231 (1966)",
+      "notes": "This low value is precisely the reason why fusion magnets are switching to REBCO."
+    },
+    {
+      "id": "c_sc_rho",
+      "from": "sc_order",
+      "to": "resistivity",
+      "relation": {
+        "type": "lookup",
+        "table": [
+          [
+            "normal",
+            1.52e-07
+          ],
+          [
+            "superconducting",
+            0.0
+          ]
+        ]
+      },
+      "latency_s": 1e-09,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "confidence": "high",
+      "source": "Normal-state value at 293 K"
+    },
+    {
+      "id": "c_field_vortex",
+      "from": "magnetic_field",
+      "to": "vortex_density",
+      "relation": {
+        "type": "linear",
+        "gain": 483000000000000.0
+      },
+      "latency_s": 0.01,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "validity": {
+        "condition": "n = B/Phi0, flux quantum 2.07e-15 Wb; only between Hc1 and Hc2"
+      },
+      "confidence": "high",
+      "source": "Abrikosov lattice theory"
+    },
+    {
+      "id": "c_vortex_force",
+      "from": "vortex_density",
+      "to": "levitation_force_density",
+      "relation": {
+        "type": "saturating",
+        "gain": 1e-08,
+        "saturation": 500000.0
+      },
+      "latency_s": 0.001,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "confidence": "low",
+      "source": "Order-of-magnitude estimate; the real pinning force density depends on the defect structure, not on the element",
+      "notes": "Deliberately listed as low. The edge shows that levitation load capacity is not a property of the element, but a property of the microstructure."
+    }
+  ],
+  "states": [
+    {
+      "id": "normal",
+      "label": "normal conducting",
+      "stability": "equilibrium",
+      "lifetime_s": null,
+      "properties": {
+        "resistivity_ohm_m": 1.52e-07
+      }
+    },
+    {
+      "id": "superconducting",
+      "label": "superconducting, type II",
+      "stability": "equilibrium",
+      "lifetime_s": null,
+      "properties": {
+        "penetration_depth_nm": 39,
+        "coherence_length_nm": 38
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t_sc",
+      "from_state": "normal",
+      "to_state": "superconducting",
+      "trigger": {
+        "variable": "temperature",
+        "operator": "<",
+        "value": 9.25,
+        "unit": "K"
+      },
+      "latency_s": 1.0,
+      "energy_density_J_per_m3": null,
+      "reversible": true,
+      "confidence": "high",
+      "source": "Standard value"
+    }
+  ],
+  "gaps": [
+    "Pinning force density depends on the microstructure and is in principle out of place in an element descriptor. It points to the need for a field for microstructure variants in schema v0.2.",
+    "Penetration depth and coherence length are indicative values within the range found in the literature (lambda 33 to 41 nm, xi 39 to 47 nm)."
+  ],
+  "sources": [
+    "Finnemore, Stromberg & Swenson, Phys. Rev. 149, 231 (1966), doi:10.1103/PhysRev.149.231",
+    "Alekseevskiy et al., arXiv:2506.01330 (Hc2, penetration depth, coherence length on ultrapure single crystals)"
+  ],
+  "verification_status": "verified",
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

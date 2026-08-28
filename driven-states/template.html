@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Driven States Registry</title>
+<style>
+:root{
+  --bg:#fbfbfa; --panel:#fff; --ink:#1d1d1b; --muted:#6b6b68; --line:#e4e4e0;
+  --accent:#1b7fa8; --accent-soft:#eef7fb;
+  --ev-established:#2f7d4f; --ev-reproduced:#1b7fa8;
+  --ev-single:#b07310; --ev-contested:#a83232;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--ink); font:15px/1.55 -apple-system,BlinkMacSystemFont,
+  "Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent)}
+header.top{
+  padding:26px 30px 18px; border-bottom:1px solid var(--line); background:var(--panel);
+}
+header.top h1{margin:0 0 4px; font-size:21px; letter-spacing:-.2px; font-weight:650}
+header.top p{margin:0; color:var(--muted); font-size:13.5px; max-width:70ch}
+.stats{display:flex; gap:26px; margin-top:14px; flex-wrap:wrap}
+.stat b{display:block; font-size:19px; font-weight:640; line-height:1.2}
+.stat span{font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:.6px}
+
+.wrap{display:grid; grid-template-columns:minmax(300px,380px) 1fr; gap:0; min-height:calc(100vh - 132px)}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}}
+
+aside{border-right:1px solid var(--line); background:var(--panel); padding:16px 18px 40px}
+.filters{display:flex; flex-direction:column; gap:9px; margin-bottom:14px}
+input[type=search],select{
+  width:100%; padding:7px 9px; border:1px solid var(--line); border-radius:5px;
+  font:inherit; font-size:13.5px; background:#fff; color:var(--ink)
+}
+.fgroup{display:flex; flex-direction:column; gap:4px}
+.flabel{font-size:10.5px; text-transform:uppercase; letter-spacing:.7px; color:var(--muted); font-weight:640}
+.chips{display:flex; flex-wrap:wrap; gap:5px}
+.chip{
+  font-size:11.5px; padding:3px 8px; border-radius:11px; border:1px solid var(--line);
+  cursor:pointer; user-select:none; background:#fff; color:var(--muted)
+}
+.chip.on{background:var(--accent-soft); border-color:var(--accent); color:var(--accent)}
+.count{font-size:12px; color:var(--muted); margin:10px 0 7px}
+
+.card{
+  border:1px solid var(--line); border-left:3px solid var(--line); border-radius:5px;
+  padding:10px 12px; margin-bottom:7px; cursor:pointer; background:#fff
+}
+.card:hover{border-color:#c9c9c4}
+.card.sel{border-color:var(--accent); border-left-color:var(--accent); background:var(--accent-soft)}
+.card h3{margin:0 0 3px; font-size:14.5px; font-weight:620}
+.card .sub{font-size:12.5px; color:var(--muted); line-height:1.4}
+.card .meta{margin-top:6px; display:flex; gap:7px; align-items:center; flex-wrap:wrap}
+
+.badge{font-size:10.5px; text-transform:uppercase; letter-spacing:.5px; padding:2px 6px;
+  border-radius:3px; color:#fff; font-weight:600}
+.b-established{background:var(--ev-established)}
+.b-reproduced{background:var(--ev-reproduced)}
+.b-single_group{background:var(--ev-single)}
+.b-contested{background:var(--ev-contested)}
+.life{font-family:var(--mono); font-size:11.5px; color:var(--muted)}
+
+main{padding:22px 30px 60px; max-width:1000px}
+.empty{color:var(--muted); padding:40px 0}
+h2.dt{margin:0 0 2px; font-size:20px; font-weight:650}
+.formula{font-family:var(--mono); color:var(--muted); font-size:13px; margin-bottom:14px}
+section{margin:22px 0 0}
+section > h4{
+  margin:0 0 9px; font-size:11.5px; text-transform:uppercase; letter-spacing:.8px;
+  color:var(--muted); font-weight:640; border-bottom:1px solid var(--line); padding-bottom:5px
+}
+table{border-collapse:collapse; width:100%; font-size:13.5px}
+th,td{text-align:left; padding:6px 10px 6px 0; vertical-align:top; border-bottom:1px solid var(--line)}
+th{font-weight:600; color:var(--muted); font-size:11.5px; text-transform:uppercase; letter-spacing:.5px}
+td.k{width:190px; color:var(--muted)}
+td.num{font-family:var(--mono); font-size:12.5px}
+.note{background:var(--accent-soft); border-left:3px solid var(--accent); padding:10px 13px;
+  font-size:13.5px; border-radius:0 4px 4px 0; margin:10px 0}
+.warn{background:#fdf4f4; border-left-color:var(--ev-contested)}
+ul.src{margin:0; padding-left:18px; font-size:13px; color:var(--muted)}
+ul.src li{margin-bottom:4px}
+.tabs{display:flex; gap:2px; border-bottom:1px solid var(--line); margin:20px 0 0}
+.tab{padding:7px 14px; font-size:13.5px; cursor:pointer; border:1px solid transparent;
+  border-bottom:none; color:var(--muted); border-radius:5px 5px 0 0}
+.tab.on{background:var(--panel); border-color:var(--line); color:var(--ink); font-weight:600;
+  margin-bottom:-1px}
+.pane{display:none; padding-top:16px}
+.pane.on{display:block}
+svg.graph{width:100%; height:auto; background:var(--panel); border:1px solid var(--line);
+  border-radius:5px}
+.n-label{font-size:10.5px; fill:var(--ink)}
+.n-sub{font-size:8.5px; fill:var(--muted)}
+.e-label{font-size:8px; fill:var(--muted); font-family:var(--mono)}
+.ctrl{display:grid; grid-template-columns:1fr auto; gap:8px 12px; align-items:center;
+  font-size:13.5px; margin-bottom:8px}
+.ctrl input{width:130px; padding:5px 7px; border:1px solid var(--line); border-radius:4px;
+  font-family:var(--mono); font-size:12.5px}
+button{background:var(--accent); color:#fff; border:0; padding:8px 16px; border-radius:5px;
+  font:inherit; font-size:13.5px; cursor:pointer; font-weight:550}
+button.sec{background:#fff; color:var(--muted); border:1px solid var(--line)}
+.foot{margin-top:44px; padding-top:16px; border-top:1px solid var(--line);
+  font-size:12px; color:var(--muted); max-width:78ch}
+.prov{margin-top:16px; padding:11px 14px; background:#fdfaf3; border:1px solid #e8ddc2;
+  border-left:3px solid #b07310; border-radius:0 4px 4px 0; font-size:12.8px;
+  line-height:1.5; max-width:92ch; color:#4a4436}
+.prov code{background:#f2ece0; color:#7a5a12}
+.viewtabs{display:flex; gap:2px; margin-top:16px}
+.vt{padding:6px 15px; font-size:13.5px; cursor:pointer; border:1px solid var(--line);
+  border-radius:5px; color:var(--muted); background:#fff}
+.vt.on{background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600}
+#overview{display:none; padding:22px 30px 60px}
+#overview.on{display:block}
+.wrap.off{display:none}
+.dot{cursor:pointer}
+.dot:hover{stroke:#000; stroke-width:1.5}
+.ax{stroke:var(--line); stroke-width:1}
+.axl{font-size:9px; fill:var(--muted); font-family:var(--mono)}
+.axt{font-size:11px; fill:var(--muted)}
+.legend{display:flex; gap:16px; flex-wrap:wrap; margin:10px 0 0; font-size:12px; color:var(--muted)}
+.legend i{display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px}
+table.sortable{table-layout:fixed}
+table.sortable th{cursor:pointer; user-select:none}
+table.sortable th:hover{color:var(--ink)}
+table.sortable td{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+table.sortable td.wrap{white-space:normal}
+table.sortable col.c-mat{width:11%} table.sortable col.c-state{width:27%}
+table.sortable col.c-drv{width:11%} table.sortable col.c-ph{width:9%}
+table.sortable col.c-life{width:10%} table.sortable col.c-stb{width:12%}
+table.sortable col.c-mech{width:11%} table.sortable col.c-ev{width:9%}
+code{font-family:var(--mono); font-size:12.5px; background:#f2f2ef; padding:1px 4px; border-radius:3px}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Driven States Registry</h1>
+  <p>A curated, openly graded record of material states that exist <em>only while a drive is
+  running</em> — light-induced phases and Floquet-engineered bands. These are not eigenstates of
+  the undriven Hamiltonian, which is why equilibrium materials databases cannot represent them.
+  Every entry carries its drive parameters, lifetime and an explicit evidence level.</p>
+  <div class="stats" id="stats"></div>
+  <div class="prov">
+    <b>Provenance.</b> Literature search and field extraction were performed by AI agents under
+    human direction. Every numerical value and citation was checked against the cited work and
+    every DOI verified — but <b>no entry has been reviewed by a domain expert.</b>
+    <code>peer_reviewed: false</code> holds for all 82 states. Treat this as a structured,
+    fully sourced starting point, not as a reviewed reference. Corrections are the intended path
+    to improvement; each entry carries its sources so any claim can be checked at the source.
+  </div>
+  <div class="viewtabs">
+    <div class="vt on" data-v="registry">Registry</div>
+    <div class="vt" data-v="overview">Overview</div>
+  </div>
+</header>
+
+<div class="wrap" id="wrapView">
+  <aside>
+    <div class="filters">
+      <input type="search" id="q" placeholder="Search material, property, source…">
+      <div class="fgroup"><span class="flabel">Evidence</span><div class="chips" id="evChips"></div></div>
+      <div class="fgroup"><span class="flabel">Drive</span><div class="chips" id="drvChips"></div></div>
+      <div class="fgroup"><span class="flabel">Stability</span><div class="chips" id="stbChips"></div></div>
+      <button class="sec" id="clearFilters" style="align-self:flex-start;padding:4px 10px;font-size:12px">Clear filters</button>
+    </div>
+    <div class="count" id="count"></div>
+    <div id="list"></div>
+  </aside>
+  <main id="detail"><div class="empty">Select an entry.</div></main>
+</div>
+<div id="overview"></div>
+
+<script>
+const DATA = /*__DATA__*/;
+
+/* ---------------------------------------------------------------- evaluator
+   Port of rpt_eval.py. Same relation types, same combine semantics, same
+   latency rule: for overwriting edges, the edge that sets the value also sets
+   the latency, so a slow competing path cannot mask a fast actuation route. */
+const UNRES = Symbol('unresolved'), QUAL = Symbol('qualitative');
+
+function applyRelation(rel, x, prev){
+  const t = rel.type;
+  if(t === 'qualitative') return QUAL;
+  if(t === 'lookup'){
+    const tbl = rel.table || [];
+    if(tbl.length && typeof tbl[0][0] === 'string'){
+      for(const [k,v] of tbl) if(k === x) return v;
+      return UNRES;
+    }
+    if(typeof x !== 'number') return UNRES;
+    const pts = tbl.map(([a,b]) => [+a,+b]).sort((a,b) => a[0]-b[0]);
+    if(!pts.length) return UNRES;
+    if(x <= pts[0][0]) return pts[0][1];
+    if(x >= pts[pts.length-1][0]) return pts[pts.length-1][1];
+    for(let i=0;i<pts.length-1;i++){
+      const [x0,y0] = pts[i], [x1,y1] = pts[i+1];
+      if(x >= x0 && x <= x1) return x1===x0 ? y0 : y0 + (y1-y0)*(x-x0)/(x1-x0);
+    }
+    return UNRES;
+  }
+  if(t === 'resonant'){
+    if(typeof x !== 'number') return UNRES;
+    return Math.abs(x - rel.center) <= (rel.width||0)/2 ? rel.high : rel.low;
+  }
+  if(t === 'threshold'){
+    if(typeof x !== 'number') return UNRES;
+    return x >= rel.threshold ? rel.high : rel.low;
+  }
+  if(t === 'hysteretic'){
+    if(typeof x !== 'number') return UNRES;
+    if(x >= rel.threshold_up) return rel.high;
+    if(x <= rel.threshold_down) return rel.low;
+    return prev !== undefined && prev !== null ? prev : rel.low;
+  }
+  if(typeof x !== 'number') return UNRES;
+  if(t === 'linear')  return (rel.gain ?? 1) * x;
+  if(t === 'affine')  return (rel.gain ?? 1) * x + (rel.offset ?? 0);
+  if(t === 'power'){
+    const s = rel.scale ?? 1, e = rel.exponent ?? 1;
+    if(x < 0 && !Number.isInteger(e)) return UNRES;
+    return s * Math.pow(Math.abs(x), e) * (x >= 0 ? 1 : -1);
+  }
+  if(t === 'exponential') return (rel.scale ?? 1) * Math.exp((rel.gain ?? 1) * x);
+  if(t === 'saturating'){
+    const y = (rel.gain ?? 1) * x, sat = rel.saturation;
+    if(sat === undefined) return y;
+    return Math.sign(y) * Math.min(Math.abs(y), Math.abs(sat));
+  }
+  return UNRES;
+}
+
+function graphOf(e){
+  const inputs = {}, dofs = {}, outputs = {};
+  (e.inputs||[]).forEach(i => inputs[i.id] = i);
+  (e.degrees_of_freedom||[]).forEach(d => dofs[d.id] = d);
+  (e.outputs||[]).forEach(o => outputs[o.id] = o);
+  const nodes = new Set([...Object.keys(inputs),...Object.keys(dofs),...Object.keys(outputs)]);
+  return {inputs, dofs, outputs, nodes, couplings: e.couplings||[]};
+}
+
+function topoOrder(g){
+  const indeg = {}, succ = {};
+  g.nodes.forEach(n => {indeg[n]=0; succ[n]=[];});
+  for(const c of g.couplings){
+    if(!g.nodes.has(c.from) || !g.nodes.has(c.to)) continue;
+    indeg[c.to]++; succ[c.from].push(c.to);
+  }
+  const q = [...g.nodes].filter(n => indeg[n]===0).sort(), order = [];
+  while(q.length){
+    const n = q.shift(); order.push(n);
+    for(const b of succ[n]) if(--indeg[b] === 0){ q.push(b); q.sort(); }
+  }
+  return order;
+}
+
+function propagate(e, settings){
+  const g = graphOf(e), order = topoOrder(g);
+  const values = {}, latency = {}, acc = {}, energy = {}, trace = [], warnings = [];
+  for(const [k,v] of Object.entries(settings)){
+    if(!g.nodes.has(k)) continue;
+    values[k] = v; latency[k] = g.inputs[k] ? g.inputs[k].latency_s : 0;
+  }
+  for(const [id,d] of Object.entries(g.dofs))
+    if(values[id] === undefined && d.domain.type === 'discrete'){
+      values[id] = d.domain.values[0]; if(latency[id]===undefined) latency[id]=0;
+    }
+  const byTarget = {};
+  for(const c of g.couplings) (byTarget[c.to] = byTarget[c.to] || []).push(c);
+
+  for(const node of order){
+    for(const c of (byTarget[node]||[])){
+      if(values[c.from] === undefined) continue;
+      const y = applyRelation(c.relation, values[c.from], values[node]);
+      if(y === UNRES){ warnings.push('Edge ' + c.id + ' not evaluable'); continue; }
+      if(y === QUAL){
+        trace.push({c, from:c.from, fv:values[c.from], to:node, tv:'qualitative', qual:true});
+        continue;
+      }
+      const mode = c.combine || 'overwrite';
+      if((mode === 'add' || mode === 'max') && typeof y === 'number'){
+        acc[node] = acc[node] === undefined ? y
+                  : (mode === 'add' ? acc[node] + y : Math.max(acc[node], y));
+        values[node] = acc[node];
+        latency[node] = Math.max(latency[node]||0, (latency[c.from]||0) + c.latency_s);
+      } else {
+        values[node] = y;
+        latency[node] = (latency[c.from]||0) + c.latency_s;
+      }
+      const dom = g.dofs[node] && g.dofs[node].domain;
+      if(dom && dom.type === 'continuous' && typeof values[node] === 'number'){
+        if(values[node] < dom.min || values[node] > dom.max){
+          const cl = Math.min(Math.max(values[node], dom.min), dom.max);
+          const m = "Degree of freedom '" + node + "' clamped to domain bound (" +
+                    fmt(values[node]) + " -> " + fmt(cl) + " " + (dom.unit||'') + ")";
+          if(!warnings.includes(m)) warnings.push(m);
+          values[node] = cl; acc[node] = cl;
+        }
+      }
+      const ec = c.energy_cost || {};
+      if(ec.value !== null && ec.value !== undefined){
+        const key = ec.model + ' [' + ec.unit + ']';
+        energy[key] = (energy[key]||0) + (+ec.value);
+      }
+      trace.push({c, from:c.from, fv:values[c.from], to:node, tv:values[node]});
+    }
+  }
+  const triggered = [];
+  for(const tr of (e.transitions||[])){
+    const v = values[tr.trigger.variable];
+    if(typeof v !== 'number' || typeof tr.trigger.value !== 'number') continue;
+    const t = tr.trigger.value, op = tr.trigger.operator;
+    const hit = op==='>'?v>t : op==='>='?v>=t : op==='<'?v<t : op==='<='?v<=t : v===t;
+    if(hit){
+      triggered.push(tr);
+      if(!tr.reversible) warnings.push('Transition ' + tr.id + ' is irreversible — no control loop possible');
+    }
+  }
+  const obs = {};
+  for(const id of Object.keys(g.outputs)) if(values[id] !== undefined) obs[id] = values[id];
+  const crit = Object.keys(obs).length ? Math.max(...Object.keys(obs).map(o => latency[o]||0)) : 0;
+  return {values, observables:obs, latency, critical:crit, energy, trace, triggered, warnings};
+}
+
+/* ---------------------------------------------------------------- helpers */
+function fmt(v){
+  if(typeof v !== 'number') return String(v);
+  if(v === 0) return '0';
+  const a = Math.abs(v);
+  if(a >= 1e5 || a < 1e-3) return v.toExponential(3).replace('e','e');
+  return String(Number(v.toPrecision(4)));
+}
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+const EV_LABEL = {established:'established', reproduced:'reproduced',
+                  single_group:'single group', contested:'contested'};
+
+/* flatten: one row per driven state */
+const ROWS = [];
+for(const e of DATA.entries)
+  for(const d of (e.driven_states||[]))
+    ROWS.push({e, d});
+
+/* ---------------------------------------------------------------- filters */
+let fEv = new Set(), fDrv = new Set(), fStb = new Set(), fQ = '', sel = null, tab = 'state';
+
+function matches(r){
+  if(fEv.size && !fEv.has(r.d.evidence_level)) return false;
+  if(fDrv.size && !fDrv.has(r.d.drive.type)) return false;
+  if(fQ){
+    const hay = [r.e.name, r.e.formula, r.d.emergent_property, r.d.source, r.d.notes,
+                 r.e.summary].join(' ').toLowerCase();
+    if(!hay.includes(fQ.toLowerCase())) return false;
+  }
+  return true;
+}
+
+function chipRow(el, values, set, labelFn){
+  el.innerHTML = values.map(v =>
+    '<span class="chip' + (set.has(v)?' on':'') + '" data-v="' + esc(v) + '">' +
+    esc(labelFn(v)) + '</span>').join('');
+  el.querySelectorAll('.chip').forEach(c => c.onclick = () => {
+    const v = c.dataset.v;
+    set.has(v) ? set.delete(v) : set.add(v);
+    render();
+    if(typeof view !== 'undefined' && view === 'overview') renderOverview();
+  });
+}
+
+function render(){
+  const evs = [...new Set(ROWS.map(r => r.d.evidence_level))];
+  const drvs = [...new Set(ROWS.map(r => r.d.drive.type))];
+  chipRow(document.getElementById('evChips'), evs, fEv, v => EV_LABEL[v]||v);
+  chipRow(document.getElementById('drvChips'), drvs, fDrv, v => v.replace(/_/g,' '));
+  const stbs = [...new Set(ROWS.map(r => r.d.stability || 'driven'))];
+  chipRow(document.getElementById('stbChips'), stbs, fStb, v => v.replace(/_/g,' '));
+
+  const vis = ROWS.filter(matches);
+  document.getElementById('count').textContent =
+    vis.length + ' of ' + ROWS.length + ' entries';
+  document.getElementById('list').innerHTML = vis.map((r,i) => {
+    const id = r.e.id + '::' + r.d.id;
+    return '<div class="card' + (sel===id?' sel':'') + '" data-id="' + esc(id) + '">' +
+      '<h3>' + esc(r.e.formula || r.e.name) + '</h3>' +
+      '<div class="sub">' + esc(r.d.emergent_property.slice(0,110)) +
+      (r.d.emergent_property.length>110?'…':'') + '</div>' +
+      '<div class="meta"><span class="badge b-' + r.d.evidence_level + '">' +
+      esc(EV_LABEL[r.d.evidence_level]||r.d.evidence_level) + '</span>' +
+      '<span class="life">τ ' + fmt(r.d.lifetime_s) + ' s</span></div></div>';
+  }).join('') || '<div class="empty">No matches.</div>';
+
+  document.querySelectorAll('.card').forEach(c => c.onclick = () => {
+    sel = c.dataset.id; render(); renderDetail();
+  });
+
+  const stats = document.getElementById('stats');
+  const verified = DATA.entries.filter(e => e.verification_status==='verified').length;
+  stats.innerHTML = [
+    [ROWS.length, 'driven states'],
+    [DATA.entries.length, 'host materials'],
+    [verified + '/' + DATA.entries.length, 'source-verified'],
+    [ROWS.filter(r => r.d.evidence_level==='contested').length, 'contested'],
+  ].map(([b,s]) => '<div class="stat"><b>'+b+'</b><span>'+s+'</span></div>').join('');
+  if(sel) renderDetail();
+}
+
+/* ---------------------------------------------------------------- detail */
+function renderDetail(){
+  if(!sel){ document.getElementById('detail').innerHTML='<div class="empty">Select an entry.</div>'; return; }
+  const [eid,did] = sel.split('::');
+  const e = DATA.entries.find(x => x.id===eid);
+  const d = e.driven_states.find(x => x.id===did);
+  const dr = d.drive;
+
+  const hasGraph = !!(e.couplings && e.couplings.length);
+  if(!hasGraph && tab !== 'state') tab = 'state';
+
+  const driveRows = [
+    ['Drive type', dr.type.replace(/_/g,' ')],
+    ['Photon energy', dr.photon_energy_eV!==undefined ? dr.photon_energy_eV+' eV' : null],
+    ['Wavelength', dr.photon_energy_eV ? (1239.84/(dr.photon_energy_eV*1000)).toFixed(1)+' µm' : null],
+    ['Fluence', dr.fluence_mJ_per_cm2!==undefined ? dr.fluence_mJ_per_cm2+' mJ/cm²' : null],
+    ['Pulse duration', dr.pulse_duration_s!==undefined ? fmt(dr.pulse_duration_s)+' s' : null],
+    ['Polarization', dr.polarization || null],
+    ['Threshold', d.threshold ? d.threshold.value+' '+d.threshold.unit+' ('+d.threshold.quantity+')' : 'none reported'],
+    ['Lifetime', fmt(d.lifetime_s)+' s' +
+      (d.lifetime_range_s ? '  (range '+fmt(d.lifetime_range_s[0])+'…'+fmt(d.lifetime_range_s[1])+' s)' : '')],
+    ['Switching time', d.switching_time_s!==undefined && d.switching_time_s!==null ? fmt(d.switching_time_s)+' s' : null],
+    ['Stability', d.stability ? d.stability.replace(/_/g,' ') : null],
+    ['Mechanism', d.mechanism ? d.mechanism.replace(/_/g,' ') : null],
+    ['Temperature window', d.temperature_window_K ? d.temperature_window_K[0]+'…'+d.temperature_window_K[1]+' K' : null],
+    ['Quenchable by', d.quenchable_by || null],
+    ['Driven mode', dr.driven_mode || null],
+    ['Host state', d.host_state || null],
+    ['Equilibrium context', e.equilibrium_context || null],
+  ].filter(r => r[1]!==null && r[1]!==undefined);
+
+  const html = `
+  <h2 class="dt">${esc(e.name)} <span class="badge b-${d.evidence_level}">${esc(EV_LABEL[d.evidence_level]||d.evidence_level)}</span></h2>
+  <div class="formula">${esc(e.formula||'')} · ${esc(e.class)} · verification: ${esc(e.verification_status)}</div>
+  <div class="note"><b>Emergent property.</b> ${esc(d.emergent_property)}</div>
+
+  <div class="tabs">
+    <div class="tab ${tab==='state'?'on':''}" data-t="state">Driven state</div>
+    ${hasGraph ? `<div class="tab ${tab==='graph'?'on':''}" data-t="graph">Coupling graph</div>
+    <div class="tab ${tab==='prop'?'on':''}" data-t="prop">Propagate</div>` :
+    '<div class="tab" style="cursor:default;opacity:.45" title="No coupling graph for this entry">Coupling graph — not available</div>'}
+  </div>
+
+  <div class="pane ${tab==='state'?'on':''}">
+    <section><h4>Drive parameters</h4><table>${
+      driveRows.map(([k,v]) => '<tr><td class="k">'+esc(k)+'</td><td>'+esc(v)+'</td></tr>').join('')
+    }</table></section>
+    ${!hasGraph ? '<div class="note"><b>Registry-only entry.</b> This material is recorded for its '+
+      'driven states; no controllability graph has been built for it. Building one would mean '+
+      'inventing couplings that are not in the literature.</div>' : ''}
+    ${(d.caveat||d.notes) ? '<section><h4>Evidence note</h4><div class="note '+
+      (d.evidence_level==='contested'?'warn':'')+'">'+esc(d.caveat||d.notes)+'</div></section>' : ''}
+    ${(d.further_sources&&d.further_sources.length) ? '<section><h4>Further sources</h4><ul class="src">'+
+      d.further_sources.map(s=>'<li>'+esc(s)+'</li>').join('')+'</ul></section>' : ''}
+    <section><h4>Known gaps</h4><ul class="src">${
+      (e.gaps||[]).map(g => '<li>'+esc(g)+'</li>').join('')}</ul></section>
+    ${e.provenance ? '<section><h4>Provenance of this entry</h4><table>' +
+      '<tr><td class="k">Compiled</td><td>' + esc(e.provenance.compiled.replace(/_/g,' ')) +
+        ', ' + esc(e.provenance.compiled_on) + '</td></tr>' +
+      '<tr><td class="k">Source check</td><td>' + esc(e.provenance.source_check.replace(/_/g,' ')) + '</td></tr>' +
+      '<tr><td class="k">Peer reviewed</td><td>' + (e.provenance.peer_reviewed ?
+        esc(e.provenance.reviewer || 'yes') :
+        '<b style="color:var(--ev-single)">no</b> — not reviewed by a domain expert') + '</td></tr>' +
+      '</table></section>' : ''}
+    <section><h4>Primary source</h4><ul class="src"><li>${esc(d.source||'')}</li></ul></section>
+    <section><h4>All sources for this material</h4><ul class="src">${
+      (e.sources||[]).map(s => '<li>'+esc(s)+'</li>').join('')}</ul></section>
+  </div>
+
+  <div class="pane ${tab==='graph'?'on':''}">
+    <section><h4>Controllability graph</h4>
+      ${svgGraph(e)}
+      <p style="font-size:12.5px;color:var(--muted);margin-top:10px">
+      Left column: actuators. Middle: degrees of freedom. Right: observables.
+      Edge labels give latency in seconds. Dashed edges are qualitative — direction known,
+      magnitude not.</p>
+    </section>
+  </div>
+
+  <div class="pane ${tab==='prop'?'on':''}">
+    <section><h4>Set actuators</h4><div id="ctrls">${
+      (e.inputs||[]).map(i => `<div class="ctrl"><label>${esc(i.id)}
+        <span style="color:var(--muted);font-size:12px"> (${esc(i.range.unit)}, ${i.range.min}…${i.range.max})</span>
+        ${i.reversible?'':'<span style="color:var(--ev-contested);font-size:11.5px"> irreversible</span>'}</label>
+        <input data-in="${esc(i.id)}" type="number" step="any" placeholder="unset"></div>`).join('')
+      }<div style="margin-top:12px"><button id="runBtn">Propagate</button>
+        <button class="sec" id="clrBtn">Clear</button></div>
+    </section>
+    <div id="result"></div>
+  </div>`;
+
+  document.getElementById('detail').innerHTML = html;
+  document.querySelectorAll('.tab').forEach(t => t.onclick = () => { tab = t.dataset.t; renderDetail(); });
+  const rb = document.getElementById('runBtn');
+  if(rb){
+    rb.onclick = () => {
+      const s = {};
+      document.querySelectorAll('[data-in]').forEach(inp => {
+        if(inp.value !== '') s[inp.dataset.in] = parseFloat(inp.value);
+      });
+      showResult(e, propagate(e, s), s);
+    };
+    document.getElementById('clrBtn').onclick = () => {
+      document.querySelectorAll('[data-in]').forEach(i => i.value='');
+      document.getElementById('result').innerHTML='';
+    };
+  }
+}
+
+function showResult(e, r, s){
+  if(!Object.keys(s).length){
+    document.getElementById('result').innerHTML =
+      '<div class="note warn">Set at least one actuator value.</div>'; return;
+  }
+  const obs = Object.entries(r.observables);
+  const oMap = {}; (e.outputs||[]).forEach(o => oMap[o.id]=o);
+  document.getElementById('result').innerHTML = `
+    <section><h4>Observables</h4><table>${
+      obs.length ? obs.map(([k,v]) =>
+        '<tr><td class="k">'+esc(k)+'</td><td class="num">'+esc(fmt(v))+
+        ' <span style="color:var(--muted)">'+esc(oMap[k]?oMap[k].unit:'')+'</span></td></tr>').join('')
+      : '<tr><td colspan="2" style="color:var(--muted)">No observable reached.</td></tr>'}</table></section>
+    <section><h4>Propagation path</h4><table>
+      <tr><th>Edge</th><th>From</th><th>To</th><th>Relation</th><th>Latency (s)</th><th>Conf.</th></tr>
+      ${r.trace.map(t => '<tr><td class="num">'+esc(t.c.id)+'</td><td>'+esc(t.from)+' = '+
+        esc(fmt(t.fv))+'</td><td>'+esc(t.to)+' = '+esc(fmt(t.tv))+'</td><td>'+
+        esc(t.c.relation.type)+'</td><td class="num">'+esc(fmt(t.c.latency_s))+'</td><td>'+
+        esc(t.c.confidence)+'</td></tr>').join('')}
+    </table></section>
+    <section><h4>Cost</h4><table>
+      <tr><td class="k">Critical path latency</td><td class="num">${esc(fmt(r.critical))} s</td></tr>
+      ${Object.entries(r.energy).map(([k,v]) =>
+        '<tr><td class="k">'+esc(k)+'</td><td class="num">'+esc(fmt(v))+'</td></tr>').join('')}
+    </table></section>
+    ${r.triggered.length ? '<section><h4>Triggered transitions</h4><table>'+
+      r.triggered.map(t => '<tr><td class="k">'+esc(t.id)+'</td><td>'+esc(t.from_state)+
+      ' → '+esc(t.to_state)+(t.reversible?'':' <b style="color:var(--ev-contested)">irreversible</b>')+
+      '</td></tr>').join('')+'</table></section>' : ''}
+    ${r.warnings.length ? '<div class="note warn"><b>Notes.</b><br>'+
+      r.warnings.map(esc).join('<br>')+'</div>' : ''}`;
+}
+
+/* ---------------------------------------------------------------- graph svg */
+function svgGraph(e){
+  const g = graphOf(e);
+  const cols = [Object.keys(g.inputs), Object.keys(g.dofs), Object.keys(g.outputs)];
+  const W = 900, colX = [110, 450, 800], rowH = 62;
+  const maxRows = Math.max(...cols.map(c => c.length), 1);
+  const H = Math.max(maxRows * rowH + 50, 180);
+  const pos = {};
+  cols.forEach((col, ci) => col.forEach((n, ri) => {
+    pos[n] = {x: colX[ci], y: 40 + ri*rowH + (maxRows-col.length)*rowH/2};
+  }));
+  const labels = {};
+  (e.inputs||[]).forEach(i => labels[i.id] = i.kind.replace(/_/g,' '));
+  (e.degrees_of_freedom||[]).forEach(d => labels[d.id] = d.kind);
+  (e.outputs||[]).forEach(o => labels[o.id] = o.unit);
+
+  let edges = '';
+  for(const c of g.couplings){
+    const a = pos[c.from], b = pos[c.to];
+    if(!a || !b) continue;
+    const mx = (a.x + b.x)/2;
+    const dash = c.relation.type === 'qualitative' ? ' stroke-dasharray="4 3"' : '';
+    const wdt = c.confidence === 'high' ? 1.6 : c.confidence === 'medium' ? 1.1 : 0.7;
+    edges += `<path d="M${a.x+58},${a.y} C${mx},${a.y} ${mx},${b.y} ${b.x-58},${b.y}"
+      fill="none" stroke="#9fbfcd" stroke-width="${wdt}"${dash}></path>
+      <text class="e-label" x="${mx}" y="${(a.y+b.y)/2 - 4}" text-anchor="middle">${esc(fmt(c.latency_s))}</text>`;
+  }
+  let nodes = '';
+  for(const [n,p] of Object.entries(pos)){
+    const isIn = g.inputs[n], isOut = g.outputs[n];
+    const fill = isIn ? '#eef7fb' : isOut ? '#f4f4f1' : '#fff';
+    const stroke = isIn ? '#1b7fa8' : isOut ? '#9a9a95' : '#c9c9c4';
+    const short = n.length > 17 ? n.slice(0,16)+'…' : n;
+    nodes += `<rect x="${p.x-58}" y="${p.y-17}" width="116" height="34" rx="4"
+      fill="${fill}" stroke="${stroke}" stroke-width="1"></rect>
+      <text class="n-label" x="${p.x}" y="${p.y-2}" text-anchor="middle">${esc(short)}</text>
+      <text class="n-sub" x="${p.x}" y="${p.y+10}" text-anchor="middle">${esc((labels[n]||'').slice(0,20))}</text>`;
+  }
+  return `<svg class="graph" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
+    <text class="n-sub" x="110" y="18" text-anchor="middle">ACTUATORS</text>
+    <text class="n-sub" x="450" y="18" text-anchor="middle">DEGREES OF FREEDOM</text>
+    <text class="n-sub" x="800" y="18" text-anchor="middle">OBSERVABLES</text>
+    ${edges}${nodes}</svg>`;
+}
+
+
+/* ---------------------------------------------------------------- overview */
+let view = 'registry', sortKey = 'lifetime_s', sortDir = 1;
+const EV_COLOR = {established:'#2f7d4f', reproduced:'#1b7fa8',
+                  single_group:'#b07310', contested:'#a83232'};
+
+function log10(v){ return Math.log(v)/Math.LN10; }
+
+function scatter(){
+  const W = 900, H = 420, L = 66, R = 24, T = 22, B = 52;
+  const xs = ROWS.map(r => r.d.lifetime_s).filter(v => v > 0);
+  const ys = ROWS.map(r => r.d.drive.photon_energy_eV).filter(v => v > 0);
+  const x0 = Math.floor(log10(Math.min(...xs))), x1 = Math.ceil(log10(Math.max(...xs)));
+  const y0 = Math.floor(log10(Math.min(...ys))), y1 = Math.ceil(log10(Math.max(...ys)));
+  const px = v => L + (log10(v) - x0) / (x1 - x0) * (W - L - R);
+  const py = v => H - B - (log10(v) - y0) / (y1 - y0) * (H - T - B);
+
+  let g = '';
+  for(let e = x0; e <= x1; e++){
+    g += `<line class="ax" x1="${px(Math.pow(10,e))}" y1="${T}" x2="${px(Math.pow(10,e))}" y2="${H-B}" opacity=".5"></line>
+      <text class="axl" x="${px(Math.pow(10,e))}" y="${H-B+15}" text-anchor="middle">1e${e}</text>`;
+  }
+  for(let e = y0; e <= y1; e++){
+    g += `<line class="ax" x1="${L}" y1="${py(Math.pow(10,e))}" x2="${W-R}" y2="${py(Math.pow(10,e))}" opacity=".5"></line>
+      <text class="axl" x="${L-8}" y="${py(Math.pow(10,e))+3}" text-anchor="end">1e${e}</text>`;
+  }
+  g += `<text class="axt" x="${(L+W-R)/2}" y="${H-10}" text-anchor="middle">lifetime (s)</text>
+    <text class="axt" x="16" y="${(T+H-B)/2}" text-anchor="middle"
+      transform="rotate(-90 16 ${(T+H-B)/2})">drive photon energy (eV)</text>`;
+
+  ROWS.forEach(r => {
+    const lt = r.d.lifetime_s, pe = r.d.drive.photon_energy_eV;
+    if(!(lt > 0) || !(pe > 0)) return;
+    const id = r.e.id + '::' + r.d.id;
+    const on = matches(r);
+    const filled = (r.d.stability || 'driven') === 'driven';
+    // Small radii and partial transparency: around 1e-12 s and 1.55 eV - the
+    // standard titanium-sapphire excitation almost everyone uses - points pile
+    // up. Overlap should be visible rather than hidden: darker spots mean more
+    // entries.
+    g += `<circle class="dot" data-id="${esc(id)}" cx="${px(lt)}" cy="${py(pe)}" r="${sel===id?7.5:4}"
+      fill="${filled ? EV_COLOR[r.d.evidence_level] : '#fff'}"
+      stroke="${EV_COLOR[r.d.evidence_level]}" stroke-width="${sel===id?2.2:1.4}"
+      fill-opacity="${on ? (filled?0.55:0.9) : 0.08}"
+      stroke-opacity="${on ? 0.85 : 0.12}"><title>${esc(r.e.formula)} — ${esc(r.d.id)}
+${esc(EV_LABEL[r.d.evidence_level])}, ${esc(r.d.stability||'')}
+lifetime ${fmt(lt)} s, drive ${pe} eV</title></circle>`;
+  });
+  return `<svg class="graph" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">${g}</svg>`;
+}
+
+const COLS = [
+  ['formula', 'Material', r => r.e.formula],
+  ['state', 'Driven state', r => r.d.id.replace(/^ds_/,'').replace(/_/g,' ')
+      .replace(new RegExp('\\b' + r.e.id.replace(/[^a-z0-9]/g,'') + '\\b','gi'), '').trim()],
+  ['drive', 'Drive', r => r.d.drive.type.replace(/_/g,' ')],
+  ['photon_energy_eV', 'Photon (eV)', r => r.d.drive.photon_energy_eV],
+  ['lifetime_s', 'Lifetime (s)', r => r.d.lifetime_s],
+  ['stability', 'Stability', r => (r.d.stability||'driven').replace(/_/g,' ')],
+  ['mechanism', 'Mechanism', r => (r.d.mechanism||'—').replace(/_/g,' ')],
+  ['evidence_level', 'Evidence', r => EV_LABEL[r.d.evidence_level]],
+];
+
+function overviewHtml(){
+  const vis = ROWS.filter(matches);
+  const key = COLS.find(c => c[0] === sortKey) || COLS[4];
+  const sorted = vis.slice().sort((a,b) => {
+    const va = key[2](a), vb = key[2](b);
+    if(typeof va === 'number' && typeof vb === 'number') return (va - vb) * sortDir;
+    return String(va).localeCompare(String(vb)) * sortDir;
+  });
+  const COLW = ['c-mat','c-state','c-drv','c-ph','c-life','c-stb','c-mech','c-ev'];
+  return `
+  <section><h4>All driven states — lifetime against drive photon energy</h4>
+    ${scatter()}
+    <div class="legend">
+      ${Object.entries(EV_COLOR).map(([k,c]) =>
+        '<span><i style="background:'+c+'"></i>'+esc(EV_LABEL[k])+'</span>').join('')}
+      <span><i style="background:#fff;border:2px solid #555"></i>metastable (hollow)</span>
+      <span><i style="background:#555"></i>driven (filled)</span>
+    </div>
+    <p style="font-size:12.5px;color:var(--muted);margin-top:10px">
+    Both axes are logarithmic. ${ROWS.filter(r=>r.d.lifetime_s>0&&r.d.drive.photon_energy_eV>0).length}
+    of ${ROWS.length} states are plotted; the rest are driven by current, electric field or a
+    drive whose photon energy the source does not report, and cannot be placed on this axis.
+    The registry spans about
+    ${Math.round(log10(Math.max(...ROWS.map(r=>r.d.lifetime_s).filter(v=>v>0))) -
+                 log10(Math.min(...ROWS.map(r=>r.d.lifetime_s).filter(v=>v>0))))} orders of magnitude in lifetime —
+    from a Floquet state that lasts exactly as long as the pulse to a photo-written phase that keeps
+    for months. Filters from the Registry view apply here; greyed points are filtered out.
+    Click a point to open the entry.</p>
+  </section>
+  <section><h4>Table — click a header to sort</h4>
+    <table class="sortable">
+      <colgroup>${COLW.map(w => '<col class="'+w+'">').join('')}</colgroup>
+      <tr>${COLS.map(c =>
+      '<th data-k="'+c[0]+'">'+esc(c[1])+(sortKey===c[0]?(sortDir>0?' ▲':' ▼'):'')+'</th>').join('')}</tr>
+      ${sorted.map(r => {
+        const id = r.e.id + '::' + r.d.id;
+        return '<tr class="card" style="cursor:pointer;border:0" data-id="'+esc(id)+'">' +
+          COLS.map(c => {
+            const v = c[2](r);
+            const cls = typeof v === 'number' ? ' class="num"' : '';
+            const txt = typeof v === 'number' ? fmt(v) : String(v);
+            // title attribute so the full identifier stays readable on hover
+            // even though the cell is clipped to a single line
+            return '<td'+cls+' title="'+esc(txt)+'">' + esc(txt) + '</td>';
+          }).join('') + '</tr>';
+      }).join('')}
+    </table></section>`;
+}
+
+function renderOverview(){
+  const el = document.getElementById('overview');
+  el.innerHTML = overviewHtml();
+  el.querySelectorAll('[data-id]').forEach(n => n.onclick = () => {
+    sel = n.dataset.id; view = 'registry'; applyView(); render(); renderDetail();
+  });
+  el.querySelectorAll('th[data-k]').forEach(h => h.onclick = () => {
+    if(sortKey === h.dataset.k) sortDir = -sortDir; else { sortKey = h.dataset.k; sortDir = 1; }
+    renderOverview();
+  });
+}
+
+function applyView(){
+  document.querySelectorAll('.vt').forEach(v => v.classList.toggle('on', v.dataset.v === view));
+  document.getElementById('wrapView').classList.toggle('off', view !== 'registry');
+  document.getElementById('overview').classList.toggle('on', view === 'overview');
+  if(view === 'overview') renderOverview();
+}
+
+document.querySelectorAll('.vt').forEach(v => v.onclick = () => { view = v.dataset.v; applyView(); });
+document.getElementById('clearFilters').onclick = () => {
+  fEv.clear(); fDrv.clear(); fStb.clear(); fQ = '';
+  document.getElementById('q').value = '';
+  render(); if(view === 'overview') renderOverview();
+};
+
+document.getElementById('q').oninput = ev => { fQ = ev.target.value; render(); if(view==='overview') renderOverview(); };
+render();
+if(ROWS.length){ sel = ROWS[0].e.id + '::' + ROWS[0].d.id; render(); }
+</script>
+
+<div class="foot" style="padding:0 30px 40px">
+  Built from the Reactive Periodic Table schema (rpt v0.1). Data CC-BY-4.0, code MIT.
+  Every value carries a source and a confidence level; entries that could not be verified against
+  primary literature stay marked. Corrections and additions are welcome — the registry is only
+  useful if it is honest about what is contested.
+</div>
+</body>
+</html>

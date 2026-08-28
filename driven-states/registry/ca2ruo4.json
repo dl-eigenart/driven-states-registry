@@ -1,0 +1,60 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "ca2ruo4",
+  "name": "Calcium ruthenate",
+  "formula": "Ca2RuO4",
+  "class": "compound",
+  "equilibrium_context": "Orbital-selective Mott insulator (S=1), insulator-metal transition at about 357 K in the bulk, shifted in strained thin films",
+  "driven_states": [
+    {
+      "id": "ds_metastable_metal",
+      "emergent_property": "Optical excitation first leads to a fast lattice rearrangement (volume expansion), and only afterwards does the electronic transition into a metastable non-equilibrium state follow. Unusual: the lattice leads, not the electrons.",
+      "stability": "metastable",
+      "host_state": "Mott insulator",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "wavelength_um": 0.8,
+        "fluence_mJ_per_cm2": 50.0,
+        "pulse_duration_s": 1e-13
+      },
+      "lifetime_s": 1e-09,
+      "switching_time_s": 3.3e-12,
+      "threshold": {
+        "quantity": "fluence",
+        "value": null,
+        "unit": "mJ/cm^2",
+        "verified": false
+      },
+      "temperature_window_K": [
+        100,
+        350
+      ],
+      "mechanism": "lattice_strain",
+      "evidence_level": "single_group",
+      "source": "Verma, Gorobtsov, ..., Singer, Nature Physics 20, 807 (2024), doi:10.1038/s41567-024-02396-1",
+      "further_sources": [
+        "Suen et al., Nature Physics 20, 1757 (2024), doi:10.1038/s41567-024-02629-3 (current-induced IMT: the driven phase is electronically distinct from the thermal high-T metallic phase)",
+        "Nakamura et al., Sci. Rep. 3, 2536 (2013), doi:10.1038/srep02536"
+      ],
+      "caveat": "The paper does not classify the transition as purely electronic - on the contrary, its central claim is that a volume expansion precedes the electronic transition. On the other hand, Suen et al. show for the current-driven case that the non-equilibrium state is not identical to the thermal metal, and hence not purely thermal either. Both statements come from one group each."
+    }
+  ],
+  "sources": [
+    "Verma et al., Nature Physics 20, 807 (2024), doi:10.1038/s41567-024-02396-1",
+    "Suen et al., Nature Physics 20, 1757 (2024), doi:10.1038/s41567-024-02629-3"
+  ],
+  "gaps": [
+    "Fluence threshold and exact lifetime not verified against the full text."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

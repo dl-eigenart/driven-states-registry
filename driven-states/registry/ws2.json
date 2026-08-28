@@ -1,0 +1,61 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "ws2",
+  "name": "Tungsten disulfide, monolayer",
+  "formula": "WS2",
+  "class": "compound",
+  "equilibrium_context": "Direct two-dimensional semiconductor, A exciton at 2.00 eV at room temperature; K and K' valleys degenerate by time reversal",
+  "summary": "Purely optical access - therefore free of any Volkov ambiguity and thus the most important independent check point of the entire Floquet debate.",
+  "driven_states": [
+    {
+      "id": "ds_optical_stark_and_bloch_siegert",
+      "emergent_property": "Light-dressed valley-selective shift of the exciton and band levels. Optical Stark effect: shift upward by up to 18 meV in only one valley, selected via the helicity. Bloch-Siegert shift: at lower photon energy the antiresonant contribution separates completely, 10.4 meV in one valley versus 18.6 meV in the other - the largest Bloch-Siegert shift ever measured directly in a solid.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.82,
+        "wavelength_um": 0.68,
+        "fluence_mJ_per_cm2": 0.09,
+        "pulse_duration_s": 2.5e-13,
+        "polarization": "circular"
+      },
+      "lifetime_s": 2.5e-13,
+      "evidence_level": "reproduced",
+      "source": "Sie et al., Nature Materials 14, 290 (2015), doi:10.1038/nmat4156",
+      "caveat": "The inverse problem compared with the photoemission cases: what is measured is not a band structure in momentum space but an exciton line. The assignment to Floquet-Bloch bands is an interpretation within a two-level picture. Excitonic many-body effects are not fully separated out. The classification as reproduced rests on independent work on the valley-selective Stark effect; the Bloch-Siegert shift itself remains single_group. The Volkov question does not apply, since no electrons are emitted.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "electronic",
+      "threshold": {
+        "quantity": "none - Floquet dressing has no threshold",
+        "value": null,
+        "unit": "-",
+        "verified": true
+      },
+      "temperature_window_K": [
+        300,
+        300
+      ],
+      "further_sources": [
+        "Sie et al., Science 355, 1066 (2017), doi:10.1126/science.aal2241",
+        "Nat. Commun. 12 (2021), doi:10.1038/s41467-021-24764-8 (independent confirmation of the Stark effect)"
+      ],
+      "measured_quantity": "pump-probe absorption, exciton shift"
+    }
+  ],
+  "sources": [
+    "Sie et al., Nature Materials 14, 290 (2015), doi:10.1038/nmat4156"
+  ],
+  "gaps": [
+    "No momentum-space access; the connection to Floquet bands is model-based."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

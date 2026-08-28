@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "lsco014",
+  "name": "Lanthanum strontium cuprate, close to optimal doping",
+  "formula": "La1.86Sr0.14CuO4",
+  "class": "compound",
+  "equilibrium_context": "Tc about 37 K, superconductor with a clear Josephson plasma resonance",
+  "summary": "Artifact warning. The methodologically most important negative entry in this area.",
+  "driven_states": [
+    {
+      "id": "ds_nir_jpr_suppression",
+      "emergent_property": "Intense near-infrared excitation in the superconducting state produces a red shift of the Josephson plasma resonance that persists over hundreds of picoseconds - that is, destruction rather than creation of c-axis coherence. The metastable spectral features can be explained by photoinduced surface heating.",
+      "stability": "metastable",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "wavelength_um": 0.8,
+        "pulse_duration_s": 1e-13
+      },
+      "lifetime_s": 3e-10,
+      "evidence_level": "single_group",
+      "source": "Niwa et al., Phys. Rev. B 100, 104507 (2019), doi:10.1103/PhysRevB.100.104507",
+      "caveat": "The value lies in the methodological warning: the customary two-layer reconstruction (transformed surface layer above unchanged bulk), on which practically all positive cuprate findings rest, can generate artifacts in the non-equilibrium response. The finding does not refute light-induced superconductivity in other compounds, but it raises the burden of proof.",
+      "equivalent_equilibrium_state": "partial",
+      "mechanism": "thermal",
+      "host_state": "superconducting",
+      "temperature_window_K": [
+        5,
+        40
+      ],
+      "measured_quantity": "Josephson plasma resonance in the c-axis reflectivity"
+    }
+  ],
+  "sources": [
+    "Niwa et al., Phys. Rev. B 100, 104507 (2019), doi:10.1103/PhysRevB.100.104507"
+  ],
+  "gaps": [
+    "Fluence not verified."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

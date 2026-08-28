@@ -1,0 +1,56 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "tmote2",
+  "name": "Twisted molybdenum ditelluride bilayer system",
+  "formula": "tMoTe2",
+  "class": "heterostructure",
+  "equilibrium_context": "Ferromagnetic Chern insulator and fractional Chern insulator at zero field, with a fractionally quantized anomalous Hall effect",
+  "summary": "The most stable topological observable in the register and the only non-volatile topological state.",
+  "driven_states": [
+    {
+      "id": "ds_optically_written_chern_domains",
+      "emergent_property": "Helicity-selective optical pumping controls the ferromagnetic polarization and thereby the sign of the Chern number and the chirality of the edge states. At low power, optical training; at higher power, direct switching far below the Curie temperature; spatially resolved writing of Chern and fractional Chern domains.",
+      "stability": "metastable",
+      "drive": {
+        "type": "cw_optical",
+        "photon_energy_eV": 1.117,
+        "wavelength_um": 1.11,
+        "polarization": "circular"
+      },
+      "lifetime_s": 100000.0,
+      "evidence_level": "single_group",
+      "source": "Holtzmann, Li, Anderson, Cai, Park et al., Nature 649, 1147 (2026), doi:10.1038/s41586-025-09777-3",
+      "caveat": "The most stable topological observable in the register (quantized or fractionally quantized Hall resistance), but the drive does not act on the band topology; it acts on the magnetic order that fixes its sign. No Floquet, no light-induced Chern number out of a trivial initial state. The authors do not entirely exclude an accompanying local heating contribution during switching. One group, 2026.",
+      "equivalent_equilibrium_state": "partial",
+      "mechanism": "electronic",
+      "threshold": {
+        "quantity": "direct switching of the full polarization, detuning-dependent",
+        "value": 6e-07,
+        "unit": "W",
+        "verified": true
+      },
+      "temperature_window_K": [
+        1.6,
+        14
+      ],
+      "measured_quantity": "quantized anomalous Hall resistance, magnetic circular dichroism, helicity-resolved photoluminescence",
+      "quenchable_by": "opposite polarization"
+    }
+  ],
+  "sources": [
+    "Holtzmann et al., Nature 649, 1147 (2026), doi:10.1038/s41586-025-09777-3"
+  ],
+  "gaps": [
+    "The drive acts on the magnetic order, not on the band topology."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "pcmo",
+  "name": "Praseodymium calcium manganite",
+  "formula": "Pr0.7Ca0.3MnO3",
+  "class": "compound",
+  "equilibrium_context": "Charge- and orbitally ordered insulator below about 230 K, canted antiferromagnet; no metal in equilibrium at ambient pressure and zero field",
+  "summary": "Two states with opposite excitation channels: one via photocarriers with a bias field, the other via resonant excitation of a single lattice vibration without any electronic excitation.",
+  "driven_states": [
+    {
+      "id": "ds_photoinduced_fm_metal",
+      "emergent_property": "Photocarrier injection causes the charge-ordered insulator to collapse; the resulting state is ferromagnetic and metallic. The photocurrent is highly non-linear in both field and light intensity, with threshold behavior in both.",
+      "stability": "metastable",
+      "host_state": "charge-ordered insulator",
+      "drive": {
+        "type": "cw_optical",
+        "photon_energy_eV": 2.0,
+        "wavelength_um": 0.62,
+        "pulse_duration_s": null
+      },
+      "lifetime_s": 1.0,
+      "switching_time_s": 1e-12,
+      "threshold": {
+        "quantity": "light intensity and bias field, both with a threshold",
+        "value": null,
+        "unit": "-",
+        "verified": false
+      },
+      "temperature_window_K": [
+        4,
+        40
+      ],
+      "quenchable_by": "temperature cycling",
+      "mechanism": "electronic",
+      "evidence_level": "established",
+      "source": "Miyano, Tanaka, Tomioka & Tokura, Phys. Rev. Lett. 78, 4257 (1997), doi:10.1103/PhysRevLett.78.4257",
+      "further_sources": [
+        "Fiebig et al., Science 280, 1925 (1998), doi:10.1126/science.280.5371.1925 (spatially resolved visualization)",
+        "Polli et al., Nature Materials 6, 643 (2007), doi:10.1038/nmat1846 (coherent orbital waves)"
+      ],
+      "caveat": "Miyano et al. explicitly rule out laser heating, via the dependence on photon energy and temperature, which contradicts a heating model - one of the cleanest non-thermal arguments in the field. However: the effect requires an applied bias field and is therefore, strictly speaking, photo-assisted field-driven. Without a field the state does not appear. In addition, phase coexistence acts as an amplifier - the transition is in part a percolation threshold, not a homogeneous Mott collapse."
+    },
+    {
+      "id": "ds_vibrationally_driven_metal",
+      "emergent_property": "Resonant excitation of a single lattice vibration (Mn-O stretching mode at 17 micrometers), without any electronic excitation across the gap, drives the crystal from the stable insulating into a metastable metallic phase. Prototype of non-linear phononics.",
+      "stability": "metastable",
+      "host_state": "charge-ordered insulator",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 0.073,
+        "wavelength_um": 17.0,
+        "pulse_duration_s": 1e-13,
+        "driven_mode": "Mn-O stretching mode"
+      },
+      "lifetime_s": 1e-09,
+      "switching_time_s": 1e-12,
+      "threshold": {
+        "quantity": "fluence",
+        "value": null,
+        "unit": "mJ/cm^2",
+        "verified": false
+      },
+      "temperature_window_K": [
+        10,
+        30
+      ],
+      "mechanism": "lattice_strain",
+      "evidence_level": "reproduced",
+      "source": "Rini et al., Nature 449, 72 (2007), doi:10.1038/nature06119",
+      "further_sources": [
+        "Foerst et al., Nature Physics 7, 854 (2011), doi:10.1038/nphys2055 (non-linear phononics as a control mechanism)"
+      ],
+      "caveat": "Non-thermal in the excitation channel, since 73 meV lies far below the gap and no charge carriers are created. But the mode heats the lattice subsystem locally and anharmonically. Non-thermal here means: no equilibrium heating. It does NOT mean purely electronic."
+    }
+  ],
+  "sources": [
+    "Miyano et al., Phys. Rev. Lett. 78, 4257 (1997), doi:10.1103/PhysRevLett.78.4257",
+    "Rini et al., Nature 449, 72 (2007), doi:10.1038/nature06119"
+  ],
+  "gaps": [
+    "Threshold values in both cases not verified against the full text.",
+    "The photon energy of the cw case is reported as a range from 1.5 to 2.5 eV; the midpoint is entered here."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

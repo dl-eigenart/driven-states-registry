@@ -1,0 +1,87 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "kappa_et_br",
+  "name": "Organic dimer Mott insulator",
+  "formula": "kappa-(BEDT-TTF)2Cu[N(CN)2]Br",
+  "class": "organic",
+  "equilibrium_context": "Dimer Mott insulator with a gap of about 30 meV; the unstrained bulk is metallic and superconducting at Tc about 11.6 K - the insulating state is created only by substrate strain",
+  "driven_states": [
+    {
+      "id": "ds_thz_mott_breakdown",
+      "emergent_property": "A strong THz field pulse creates doublon-holon pairs by quantum tunnelling (impulsive dielectric breakdown); the Mott gap collapses with a time constant of about 0.1 ps, the Drude weight rises nonlinearly. Faster and more coherent than under fs laser excitation of the same sample.",
+      "stability": "driven",
+      "host_state": "dimer Mott insulator",
+      "drive": {
+        "type": "thz",
+        "photon_energy_eV": 0.004,
+        "wavelength_um": 300.0,
+        "pulse_duration_s": 1e-12
+      },
+      "lifetime_s": 1e-11,
+      "switching_time_s": 1e-13,
+      "threshold": {
+        "quantity": "electric field",
+        "value": 10000000.0,
+        "unit": "V/m",
+        "verified": false
+      },
+      "temperature_window_K": [
+        10,
+        100
+      ],
+      "mechanism": "field_tunneling",
+      "evidence_level": "single_group",
+      "source": "Yamakawa et al., Nature Materials 16, 1100 (2017), doi:10.1038/nmat4967",
+      "further_sources": [
+        "Kawakami et al., Phys. Rev. Lett. 103, 066403 (2009), doi:10.1103/PhysRevLett.103.066403",
+        "Singla et al., Phys. Rev. Lett. 115, 187401 (2015), doi:10.1103/PhysRevLett.115.187401 (THz modulation of the Hubbard U)",
+        "Iwai et al., Phys. Rev. Lett. 91, 057401 (2003), doi:10.1103/PhysRevLett.91.057401 (first clear example, halogen-bridged Ni chain)"
+      ],
+      "caveat": "The best candidate in the registry for a genuinely purely electronic Mott transition: no photons above the gap, but field-driven quantum tunnelling. Limitations: the sample is an artificially strained thin crystal on diamond, so the insulating ground state is created by preparation; at 30 meV the gap is very small, so the THz photon energy is not arbitrarily far from it; single group without independent repetition."
+    },
+    {
+      "id": "ds_molecular_vibration_sc",
+      "emergent_property": "Resonant excitation of local molecular vibrations of BEDT-TTF produces a colossal increase in carrier mobility and opens a superconductivity-like optical gap. Both features track the quasiparticle density of the equilibrium metal and persist up to a coherence temperature of about 50 K.",
+      "stability": "driven",
+      "host_state": "correlated metal close to the Mott transition",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 0.248,
+        "wavelength_um": 5.0,
+        "fluence_mJ_per_cm2": 2.0
+      },
+      "lifetime_s": 5e-12,
+      "switching_time_s": 1e-12,
+      "temperature_window_K": [
+        12.5,
+        50
+      ],
+      "mechanism": "electronic",
+      "equivalent_equilibrium_state": "no",
+      "measured_quantity": "optical conductivity in the mid-infrared",
+      "evidence_level": "single_group",
+      "source": "Buzzi et al., Phys. Rev. X 10, 031028 (2020), doi:10.1103/PhysRevX.10.031028",
+      "further_sources": [
+        "Buzzi et al., Phys. Rev. Lett. 127, 197002 (2021), doi:10.1103/PhysRevLett.127.197002 (control compounds)"
+      ],
+      "caveat": "The optical gap that is reached does NOT occur in the equilibrium superconductor - the light-induced state is therefore demonstrably different from the cooled one, which makes the label superconductivity difficult. Purely optical evidence, no transport, no Meissner effect. All measurements from one group. The saturation and reconstruction criticism of Dodge et al. applies methodologically here as well."
+    }
+  ],
+  "sources": [
+    "Yamakawa et al., Nature Materials 16, 1100 (2017), doi:10.1038/nmat4967",
+    "Buzzi et al., Phys. Rev. X 10, 031028 (2020), doi:10.1103/PhysRevX.10.031028"
+  ],
+  "gaps": [
+    "Field threshold as an order of magnitude, not verified against the full text."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

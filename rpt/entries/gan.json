@@ -1,0 +1,212 @@
+{
+  "schema_version": "0.1",
+  "id": "gan",
+  "name": "Gallium nitride",
+  "formula": "GaN",
+  "class": "compound",
+  "summary": "Example of a property that follows from structure rather than from doping: the spontaneous and piezoelectric polarization creates an electron gas at the AlGaN interface without any doping. In terms of the paradigm, an expression that arises from the geometry.",
+  "degrees_of_freedom": [
+    {
+      "id": "polarization",
+      "kind": "electronic",
+      "domain": {
+        "type": "continuous",
+        "min": -0.09,
+        "max": 0.09,
+        "unit": "C/m^2"
+      },
+      "description": "Sum of spontaneous and piezoelectric polarization"
+    },
+    {
+      "id": "sheet_density_2deg",
+      "kind": "electronic",
+      "domain": {
+        "type": "continuous",
+        "min": 0,
+        "max": 2e+17,
+        "unit": "m^-2"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "gate_voltage",
+      "kind": "gate_voltage",
+      "range": {
+        "min": -10,
+        "max": 3,
+        "unit": "V"
+      },
+      "latency_s": 1e-11,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "reversible": true
+    },
+    {
+      "id": "biaxial_strain",
+      "kind": "strain",
+      "range": {
+        "min": -0.02,
+        "max": 0.02,
+        "unit": "1"
+      },
+      "latency_s": 1e-06,
+      "energy_cost": {
+        "model": "unknown",
+        "value": null,
+        "unit": "J"
+      },
+      "reversible": true,
+      "notes": "Lattice mismatch to the AlGaN barrier; built into the heterostructure"
+    },
+    {
+      "id": "temperature",
+      "kind": "thermal",
+      "range": {
+        "min": 77,
+        "max": 1000,
+        "unit": "K"
+      },
+      "latency_s": 0.001,
+      "energy_cost": {
+        "model": "per_volume",
+        "value": 3000000.0,
+        "unit": "J/(m^3*K)"
+      },
+      "reversible": true
+    }
+  ],
+  "outputs": [
+    {
+      "id": "sheet_conductivity",
+      "quantity": "Sheet conductivity of the 2DEG",
+      "unit": "S",
+      "readout": "transport",
+      "readout_latency_s": 1e-09,
+      "nondestructive": true
+    },
+    {
+      "id": "breakdown_field",
+      "quantity": "Breakdown field strength",
+      "unit": "V/m",
+      "readout": "transport",
+      "readout_latency_s": 1.0,
+      "nondestructive": false
+    }
+  ],
+  "couplings": [
+    {
+      "id": "c_strain_pol",
+      "from": "biaxial_strain",
+      "to": "polarization",
+      "relation": {
+        "type": "linear",
+        "gain": -1.35
+      },
+      "latency_s": 1e-06,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "validity": {
+        "condition": "P_pz = 2*eps*(e31 - e33*C13/C33); sign and magnitude corrected relative to v0.1, where e33 was incorrectly coupled directly to the biaxial strain"
+      },
+      "confidence": "medium",
+      "source": "Ambacher et al., J. Appl. Phys. 85, 3222 (1999), Eq. (5), doi:10.1063/1.369664"
+    },
+    {
+      "id": "c_pol_2deg",
+      "from": "polarization",
+      "to": "sheet_density_2deg",
+      "relation": {
+        "type": "linear",
+        "gain": 6.24e+18
+      },
+      "latency_s": 1e-12,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "validity": {
+        "condition": "n = sigma_pol / q; polarization difference at the AlGaN/GaN interface"
+      },
+      "confidence": "high",
+      "source": "Ambacher et al., J. Appl. Phys. 85, 3222 (1999)",
+      "notes": "Key point: carrier density around 1e17 m^-2 without doping. Structure replaces chemistry."
+    },
+    {
+      "id": "c_gate_2deg",
+      "from": "gate_voltage",
+      "to": "sheet_density_2deg",
+      "relation": {
+        "type": "linear",
+        "gain": 2.1e+16
+      },
+      "latency_s": 1e-11,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "confidence": "medium",
+      "source": "25 nm AlGaN, eps_r = 9.5"
+    },
+    {
+      "id": "c_2deg_sigma",
+      "from": "sheet_density_2deg",
+      "to": "sheet_conductivity",
+      "relation": {
+        "type": "power",
+        "exponent": 1.0,
+        "scale": 2.4e-20
+      },
+      "latency_s": 1e-12,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "validity": {
+        "condition": "scale = q*mu with mu = 0.15 m^2/(V*s) at 300 K"
+      },
+      "confidence": "high",
+      "source": "Ambacher et al. (1999)"
+    }
+  ],
+  "states": [
+    {
+      "id": "wurtzite",
+      "label": "wurtzite, polar",
+      "stability": "equilibrium",
+      "lifetime_s": null,
+      "properties": {
+        "band_gap_eV": 3.4,
+        "breakdown_field_MV_per_cm": 3.3
+      }
+    }
+  ],
+  "gaps": [
+    "The polarization is fixed in the finished heterostructure; biaxial_strain is not a free actuation route during operation, but a design parameter.",
+    "Strictly speaking this entry describes a heterostructure, not the pure material. It points to the need for a dedicated entry type for interfaces.",
+    "The spontaneous polarization of -0.029 C/m^2 comes from Bernardini 1997 and was revised in 2001 to -0.034 C/m^2. The older value is retained because the remaining constants come from the same work; on an update the whole set has to be exchanged."
+  ],
+  "sources": [
+    "Bernardini, Fiorentini & Vanderbilt, Phys. Rev. B 56, R10024 (1997)",
+    "Ambacher et al., J. Appl. Phys. 85, 3222 (1999)",
+    "Bernardini & Fiorentini, Phys. Rev. B 64, 085207 (2001), doi:10.1103/PhysRevB.64.085207 (revised spontaneous polarization)"
+  ],
+  "verification_status": "verified",
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

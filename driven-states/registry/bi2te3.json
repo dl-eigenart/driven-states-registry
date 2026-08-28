@@ -1,0 +1,56 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "bi2te3",
+  "name": "Bismuth telluride",
+  "formula": "Bi2Te3",
+  "class": "compound",
+  "equilibrium_context": "Three-dimensional topological insulator, p-doped, bulk gap about 0.15 eV",
+  "driven_states": [
+    {
+      "id": "ds_floquet_buildup_subcycle",
+      "emergent_property": "Time-resolved buildup of the Floquet-Bloch bands within a single optical cycle of the drive. Several sidebands emerge sequentially, intraband acceleration proceeds simultaneously in several sidebands, followed by destruction through scattering of high-energy electrons into bulk states.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 0.1,
+        "wavelength_um": 12.0,
+        "pulse_duration_s": 1e-13,
+        "polarization": "linear s",
+        "field_MV_per_cm": 0.8
+      },
+      "lifetime_s": 1e-13,
+      "evidence_level": "single_group",
+      "source": "Ito et al., Nature 616, 696 (2023), doi:10.1038/s41586-023-05850-x",
+      "caveat": "Only one group. The assignment of the subcycle dynamics relies heavily on non-equilibrium quantum calculations; the energy resolution is coarse at 100 meV. No independent gap measurement. The separation of intraband acceleration from genuine sideband formation is theory-supported, not model-free. Volkov states are excluded via s polarization plus in-situ field reconstruction by momentum streaking - methodologically strong.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "electronic",
+      "threshold": {
+        "quantity": "none - Floquet dressing has no threshold",
+        "value": null,
+        "unit": "-",
+        "verified": true
+      },
+      "temperature_window_K": [
+        300,
+        300
+      ],
+      "measured_quantity": "subcycle-resolved photoemission, field waveform from streaking"
+    }
+  ],
+  "sources": [
+    "Ito et al., Nature 616, 696 (2023), doi:10.1038/s41586-023-05850-x"
+  ],
+  "gaps": [
+    "Fluence not reported."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

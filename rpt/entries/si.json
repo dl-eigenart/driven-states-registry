@@ -1,0 +1,315 @@
+{
+  "schema_version": "0.1",
+  "id": "si",
+  "name": "Silicon",
+  "formula": "Si",
+  "class": "element",
+  "z": 14,
+  "summary": "Calibration case of the schema. Few degrees of freedom, but the largest actuation range per degree of freedom: the conductivity can be set over more than ten orders of magnitude. Anyone who wants to check the schema checks it here first, because every number is independently documented.",
+  "degrees_of_freedom": [
+    {
+      "id": "carrier_density",
+      "kind": "electronic",
+      "domain": {
+        "type": "continuous",
+        "min": 1e+16,
+        "max": 1e+27,
+        "unit": "m^-3"
+      },
+      "description": "Carrier density, controllable by doping and by field"
+    },
+    {
+      "id": "band_gap",
+      "kind": "electronic",
+      "domain": {
+        "type": "continuous",
+        "min": 0.7,
+        "max": 1.17,
+        "unit": "eV"
+      },
+      "description": "Indirect band gap, dependent on temperature and strain"
+    },
+    {
+      "id": "strain_uniaxial",
+      "kind": "structural",
+      "domain": {
+        "type": "continuous",
+        "min": -0.02,
+        "max": 0.02,
+        "unit": "1"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "temperature",
+      "kind": "thermal",
+      "range": {
+        "min": 4,
+        "max": 1687,
+        "unit": "K"
+      },
+      "latency_s": 0.001,
+      "energy_cost": {
+        "model": "per_volume",
+        "value": 1630000.0,
+        "unit": "J/(m^3*K)"
+      },
+      "reversible": true,
+      "notes": "Volumetric heat capacity 700 J/(kg*K) * 2329 kg/m^3"
+    },
+    {
+      "id": "gate_voltage",
+      "kind": "gate_voltage",
+      "range": {
+        "min": -5,
+        "max": 5,
+        "unit": "V"
+      },
+      "latency_s": 1e-11,
+      "energy_cost": {
+        "model": "per_cycle",
+        "value": null,
+        "unit": "J"
+      },
+      "reversible": true,
+      "notes": "Field effect; switching energy is device-dependent (C*V^2), not intrinsic to the material"
+    },
+    {
+      "id": "doping",
+      "kind": "chemical",
+      "range": {
+        "min": 1e+19,
+        "max": 1e+27,
+        "unit": "m^-3"
+      },
+      "latency_s": 1.0,
+      "energy_cost": {
+        "model": "per_volume",
+        "value": null,
+        "unit": "J/m^3"
+      },
+      "reversible": false,
+      "notes": "Irreversible in the finished device. The most important case in the schema where reversible=false rules out closed-loop control."
+    },
+    {
+      "id": "uniaxial_stress",
+      "kind": "strain",
+      "range": {
+        "min": -1000000000.0,
+        "max": 1000000000.0,
+        "unit": "Pa"
+      },
+      "latency_s": 1e-06,
+      "energy_cost": {
+        "model": "per_volume",
+        "value": null,
+        "unit": "J/m^3"
+      },
+      "reversible": true
+    }
+  ],
+  "outputs": [
+    {
+      "id": "conductivity",
+      "quantity": "electrical conductivity",
+      "unit": "S/m",
+      "readout": "transport",
+      "readout_latency_s": 1e-06,
+      "nondestructive": true
+    },
+    {
+      "id": "resistance_rel",
+      "quantity": "relative change in resistance",
+      "unit": "1",
+      "readout": "transport",
+      "readout_latency_s": 1e-06,
+      "nondestructive": true
+    }
+  ],
+  "couplings": [
+    {
+      "id": "c_dope_n",
+      "from": "doping",
+      "to": "carrier_density",
+      "relation": {
+        "type": "linear",
+        "gain": 1.0
+      },
+      "latency_s": 1.0,
+      "energy_cost": {
+        "model": "unknown",
+        "value": null,
+        "unit": "J"
+      },
+      "confidence": "high",
+      "source": "Sze & Ng, Physics of Semiconductor Devices, 3rd ed. (2007)",
+      "combine": "add"
+    },
+    {
+      "id": "c_gate_n",
+      "from": "gate_voltage",
+      "to": "carrier_density",
+      "relation": {
+        "type": "linear",
+        "gain": 1.08e+25
+      },
+      "latency_s": 1e-11,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "validity": {
+        "condition": "inversion operation, 2 nm SiO2 equivalent (C = 1.73e-2 F/m^2), sheet charge converted to a 10 nm channel depth"
+      },
+      "confidence": "medium",
+      "source": "Sze & Ng (2007), Ch. 6",
+      "combine": "add"
+    },
+    {
+      "id": "c_n_sigma",
+      "from": "carrier_density",
+      "to": "conductivity",
+      "relation": {
+        "type": "power",
+        "exponent": 1.0,
+        "scale": 2.24e-20
+      },
+      "latency_s": 1e-12,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "validity": {
+        "condition": "sigma = q * mu * n, mu = 0.14 m^2/(V*s) for electrons at 300 K; scale = q*mu = 2.24e-20",
+        "temperature_K": [
+          200,
+          400
+        ]
+      },
+      "confidence": "high",
+      "source": "Sze & Ng (2007)"
+    },
+    {
+      "id": "c_temp_gap",
+      "from": "temperature",
+      "to": "band_gap",
+      "relation": {
+        "type": "affine",
+        "gain": -0.0002673,
+        "offset": 1.191
+      },
+      "latency_s": 0.001,
+      "energy_cost": {
+        "model": "per_volume",
+        "value": 1630000.0,
+        "unit": "J/(m^3*K)"
+      },
+      "validity": {
+        "condition": "Linearization of the Varshni relation with Varshni's own Si parameters (E0=1.1557 eV, alpha=7.021e-4, beta=1108); yields Eg(300 K) = 1.111 eV",
+        "temperature_K": [
+          250,
+          500
+        ]
+      },
+      "confidence": "high",
+      "source": "Varshni, Physica 34, 149 (1967)"
+    },
+    {
+      "id": "c_strain_r",
+      "from": "uniaxial_stress",
+      "to": "resistance_rel",
+      "relation": {
+        "type": "linear",
+        "gain": 7.18e-10
+      },
+      "latency_s": 1e-06,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "validity": {
+        "condition": "p-Si <110> longitudinal, (pi11+pi12+pi44)/2 = 71.8e-11 Pa^-1 from Smith's tensor components"
+      },
+      "confidence": "high",
+      "source": "Smith, Phys. Rev. 94, 42 (1954)",
+      "notes": "The value of 94e-11 carried in v0.1 cannot be found in the primary literature and has been replaced."
+    },
+    {
+      "id": "c_gap_ni",
+      "from": "band_gap",
+      "to": "carrier_density",
+      "relation": {
+        "type": "exponential",
+        "scale": 2.06e+25,
+        "gain": -19.34
+      },
+      "latency_s": 1e-12,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "combine": "add",
+      "validity": {
+        "condition": "n_i = A*exp(-Eg/(2kT)); exponent frozen at 300 K; A calibrated such that n_i(300 K) = 9.65e15 m^-3 with the model's own Eg(300 K) = 1.111 eV",
+        "temperature_K": [
+          250,
+          450
+        ]
+      },
+      "confidence": "high",
+      "source": "Misiakos & Tsamakis, J. Appl. Phys. 74, 3293 (1993), doi:10.1063/1.354551",
+      "notes": "Closes the thermal runaway cycle. Without this edge the feedback loop declared in feedback_loops was broken in the graph - which is exactly what the path check in the linter revealed."
+    }
+  ],
+  "states": [
+    {
+      "id": "diamond_cubic",
+      "label": "diamond structure, semiconductor",
+      "stability": "equilibrium",
+      "lifetime_s": null,
+      "properties": {
+        "band_gap_eV": 1.12,
+        "structure": "Fd-3m"
+      }
+    }
+  ],
+  "feedback_loops": [
+    {
+      "id": "fb_thermal_runaway",
+      "path": [
+        "c_temp_gap",
+        "c_gap_ni",
+        "c_n_sigma"
+      ],
+      "sign": "positive",
+      "notes": "A higher temperature narrows the gap, raises the intrinsic carrier density and hence the current, which heats further. Limits high-temperature operation. Detected and reported by the evaluator as a positive cycle, not integrated numerically."
+    }
+  ],
+  "gaps": [
+    "Doping is irreversible in the finished device; a reversible chemical actuation route is missing.",
+    "The coupling c_gate_n depends on device geometry and is therefore strictly speaking not a material property. Marked as medium in the schema.",
+    "In the exponent of c_gap_ni the temperature is frozen at 300 K. The model underestimates thermal runaway and is only good for demonstrating the sign, not for design.",
+    "The band gap of the model is Varshni-consistent (1.111 eV at 300 K) and therefore lies about 9 meV below the common textbook value of 1.12 eV. The deviation is intentional, because slope and absolute value have to come from the same source."
+  ],
+  "sources": [
+    "Sze & Ng, Physics of Semiconductor Devices, 3rd ed. (2007)",
+    "Varshni, Physica 34, 149 (1967)",
+    "Smith, Phys. Rev. 94, 42 (1954)",
+    "Misiakos & Tsamakis, J. Appl. Phys. 74, 3293 (1993), doi:10.1063/1.354551",
+    "Rowe, arXiv:1309.6445 (compilation of the piezoresistance coefficients)"
+  ],
+  "verification_status": "verified",
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

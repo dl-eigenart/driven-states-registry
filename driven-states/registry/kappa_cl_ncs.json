@@ -1,0 +1,52 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "kappa_cl_ncs",
+  "name": "Organic charge-transfer salts, control compounds",
+  "formula": "kappa-(BEDT-TTF)2Cu[N(CN)2]Cl and kappa-(BEDT-TTF)2Cu(NCS)2",
+  "class": "organic",
+  "equilibrium_context": "kappa-Cl: Mott insulator without superconductivity at ambient pressure. kappa-NCS: metallic, Tc about 10 K, further away from the Mott transition",
+  "summary": "Internal control within the same material family. Shows that the effect is tied to the position in the phase diagram.",
+  "driven_states": [
+    {
+      "id": "ds_no_photo_sc",
+      "emergent_property": "Negative result. Under identical resonant vibrational excitation neither the Mott insulator kappa-Cl nor the metal kappa-NCS shows a photoinduced superconductivity-like response; the effect occurs exclusively in kappa-Br.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 0.248,
+        "wavelength_um": 5.0,
+        "fluence_mJ_per_cm2": 2.0
+      },
+      "lifetime_s": 1e-12,
+      "evidence_level": "single_group",
+      "source": "Buzzi et al., Phys. Rev. Lett. 127, 197002 (2021), doi:10.1103/PhysRevLett.127.197002",
+      "caveat": "Valuable as an internal control: the effect is not generic for organic conductors but is closely tied to proximity to the Mott phase and to pre-existing superconducting fluctuations. This strengthens the electronic interpretation, but it does not replace an external reproduction - the positive and the negative result come from the same group and the same setup.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "unresolved",
+      "temperature_window_K": [
+        5,
+        50
+      ],
+      "further_sources": [
+        "Buzzi et al., Phys. Rev. X 10, 031028 (2020), doi:10.1103/PhysRevX.10.031028"
+      ],
+      "measured_quantity": "optical conductivity in the mid-infrared"
+    }
+  ],
+  "sources": [
+    "Buzzi et al., Phys. Rev. Lett. 127, 197002 (2021), doi:10.1103/PhysRevLett.127.197002"
+  ],
+  "gaps": [
+    "A negative result from the same laboratory as the positive result."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

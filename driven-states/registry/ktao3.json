@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "ktao3",
+  "name": "Potassium tantalate",
+  "formula": "KTaO3",
+  "class": "compound",
+  "equilibrium_context": "Quantum paraelectric, no ferroelectricity down to absolute zero",
+  "summary": "Control and negative entry on the SrTiO3 controversy.",
+  "driven_states": [
+    {
+      "id": "ds_thz_local_dipolar_correlation",
+      "emergent_property": "Intense THz excitation of the soft mode produces a long-lived second-harmonic response which, however, does not stem from a global ferroelectric phase but from a THz-driven correlation between defect-induced local polar structures.",
+      "stability": "driven",
+      "drive": {
+        "type": "thz",
+        "frequency_THz": 0.8,
+        "field_MV_per_cm": 0.5,
+        "pulse_duration_s": 1e-12,
+        "driven_mode": "TO1 soft mode"
+      },
+      "lifetime_s": 2e-11,
+      "evidence_level": "single_group",
+      "source": "Cheng, Kramer, Shen & Hoffmann, Phys. Rev. Lett. 130, 126902 (2023), doi:10.1103/PhysRevLett.130.126902",
+      "caveat": "Deliberately listed as a control entry. Important for the state of the controversy: the same experimental signature - a long-lived second harmonic after a THz pulse - that is read elsewhere as light-induced ferroelectricity is here traced explicitly back to defect physics. The fluence-dependent hardening of the soft mode can be described by a single-well potential, so no ferroelectric double well arises.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "mixed",
+      "temperature_window_K": [
+        10,
+        100
+      ],
+      "measured_quantity": "second harmonic, soft-mode frequency"
+    }
+  ],
+  "sources": [
+    "Cheng et al., Phys. Rev. Lett. 130, 126902 (2023), doi:10.1103/PhysRevLett.130.126902"
+  ],
+  "gaps": [
+    "No independent repetition."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

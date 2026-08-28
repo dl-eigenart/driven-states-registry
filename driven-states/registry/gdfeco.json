@@ -1,0 +1,60 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "gdfeco",
+  "name": "Gadolinium-iron-cobalt",
+  "formula": "Gd22Fe75Co3",
+  "class": "alloy",
+  "equilibrium_context": "Amorphous ferrimagnet, Gd and FeCo sublattices antiferromagnetically coupled, with magnetization and angular-momentum compensation points",
+  "summary": "Special case: only the transient intermediate state qualifies for the registry, not the switching outcome.",
+  "driven_states": [
+    {
+      "id": "ds_transient_ferromagnetic_state",
+      "emergent_property": "After a single femtosecond pulse the sublattices reverse on strongly different time scales; in the process a transient ferromagnet-like state arises for a few hundred femtoseconds, in which the Gd and Fe moments, antiparallel in equilibrium, stand parallel.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "wavelength_um": 0.8,
+        "fluence_mJ_per_cm2": 4.0,
+        "pulse_duration_s": 6e-14,
+        "polarization": "irrelevant for the switching itself"
+      },
+      "lifetime_s": 4e-13,
+      "evidence_level": "established",
+      "source": "Radu, Vahaplar, Stamm et al., Nature 472, 205 (2011), doi:10.1038/nature09901",
+      "caveat": "What qualifies for the registry here is exclusively the transient ferromagnet-like intermediate state, which is a genuine non-equilibrium state and appears nowhere in the phase diagram. The switching outcome itself is a symmetry-equivalent equilibrium state and is neither driven nor metastable - anyone listing it as a light-induced state would have to include every magnetization reversal by a field pulse. The intermediate state is measured element-resolved and reproduced; its microscopic description is not conclusively settled.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "mixed",
+      "threshold": {
+        "quantity": "narrow fluence window: below it no switching, above it a multidomain state or damage",
+        "value": null,
+        "unit": "mJ/cm^2",
+        "verified": true
+      },
+      "temperature_window_K": [
+        4,
+        400
+      ],
+      "further_sources": [
+        "Stanciu et al., Phys. Rev. Lett. 99, 047601 (2007), doi:10.1103/PhysRevLett.99.047601"
+      ],
+      "measured_quantity": "element-resolved magnetization of the sublattices (XMCD)"
+    }
+  ],
+  "sources": [
+    "Radu et al., Nature 472, 205 (2011), doi:10.1038/nature09901"
+  ],
+  "gaps": [
+    "The switched final state is deliberately NOT listed as a driven state."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

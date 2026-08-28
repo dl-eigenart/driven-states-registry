@@ -1,0 +1,83 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "tise2",
+  "name": "Titanium diselenide, 1T polytype",
+  "formula": "1T-TiSe2",
+  "class": "compound",
+  "equilibrium_context": "Commensurate 2x2x2 charge density wave below about 200 K with excitonic correlations and a periodic lattice distortion; CDW gap about 220 meV",
+  "summary": "Two states from different domains: the separation of the CDW order parameter components, and a Floquet renormalization that exists only in the CDW phase.",
+  "driven_states": [
+    {
+      "id": "ds_pld_without_excitonic_order",
+      "emergent_property": "Non-thermal separation of the two CDW order parameter components: the excitonic order is quenched while the periodic lattice distortion persists in a coherently excited state - a state that does not exist in equilibrium.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.5,
+        "wavelength_um": 0.8,
+        "fluence_mJ_per_cm2": 0.2,
+        "pulse_duration_s": 1.2e-14
+      },
+      "lifetime_s": 1e-12,
+      "evidence_level": "established",
+      "source": "Porer et al., Nature Materials 13, 857 (2014), doi:10.1038/nmat4042",
+      "caveat": "Clearly transient, not a metastable hidden state. The assignment of the THz response to excitonic order versus lattice distortion is model-dependent; the debate about the relative contributions of an exciton condensate and Jahn-Teller coupling in TiSe2 is not settled.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "electronic",
+      "switching_time_s": 1e-13,
+      "temperature_window_K": [
+        10,
+        200
+      ],
+      "measured_quantity": "THz conductivity, separated by order parameter components",
+      "quenchable_by": "self-relaxation"
+    },
+    {
+      "id": "ds_cdw_enabled_floquet_renormalization",
+      "emergent_property": "Instantaneous, pump-synchronous downward shift of the valence band maximum by 8 +/- 3 meV plus valence band replicas spaced by one photon energy. The effect exists EXCLUSIVELY in the CDW phase and disappears above the transition temperature: the temporally periodic driving couples to the spatially periodic CDW modulation.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 0.248,
+        "wavelength_um": 5.0,
+        "fluence_mJ_per_cm2": 2.0,
+        "polarization": "linear p",
+        "field_MV_per_cm": 3.1
+      },
+      "lifetime_s": 1e-13,
+      "evidence_level": "single_group",
+      "source": "Wang, Cai, Xiao et al., PNAS 123, e2538027123 (2026), doi:10.1073/pnas.2538027123",
+      "caveat": "The effect is small - 8 +/- 3 meV, barely three standard deviations and far below the energy resolution, obtained from peak position shifts in the fit. Only one group, the same setup as for black phosphorus and graphene, published June 2026. The distinction from a Volkov state is indirect but sound at its core: the effect disappears above the CDW temperature with otherwise identical geometry - a laser-assisted photoemission effect would have no reason to depend on the CDW order.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "mixed",
+      "threshold": {
+        "quantity": "temperature threshold: the effect disappears above the CDW transition temperature",
+        "value": 200.0,
+        "unit": "K",
+        "verified": true
+      },
+      "temperature_window_K": [
+        80,
+        200
+      ],
+      "measured_quantity": "angle-resolved photoemission, energy shift of the valence band maximum"
+    }
+  ],
+  "sources": [
+    "Porer et al., Nature Materials 13, 857 (2014), doi:10.1038/nmat4042",
+    "Wang, Cai, Xiao et al., PNAS 123, e2538027123 (2026), doi:10.1073/pnas.2538027123"
+  ],
+  "gaps": [
+    "The Floquet effect lies below the energy resolution and rests on fit shifts."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

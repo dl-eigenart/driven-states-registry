@@ -1,0 +1,406 @@
+{
+  "schema_version": "0.1",
+  "id": "vo2",
+  "name": "Vanadium dioxide",
+  "formula": "VO2",
+  "class": "compound",
+  "summary": "The canonical threshold switch: insulator-metal transition at 341 K with a resistance change of three to five orders of magnitude. In the schema it shows the difference between the thermal actuation route (milliseconds) and the optical actuation route (below one picosecond) acting on the same degree of freedom.",
+  "degrees_of_freedom": [
+    {
+      "id": "crystal_phase",
+      "kind": "structural",
+      "domain": {
+        "type": "discrete",
+        "values": [
+          "monoclinic_M1",
+          "rutile_R"
+        ]
+      },
+      "description": "Monoclinic insulating, rutile metallic"
+    },
+    {
+      "id": "carrier_density",
+      "kind": "electronic",
+      "domain": {
+        "type": "continuous",
+        "min": 1e+24,
+        "max": 1e+28,
+        "unit": "m^-3"
+      }
+    },
+    {
+      "id": "transition_temperature",
+      "kind": "structural",
+      "domain": {
+        "type": "continuous",
+        "min": 320,
+        "max": 365,
+        "unit": "K"
+      },
+      "description": "Transition temperature of the insulator-metal transition, shiftable by strain"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "temperature",
+      "kind": "thermal",
+      "range": {
+        "min": 200,
+        "max": 400,
+        "unit": "K"
+      },
+      "latency_s": 0.001,
+      "energy_cost": {
+        "model": "per_volume",
+        "value": 3200000.0,
+        "unit": "J/(m^3*K)"
+      },
+      "reversible": true
+    },
+    {
+      "id": "pump_pulse",
+      "kind": "optical",
+      "range": {
+        "min": 0,
+        "max": 50,
+        "unit": "mJ/cm^2"
+      },
+      "latency_s": 1e-13,
+      "energy_cost": {
+        "model": "per_cycle",
+        "value": null,
+        "unit": "J"
+      },
+      "reversible": true,
+      "notes": "Ultrashort pulse, typically 800 nm, threshold around 5 mJ/cm^2"
+    },
+    {
+      "id": "uniaxial_stress",
+      "kind": "strain",
+      "range": {
+        "min": -500000000.0,
+        "max": 500000000.0,
+        "unit": "Pa"
+      },
+      "latency_s": 1e-06,
+      "energy_cost": {
+        "model": "unknown",
+        "value": null,
+        "unit": "J"
+      },
+      "reversible": true,
+      "notes": "Shifts the transition temperature by several K"
+    }
+  ],
+  "outputs": [
+    {
+      "id": "resistivity",
+      "quantity": "resistivity",
+      "unit": "Ohm*m",
+      "readout": "transport",
+      "readout_latency_s": 1e-09,
+      "nondestructive": true
+    },
+    {
+      "id": "ir_transmittance",
+      "quantity": "Transmittance in the near infrared",
+      "unit": "1",
+      "readout": "optical",
+      "readout_latency_s": 1e-13,
+      "nondestructive": true
+    }
+  ],
+  "couplings": [
+    {
+      "id": "c_temp_phase",
+      "from": "temperature",
+      "to": "crystal_phase",
+      "relation": {
+        "type": "hysteretic",
+        "threshold_up": 341,
+        "threshold_down": 333,
+        "low": "monoclinic_M1",
+        "high": "rutile_R"
+      },
+      "latency_s": 0.001,
+      "energy_cost": {
+        "model": "per_volume",
+        "value": 235000000.0,
+        "unit": "J/m^3"
+      },
+      "confidence": "high",
+      "source": "Morin, Phys. Rev. Lett. 3, 34 (1959)",
+      "notes": "Latent heat 51 J/g at a density of 4.57 g/cm^3. The hysteresis width depends on the thin film, 1 to 10 K."
+    },
+    {
+      "id": "c_phase_rho",
+      "from": "crystal_phase",
+      "to": "resistivity",
+      "relation": {
+        "type": "lookup",
+        "table": [
+          [
+            "monoclinic_M1",
+            0.1
+          ],
+          [
+            "rutile_R",
+            3e-06
+          ]
+        ]
+      },
+      "latency_s": 1e-13,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "confidence": "high",
+      "source": "Morin (1959); thin film values scatter by up to two orders of magnitude"
+    },
+    {
+      "id": "c_phase_ir",
+      "from": "crystal_phase",
+      "to": "ir_transmittance",
+      "relation": {
+        "type": "lookup",
+        "table": [
+          [
+            "monoclinic_M1",
+            0.7
+          ],
+          [
+            "rutile_R",
+            0.1
+          ]
+        ]
+      },
+      "latency_s": 1e-13,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "confidence": "medium",
+      "source": "Basis of thermochromic window coatings"
+    },
+    {
+      "id": "c_pump_phase",
+      "from": "pump_pulse",
+      "to": "crystal_phase",
+      "relation": {
+        "type": "threshold",
+        "threshold": 5.0,
+        "low": "monoclinic_M1",
+        "high": "rutile_R"
+      },
+      "latency_s": 1e-13,
+      "energy_cost": {
+        "model": "per_cycle",
+        "value": null,
+        "unit": "J"
+      },
+      "confidence": "high",
+      "source": "Cavalleri et al., Phys. Rev. Lett. 87, 237401 (2001), doi:10.1103/PhysRevLett.87.237401; threshold values from O'Callahan et al., Nat. Commun. 6, 6849 (2015), doi:10.1038/ncomms7849",
+      "notes": "The same degree of freedom as c_temp_phase, but ten orders of magnitude faster. Cavalleri 2001 does not give a threshold fluence but an excitation density of about 5e21 cm^-3; the first robust threshold determination comes from Cavalleri PRB 69, 153106 (2004) and Cocker PRB 85, 155120 (2012).",
+      "validity": {
+        "condition": "Threshold is sample-dependent: 2 to 6 mJ/cm^2 for microcrystals weakly coupled to the substrate, 5.5 to 15 mJ/cm^2 for thin films, saturation at 14.7 mJ/cm^2. The entry value of 5.0 is an indicative value for thin films."
+      }
+    },
+    {
+      "id": "c_stress_tmit",
+      "from": "uniaxial_stress",
+      "to": "transition_temperature",
+      "relation": {
+        "type": "qualitative",
+        "direction": "increases"
+      },
+      "latency_s": 1e-06,
+      "energy_cost": {
+        "model": "unknown",
+        "value": null,
+        "unit": "J"
+      },
+      "confidence": "medium",
+      "source": "Cao et al., Nano Lett. 10, 2667 (2010), doi:10.1021/nl101457k",
+      "notes": "Sign corrected relative to v0.1. Tension along the rutile c axis stabilizes the insulating M1 phase and raises the transition temperature; compression lowers it. In v0.1 the direction was inverted and the target was a categorical quantity on which 'decreases' is undefined."
+    }
+  ],
+  "states": [
+    {
+      "id": "insulating",
+      "label": "monoclinic, insulating",
+      "stability": "equilibrium",
+      "lifetime_s": null,
+      "properties": {
+        "resistivity_ohm_m": 0.1
+      }
+    },
+    {
+      "id": "metallic",
+      "label": "rutile, metallic",
+      "stability": "equilibrium",
+      "lifetime_s": null,
+      "properties": {
+        "resistivity_ohm_m": 3e-06
+      }
+    },
+    {
+      "id": "photo_metallic",
+      "label": "photoinduced metallic below 341 K",
+      "stability": "driven",
+      "lifetime_s": 1e-09,
+      "source": "Cavalleri et al. (2001); Wegkamp & Staehler, Prog. Surf. Sci. 90, 464 (2015)"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t_mit_heat",
+      "from_state": "insulating",
+      "to_state": "metallic",
+      "trigger": {
+        "variable": "temperature",
+        "operator": ">=",
+        "value": 341,
+        "unit": "K"
+      },
+      "latency_s": 0.001,
+      "energy_density_J_per_m3": 235000000.0,
+      "reversible": true,
+      "hysteresis": {
+        "width": 8,
+        "unit": "K"
+      },
+      "confidence": "high",
+      "source": "Morin (1959)"
+    },
+    {
+      "id": "t_mit_light",
+      "from_state": "insulating",
+      "to_state": "photo_metallic",
+      "trigger": {
+        "variable": "pump_pulse",
+        "operator": ">=",
+        "value": 5.0,
+        "unit": "mJ/cm^2"
+      },
+      "latency_s": 8e-14,
+      "energy_density_J_per_m3": null,
+      "reversible": true,
+      "confidence": "high",
+      "source": "Cavalleri et al. (2001)",
+      "notes": "Structural bottleneck: half a period of the 6 THz Ag mode. The electronic gap collapse is faster, below 5e-13 s."
+    }
+  ],
+  "driven_states": [
+    {
+      "id": "ds_photo_metal",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "fluence_mJ_per_cm2": 10,
+        "pulse_duration_s": 1e-13
+      },
+      "emergent_property": "metallic conductivity below the equilibrium transition temperature",
+      "host_state": "insulating",
+      "lifetime_s": 1e-07,
+      "threshold": {
+        "quantity": "fluence",
+        "value": 5.0,
+        "unit": "mJ/cm^2"
+      },
+      "evidence_level": "established",
+      "source": "Cavalleri et al., Phys. Rev. Lett. 87, 237401 (2001), doi:10.1103/PhysRevLett.87.237401",
+      "notes": "Lifetime and threshold corrected after checking the sources. The return is NOT an intrinsic electronic lifetime, but a heat transport time into the substrate (Wen et al., PRB 88, 165424 (2013)); in microcrystals decoupled from the substrate the state persists into the microsecond range (O'Callahan et al., Nat. Commun. 6, 6849 (2015)). Range 1e-9 to 1e-6 s. The dispute between thermal and electronic is open: Cavalleri 2001 argues non-thermally, while Hilton 2007 and Cocker 2012 successfully model the same data as overheating plus percolation.",
+      "stability": "driven_to_metastable",
+      "mechanism": "thermal",
+      "equivalent_equilibrium_state": "no",
+      "measured_quantity": "THz and optical conductivity",
+      "temperature_window_K": [
+        80,
+        340
+      ]
+    },
+    {
+      "id": "ds_monoclinic_hidden_metal",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "fluence_mJ_per_cm2": 10.0,
+        "pulse_duration_s": 1e-13
+      },
+      "emergent_property": "Metal-like mid-infrared response with the monoclinic lattice distortion intact: the V-V dimers are preserved, and the charge density reorders one-dimensionally along the V chains. This state does not exist in the equilibrium phase diagram.",
+      "host_state": "insulating",
+      "lifetime_s": 1e-10,
+      "threshold": {
+        "quantity": "fluence, narrow window just below the M1-to-R threshold",
+        "value": 9.0,
+        "unit": "mJ/cm^2"
+      },
+      "evidence_level": "contested",
+      "source": "Morrison et al., Science 346, 445 (2014), doi:10.1126/science.1253779",
+      "notes": "Non-thermal in the strong sense: a purely thermal process could not produce this state, because the lattice remains monoclinic. That is exactly why it is interesting. Counterargument: several groups attribute the metal-like response to photoexcited carriers in a still insulating lattice, not to a genuine metallic phase. The lifetime is reported inconsistently, between a few picoseconds and long-lived. The observation has been reproduced, but the interpretation as an independent monoclinic metallic phase is open as of 2026. See also Nat. Commun. (2024), doi:10.1038/s41467-024-55760-3.",
+      "stability": "metastable",
+      "mechanism": "electronic",
+      "equivalent_equilibrium_state": "no",
+      "measured_quantity": "mid-infrared response with the monoclinic structure intact",
+      "temperature_window_K": [
+        100,
+        335
+      ]
+    },
+    {
+      "id": "ds_thz_field_metallization",
+      "drive": {
+        "type": "thz",
+        "photon_energy_eV": 0.004,
+        "pulse_duration_s": 1e-12
+      },
+      "emergent_property": "A THz field locally enhanced by metamaterial split-ring resonators lowers the Coulomb barrier for charge transport and triggers the insulator-metal transition, without interband photoexcitation and therefore without direct carrier generation by photons.",
+      "host_state": "insulating",
+      "lifetime_s": 1e-11,
+      "threshold": {
+        "quantity": "local electric field",
+        "value": 100000000.0,
+        "unit": "V/m"
+      },
+      "evidence_level": "reproduced",
+      "source": "Liu et al., Nature 487, 345 (2012), doi:10.1038/nature11231",
+      "notes": "The authors argue that the effect is field-driven rather than photon-driven, but concede Joule heating in the metamaterial gap as a contribution. Mayer et al., Phys. Rev. B 91, 235113 (2015) attribute the effect to a Zener-like tunneling breakdown. At the highest fields a permanent conversion is documented, which is likely to be thermal in origin. The field threshold is an order-of-magnitude value.",
+      "stability": "driven_to_metastable",
+      "mechanism": "field_tunneling",
+      "equivalent_equilibrium_state": "no",
+      "measured_quantity": "THz transmission in the metamaterial gap",
+      "temperature_window_K": [
+        290,
+        330
+      ]
+    }
+  ],
+  "gaps": [
+    "Hysteresis width and absolute resistance values depend strongly on the film and the substrate; the tabulated values are indicative values, not material constants.",
+    "The relative share of purely electronic versus thermally driven switching has not been conclusively settled and remains the central point of dispute in the field.",
+    "Fluence thresholds are sample-specific (substrate coupling, grain size, strain) and are practically worthless as a single number. The data set therefore carries the range in the validity condition.",
+    "The edge c_stress_tmit acts on the transition temperature, but the evaluator does not feed this back into the threshold of c_temp_phase. Parametric thresholds belong in schema v0.2."
+  ],
+  "sources": [
+    "Morin, Phys. Rev. Lett. 3, 34 (1959), doi:10.1103/PhysRevLett.3.34",
+    "Cavalleri et al., Phys. Rev. Lett. 87, 237401 (2001), doi:10.1103/PhysRevLett.87.237401",
+    "Cavalleri et al., Phys. Rev. B 69, 153106 (2004), doi:10.1103/PhysRevB.69.153106",
+    "Cao et al., Nano Lett. 10, 2667 (2010), doi:10.1021/nl101457k",
+    "Cocker et al., Phys. Rev. B 85, 155120 (2012), doi:10.1103/PhysRevB.85.155120",
+    "Wen et al., Phys. Rev. B 88, 165424 (2013), doi:10.1103/PhysRevB.88.165424",
+    "Morrison et al., Science 346, 445 (2014), doi:10.1126/science.1253779",
+    "O'Callahan et al., Nat. Commun. 6, 6849 (2015), doi:10.1038/ncomms7849",
+    "Liu et al., Nature 487, 345 (2012), doi:10.1038/nature11231"
+  ],
+  "verification_status": "verified",
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

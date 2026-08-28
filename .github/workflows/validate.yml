@@ -1,0 +1,48 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install jsonschema
+
+      - name: Validate schemas and dataset consistency
+        run: python3 rpt/rpt_eval.py lint
+
+      - name: Run test suite
+        run: python3 rpt/test_rpt.py
+
+      - name: Rebuild the explorer and check both copies are committed and identical
+        run: |
+          cp driven-states/index.html /tmp/sub-committed.html
+          cp index.html /tmp/root-committed.html
+          python3 driven-states/build_site.py
+          for pair in "sub:driven-states/index.html" "root:index.html"; do
+            name="${pair%%:*}"; path="${pair#*:}"
+            if ! diff -q "/tmp/$name-committed.html" "$path" > /dev/null; then
+              echo "::error::$path is out of date. Run 'python3 driven-states/build_site.py' and commit both copies."
+              diff "/tmp/$name-committed.html" "$path" | head -20
+              exit 1
+            fi
+          done
+          if ! diff -q index.html driven-states/index.html > /dev/null; then
+            echo "::error::The two copies of index.html differ."
+            exit 1
+          fi
+          echo "Both copies of index.html are current and identical."
+
+      - name: Check that no confidential file is tracked
+        run: python3 scripts/check_publish.py --strict

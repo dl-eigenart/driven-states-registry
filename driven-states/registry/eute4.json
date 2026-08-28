@@ -1,0 +1,57 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "eute4",
+  "name": "Europium tetratelluride",
+  "formula": "EuTe4",
+  "class": "compound",
+  "equilibrium_context": "Incommensurate charge density wave with polar, symmetry-breaking charge order and colossal thermal hysteresis extending well above room temperature",
+  "summary": "The only room-temperature case in the CDW domain - but mechanistically the most strongly thermally contaminated.",
+  "driven_states": [
+    {
+      "id": "ds_nonvolatile_polar_order_switch",
+      "emergent_property": "Non-volatile, reversible switching of the electronic polar order at room temperature. Each state produced changes the resistance and the second-harmonic intensity; hidden metastable CDW configurations that are thermally inaccessible become available.",
+      "stability": "metastable",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "wavelength_um": 0.8,
+        "fluence_mJ_per_cm2": 1.0,
+        "pulse_duration_s": 1e-13
+      },
+      "lifetime_s": 100000.0,
+      "evidence_level": "single_group",
+      "source": "Wu, Liu, Wang et al., Nat. Commun. 15, 8937 (2024), doi:10.1038/s41467-024-53323-0",
+      "caveat": "Candid: the authors themselves cite photoinduced thermal effects as an essential part of the mechanism - the switching exploits the colossal hysteresis and is not purely electronic. The structure of the switched configurations is characterized only via second harmonic and resistance.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "mixed",
+      "threshold": {
+        "quantity": "fluence and pulse number, cumulative",
+        "value": null,
+        "unit": "mJ/cm^2",
+        "verified": false
+      },
+      "temperature_window_K": [
+        290,
+        310
+      ],
+      "measured_quantity": "resistance and second-harmonic intensity",
+      "quenchable_by": "a second laser pulse of different fluence, temperature cycling through the hysteresis"
+    }
+  ],
+  "sources": [
+    "Wu et al., Nat. Commun. 15, 8937 (2024), doi:10.1038/s41467-024-53323-0"
+  ],
+  "gaps": [
+    "Thermal contribution to the mechanism conceded by the authors themselves."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "cete3",
+  "name": "Cerium tritelluride",
+  "formula": "CeTe3",
+  "class": "compound",
+  "equilibrium_context": "Unidirectional stripe charge density wave along c",
+  "driven_states": [
+    {
+      "id": "ds_hidden_bidirectional_cdw",
+      "emergent_property": "Spontaneous transformation of the stripe CDW into a bidirectional hidden state after intense excitation: a non-thermal critical point in the non-equilibrium energy landscape, followed by slow growth of the new order through spontaneous symmetry breaking.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "wavelength_um": 0.8,
+        "fluence_mJ_per_cm2": 3.0,
+        "pulse_duration_s": 1e-13
+      },
+      "lifetime_s": 1e-10,
+      "evidence_level": "single_group",
+      "source": "Zhou et al., Nat. Commun. 12, 566 (2021), doi:10.1038/s41467-020-20834-5",
+      "caveat": "Adds the kinetics of symmetry breaking to the LaTe3 case, but essentially confirms the same physics in another member of the tritellurides. The hidden state is characterized via diffraction intensities and mode coupling; an independent electronic characterization is missing.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "electronic",
+      "threshold": {
+        "quantity": "fluence at the non-thermal critical point",
+        "value": null,
+        "unit": "mJ/cm^2",
+        "verified": false
+      },
+      "switching_time_s": 1e-12,
+      "temperature_window_K": [
+        100,
+        300
+      ],
+      "measured_quantity": "ultrafast electron diffraction",
+      "quenchable_by": "self-relaxation"
+    }
+  ],
+  "sources": [
+    "Zhou et al., Nat. Commun. 12, 566 (2021), doi:10.1038/s41467-020-20834-5"
+  ],
+  "gaps": [
+    "Fluence estimated."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

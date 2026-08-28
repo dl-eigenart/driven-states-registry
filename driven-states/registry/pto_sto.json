@@ -1,0 +1,56 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "pto_sto",
+  "name": "Lead titanate / strontium titanate superlattice",
+  "formula": "(PbTiO3)n/(SrTiO3)m",
+  "class": "heterostructure",
+  "equilibrium_context": "Ferroelectric superlattice with a/c domains or polar vortex structures; the supercrystal phase does not exist in the equilibrium phase diagram",
+  "driven_states": [
+    {
+      "id": "ds_photoinduced_supercrystal",
+      "emergent_property": "Sub-picosecond light pulses transform the superlattice into a coherent three-dimensional supercrystal phase with polar, strain and charge order periodicity up to 30 nanometers. The state persists indefinitely under ambient conditions and can be erased thermally.",
+      "stability": "driven_to_metastable",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 3.1,
+        "wavelength_um": 0.4,
+        "pulse_duration_s": 1e-13
+      },
+      "lifetime_s": 10000000.0,
+      "evidence_level": "single_group",
+      "source": "Stoica, Laanait, Dai et al., Nature Materials 18, 377 (2019), doi:10.1038/s41563-019-0311-x",
+      "caveat": "Genuine, indefinitely long-lived metastability at room temperature - one of only two such cases in the registry. The mechanism (photoinduced charge carriers, screening of the depolarization field, electrostriction) is, however, not clarified. The state is tied to the heterostructure, not to a bulk material, and is strongly sample-dependent.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "mixed",
+      "threshold": {
+        "quantity": "fluence threshold plus accumulation over many pulses",
+        "value": null,
+        "unit": "mJ/cm^2",
+        "verified": false
+      },
+      "temperature_window_K": [
+        300,
+        300
+      ],
+      "measured_quantity": "X-ray diffraction, supercrystal superlattice reflections",
+      "quenchable_by": "heating"
+    }
+  ],
+  "sources": [
+    "Stoica et al., Nature Materials 18, 377 (2019), doi:10.1038/s41563-019-0311-x"
+  ],
+  "gaps": [
+    "Mechanism not clarified.",
+    "Fluence threshold not verified."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

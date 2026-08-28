@@ -1,0 +1,31 @@
+# Deny-by-default. Only what is explicitly re-included below is ever published.
+# This folder also holds confidential Eigenart documents (working paper, prior-art
+# gate) and the CI build engine. Those must never reach a public repository, so the
+# safe pattern is an allowlist rather than a list of exclusions.
+
+*
+
+!/.gitignore
+!/LICENSE
+!/LICENSE-DATA
+!/CITATION.cff
+!/CONTRIBUTING.md
+!/README.md
+!/index.html
+
+!/.github/
+!/.github/**
+
+!/rpt/
+!/rpt/**
+
+!/driven-states/
+!/driven-states/**
+
+!/scripts/
+!/scripts/**
+
+# Re-deny build artifacts inside the allowed trees
+__pycache__/
+*.pyc
+.DS_Store

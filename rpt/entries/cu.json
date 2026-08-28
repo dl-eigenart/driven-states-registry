@@ -1,0 +1,199 @@
+{
+  "schema_version": "0.1",
+  "id": "cu",
+  "name": "Copper",
+  "formula": "Cu",
+  "class": "element",
+  "z": 29,
+  "summary": "Contrasting case: highest performance with almost no controllability. Copper is included in the data set deliberately, because a controllability schema is worthless if it cannot also show where there is nothing to control. The only interesting variable is catalytic, not electronic.",
+  "degrees_of_freedom": [
+    {
+      "id": "conductivity_dof",
+      "kind": "electronic",
+      "domain": {
+        "type": "continuous",
+        "min": 10000000.0,
+        "max": 600000000.0,
+        "unit": "S/m"
+      },
+      "description": "Can only be changed via temperature and purity, not switched"
+    },
+    {
+      "id": "surface_facet",
+      "kind": "structural",
+      "domain": {
+        "type": "discrete",
+        "values": [
+          "cu_100",
+          "cu_111",
+          "cu_211",
+          "oxide_derived"
+        ]
+      },
+      "description": "Crystal facet of the surface; determines the product selectivity of CO2 reduction"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "temperature",
+      "kind": "thermal",
+      "range": {
+        "min": 4,
+        "max": 1358,
+        "unit": "K"
+      },
+      "latency_s": 1.0,
+      "energy_cost": {
+        "model": "per_volume",
+        "value": 3450000.0,
+        "unit": "J/(m^3*K)"
+      },
+      "reversible": true
+    },
+    {
+      "id": "electrode_potential",
+      "kind": "electric_field",
+      "range": {
+        "min": -1.5,
+        "max": 0,
+        "unit": "V vs RHE"
+      },
+      "latency_s": 0.001,
+      "energy_cost": {
+        "model": "continuous_power",
+        "value": null,
+        "unit": "W"
+      },
+      "reversible": true,
+      "notes": "Electrochemical potential in CO2 reduction"
+    }
+  ],
+  "outputs": [
+    {
+      "id": "conductivity",
+      "quantity": "electrical conductivity",
+      "unit": "S/m",
+      "readout": "transport",
+      "readout_latency_s": 1e-06,
+      "nondestructive": true
+    },
+    {
+      "id": "c2_selectivity",
+      "quantity": "Faradaic efficiency towards C2 products",
+      "unit": "1",
+      "readout": "spectroscopy",
+      "readout_latency_s": 3600,
+      "nondestructive": false
+    }
+  ],
+  "couplings": [
+    {
+      "id": "c_temp_sigma",
+      "from": "temperature",
+      "to": "conductivity",
+      "relation": {
+        "type": "affine",
+        "gain": -234000.0,
+        "offset": 128200000.0
+      },
+      "latency_s": 1.0,
+      "energy_cost": {
+        "model": "per_volume",
+        "value": 3450000.0,
+        "unit": "J/(m^3*K)"
+      },
+      "validity": {
+        "condition": "Linearization about 293 K with alpha = 0.00393 /K and sigma(293 K) = 5.96e7 S/m",
+        "temperature_K": [
+          200,
+          500
+        ]
+      },
+      "confidence": "high",
+      "source": "Standard value: 5.96e7 S/m at 293 K"
+    },
+    {
+      "id": "c_potential_c2",
+      "from": "electrode_potential",
+      "to": "c2_selectivity",
+      "relation": {
+        "type": "qualitative",
+        "direction": "nonmonotonic"
+      },
+      "latency_s": 1.0,
+      "energy_cost": {
+        "model": "continuous_power",
+        "value": null,
+        "unit": "W"
+      },
+      "confidence": "medium",
+      "source": "Hori et al., J. Mol. Catal. A 199, 39 (2003); overview of metal selectivities in Hori et al., Electrochim. Acta 39, 1833 (1994)",
+      "notes": "Copper is the only metal with appreciable C-C coupling in CO2 reduction. The selectivity depends strongly on potential and facet, but not monotonically."
+    },
+    {
+      "id": "c_facet_c2",
+      "from": "surface_facet",
+      "to": "c2_selectivity",
+      "relation": {
+        "type": "lookup",
+        "table": [
+          [
+            "cu_100",
+            0.4
+          ],
+          [
+            "cu_111",
+            0.1
+          ],
+          [
+            "cu_211",
+            0.25
+          ],
+          [
+            "oxide_derived",
+            0.5
+          ]
+        ]
+      },
+      "latency_s": 3600,
+      "energy_cost": {
+        "model": "unknown",
+        "value": null,
+        "unit": "J"
+      },
+      "confidence": "low",
+      "source": "Hori, Takahashi, Koga & Hoshi, J. Mol. Catal. A 199, 39 (2003), doi:10.1016/S1381-1169(03)00016-5",
+      "notes": "Exactly the edge whose refinement a QPU calculation would have to deliver. Currently low, because classical DFT does not reliably resolve the reaction network. The value for oxide-derived copper is conservative: modern gas diffusion electrodes reach 70 to 90 percent Faradaic efficiency towards C2+."
+    }
+  ],
+  "states": [
+    {
+      "id": "fcc_metal",
+      "label": "fcc, metallic",
+      "stability": "equilibrium",
+      "lifetime_s": null,
+      "properties": {
+        "conductivity_S_per_m": 59600000.0
+      }
+    }
+  ],
+  "gaps": [
+    "No switchable electronic degree of freedom. Copper is deliberately edge-poor in the schema.",
+    "The facet dependence of CO2 reduction is quantitatively uncertain; the values are indicative, not target figures.",
+    "The origin of the Cu(211) value of 0.25 could not be traced back to a primary source."
+  ],
+  "sources": [
+    "Hori, Takahashi, Koga & Hoshi, J. Mol. Catal. A 199, 39 (2003), doi:10.1016/S1381-1169(03)00016-5",
+    "Hori, Wakebe, Tsukamoto & Koga, Electrochim. Acta 39, 1833 (1994), doi:10.1016/0013-4686(94)85172-7",
+    "CRC Handbook of Chemistry and Physics (conductivity, heat capacity)"
+  ],
+  "verification_status": "verified",
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

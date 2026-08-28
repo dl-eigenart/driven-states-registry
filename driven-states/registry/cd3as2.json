@@ -1,0 +1,57 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "cd3as2",
+  "name": "Cadmium arsenide",
+  "formula": "Cd3As2",
+  "class": "compound",
+  "equilibrium_context": "Three-dimensional Dirac semimetal",
+  "driven_states": [
+    {
+      "id": "ds_light_induced_anomalous_hall_conductivity",
+      "emergent_property": "Transient anomalous Hall conductivity under circularly polarized driving. Sign and spectrum allow the contributions to be assigned: direct photocurrent generation dominates, and the Floquet-Weyl contribution is demonstrably small.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 0.138,
+        "wavelength_um": 9.0,
+        "fluence_mJ_per_cm2": 0.132,
+        "pulse_duration_s": 1e-13,
+        "polarization": "circular",
+        "field_MV_per_cm": 0.089
+      },
+      "lifetime_s": 5e-13,
+      "evidence_level": "single_group",
+      "source": "Murotani et al., Phys. Rev. Lett. 131, 096901 (2023), doi:10.1103/PhysRevLett.131.096901",
+      "caveat": "Here the topological interpretation is precisely NOT supported but qualified - that is the value of this entry. Under resonant driving the Floquet-Weyl share is a minority contribution. The paper provides a general classification of the mechanisms (photocurrent, inverse Faraday effect, Floquet-Berry) that transfers directly to the graphene case. Sign analyzis is the decisive tool; pure amplitude measurements cannot separate the mechanisms.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "electronic",
+      "threshold": {
+        "quantity": "linearity in fluence up to 20 microjoule per cm^2, flattening above",
+        "value": 0.02,
+        "unit": "mJ/cm^2",
+        "verified": true
+      },
+      "temperature_window_K": [
+        295,
+        300
+      ],
+      "measured_quantity": "complex THz Faraday rotation, from which the Hall conductivity is obtained; sign as discriminator"
+    }
+  ],
+  "sources": [
+    "Murotani et al., Phys. Rev. Lett. 131, 096901 (2023), doi:10.1103/PhysRevLett.131.096901"
+  ],
+  "gaps": [
+    "One group."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

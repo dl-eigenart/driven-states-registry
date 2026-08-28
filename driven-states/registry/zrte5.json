@@ -1,0 +1,81 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "zrte5",
+  "name": "Zirconium pentatelluride",
+  "formula": "ZrTe5",
+  "class": "compound",
+  "equilibrium_context": "Dirac semimetal at the boundary point between strong and weak topological insulator, bulk gap below 30 meV; centrosymmetric in equilibrium",
+  "summary": "Carries the strongest non-thermality evidence in the entire register - and at the same time the entry with the largest open interpretational risk.",
+  "driven_states": [
+    {
+      "id": "ds_thz_phonon_coherence_topology_switch",
+      "emergent_property": "THz-driven coherence of the A1g Raman mode at 1.2 THz drives the system above a field threshold into a long-lived metastable phase. The DFT assignment reads: strong topological insulator to weak topological insulator, with an intervening Dirac semimetal phase at the critical atomic displacement.",
+      "stability": "metastable",
+      "drive": {
+        "type": "thz",
+        "photon_energy_eV": 0.005,
+        "wavelength_um": 250.0,
+        "frequency_THz": 1.2,
+        "pulse_duration_s": 1e-12,
+        "polarization": "linear",
+        "field_MV_per_cm": 0.736
+      },
+      "lifetime_s": 1e-11,
+      "evidence_level": "single_group",
+      "source": "Vaswani, Wang, Mudiyanselage et al., Phys. Rev. X 10, 021013 (2020), doi:10.1103/PhysRevX.10.021013",
+      "caveat": "Argued explicitly as non-thermal - non-thermal spectral shape, mode-selective coupling, no effect under optical pumping at the same deposited energy. This is the strongest non-thermality evidence in the register. However: the topological assignment is made exclusively via DFT at a prescribed atomic displacement, not through a measurement of an invariant. ZrTe5 is notoriously sample-dependent, which limits transferability.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "mixed",
+      "threshold": {
+        "quantity": "field threshold for the formation of the metastable phase",
+        "value": 0.075,
+        "unit": "MV/cm",
+        "verified": true
+      },
+      "temperature_window_K": [
+        4,
+        150
+      ],
+      "measured_quantity": "THz differential transmission, coherent phonon emission spectra"
+    },
+    {
+      "id": "ds_phonon_generated_weyl_nodes",
+      "emergent_property": "Laser-induced coherent B1u phonons dynamically break the inversion symmetry and generate two pairs of Weyl points. Their chirality manifests itself in a transverse, helicity-dependent photocurrent perpendicular to the symmetry-breaking axis, with a ballistic transport length of about ten micrometers.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "pulse_duration_s": 1e-13,
+        "polarization": "circular"
+      },
+      "lifetime_s": 1e-12,
+      "evidence_level": "single_group",
+      "source": "Luo, Cheng, Song et al., Nature Materials 20, 329 (2021), doi:10.1038/s41563-020-00882-4",
+      "caveat": "A borderline case of state versus response, and the entry with the largest open risk. The measured observable is a nonlinear photocurrent, that is a response, but it is interpreted as the signature of a symmetry-broken Weyl state existing during the phonon coherence. The attribute dissipationless rests on a derived ballistic length, not on a conductivity measurement. ZrTe5 is known for a strong photothermoelectric photocurrent channel at contacts; an independent replication is missing. Important pump parameters cannot be substantiated from the accessible version.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "mixed",
+      "temperature_window_K": [
+        4,
+        300
+      ],
+      "measured_quantity": "emitted THz transient as a measure of the nonlinear photocurrent"
+    }
+  ],
+  "sources": [
+    "Vaswani et al., Phys. Rev. X 10, 021013 (2020), doi:10.1103/PhysRevX.10.021013",
+    "Luo et al., Nature Materials 20, 329 (2021), doi:10.1038/s41563-020-00882-4"
+  ],
+  "gaps": [
+    "Topology inferred in both cases, not established by a measurement of an invariant.",
+    "Pump parameters of the Weyl entry cannot be substantiated and have therefore been left empty."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

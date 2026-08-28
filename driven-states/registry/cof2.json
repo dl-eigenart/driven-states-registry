@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "cof2",
+  "name": "Cobalt difluoride",
+  "formula": "CoF2",
+  "class": "compound",
+  "equilibrium_context": "Collinear antiferromagnet in the rutile structure, Neel temperature 39 K, piezomagnetic but without a net moment",
+  "driven_states": [
+    {
+      "id": "ds_phonon_induced_ferrimagnetic_moment",
+      "emergent_property": "Nonlinear three-phonon mixing selectively generates crystal-field distortions that decompensate the compensated spin structure. What is produced is a ferrimagnetic moment of 0.2 Bohr magnetons per unit cell, about three orders of magnitude larger than what is achievable with mechanical strain.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "wavelength_um": 20.0,
+        "frequency_THz": 12.0,
+        "pulse_duration_s": 1e-13,
+        "polarization": "linear; the sign of the moment is bidirectionally controllable via the excitation geometry",
+        "driven_mode": "two infrared-active Eu modes whose sum-frequency mixing generates a Raman-active crystal-field distortion"
+      },
+      "lifetime_s": 1e-12,
+      "evidence_level": "single_group",
+      "source": "Disa, Fechner, Nova, Liu, Foerst, Prabhakaran, Radaelli & Cavalleri, Nature Physics 16, 937 (2020), doi:10.1038/s41567-020-0936-3",
+      "caveat": "Purely driven state without persistence. An Author Correction to the paper exists. The evidence is magneto-optical, and the moment is converted into absolute units in a model-dependent way.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "lattice_strain",
+      "threshold": {
+        "quantity": "no threshold, quadratic growth with the excitation amplitude",
+        "value": null,
+        "unit": "-",
+        "verified": true
+      },
+      "temperature_window_K": [
+        5,
+        39
+      ],
+      "further_sources": [
+        "Author Correction: Nature Physics 16 (2020), doi:10.1038/s41567-020-0977-7"
+      ],
+      "measured_quantity": "net moment determined magneto-optically"
+    }
+  ],
+  "sources": [
+    "Disa et al., Nature Physics 16, 937 (2020), doi:10.1038/s41567-020-0936-3"
+  ],
+  "gaps": [
+    "Field strength and fluence not verified."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

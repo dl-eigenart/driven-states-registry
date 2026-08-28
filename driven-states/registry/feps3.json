@@ -1,0 +1,56 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "feps3",
+  "name": "Iron phosphorus trisulfide",
+  "formula": "FePS3",
+  "class": "compound",
+  "equilibrium_context": "Van der Waals antiferromagnet, Neel temperature 118 K, Ising-like, no net magnetization",
+  "summary": "The longest lifetime of a driven magnetic state in the registry: more than 2.5 milliseconds.",
+  "driven_states": [
+    {
+      "id": "ds_thz_metastable_magnetization",
+      "emergent_property": "Intense THz pulses generate a metastable net magnetization with a lifetime of more than 2.5 milliseconds. Nonlinear excitation of a phonon mode displaces a Raman mode whose displacement modulates the exchange couplings such that a ground state with finite magnetization is favoured.",
+      "stability": "driven_to_metastable",
+      "drive": {
+        "type": "thz",
+        "frequency_THz": 2.0,
+        "field_MV_per_cm": 1.0,
+        "pulse_duration_s": 1e-12
+      },
+      "lifetime_s": 0.0025,
+      "evidence_level": "single_group",
+      "source": "Ilyas, Luo, von Hoegen et al., Nature 636, 609 (2024), doi:10.1038/s41586-024-08226-x",
+      "caveat": "So far one group, one material. The millisecond lifetime substantially exceeds the measurement window of conventional pump-probe technique and rests on a repetition-rate analyzis. The interpretation as a new magnetic ground state relies essentially on the accompanying calculation, not on a direct structural determination.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "lattice_strain",
+      "threshold": {
+        "quantity": "strongly nonlinear field dependence; amplitude and lifetime both grow on approaching the Neel temperature",
+        "value": null,
+        "unit": "MV/cm",
+        "verified": false
+      },
+      "temperature_window_K": [
+        4,
+        118
+      ],
+      "measured_quantity": "magneto-optically determined net magnetization"
+    }
+  ],
+  "sources": [
+    "Ilyas et al., Nature 636, 609 (2024), doi:10.1038/s41586-024-08226-x"
+  ],
+  "gaps": [
+    "Field strength not verified.",
+    "Interpretation relies heavily on calculations."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

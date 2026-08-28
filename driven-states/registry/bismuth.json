@@ -1,0 +1,51 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "pending",
+  "id": "bismuth",
+  "name": "Bismuth, thin film",
+  "formula": "Bi",
+  "class": "element",
+  "equilibrium_context": "Semimetal with three-dimensional Dirac electrons at the L point",
+  "driven_states": [
+    {
+      "id": "ds_cpl_driven_anomalous_hall",
+      "emergent_property": "Helicity-dependent, instantaneous anomalous Hall conductivity. An effective Floquet model implies the emergence of a pair of double Weyl points through light-induced hybridization of occupied and unoccupied Dirac bands.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 0.31,
+        "wavelength_um": 4.0,
+        "fluence_mJ_per_cm2": 0.2,
+        "pulse_duration_s": 2.2e-13,
+        "polarization": "circular",
+        "field_MV_per_cm": 0.23
+      },
+      "lifetime_s": 3e-13,
+      "evidence_level": "single_group",
+      "source": "Kanda, Murotani, Matsuda et al., arXiv:2301.06072 (2023), doi:10.48550/arXiv.2301.06072",
+      "caveat": "Preprint. No journal version traceable since January 2023 - this is itself an evidence signal, and the entry is weighted low accordingly. The double Weyl points are a model statement of the effective Floquet Hamiltonian, not a direct measurement; what is measured is only a helicity-dependent Hall conductivity, which, as in the Cd3As2 case from the same group, originates predominantly from resonant one-photon contributions.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "electronic",
+      "temperature_window_K": [
+        11,
+        11
+      ],
+      "measured_quantity": "THz Faraday rotation, real part of the Hall conductivity"
+    }
+  ],
+  "sources": [
+    "Kanda et al., arXiv:2301.06072 (2023), doi:10.48550/arXiv.2301.06072"
+  ],
+  "gaps": [
+    "Preprint without a journal version since 2023. verification_status remains pending."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

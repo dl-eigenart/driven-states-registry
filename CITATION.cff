@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+title: Driven States Registry and Reactive Periodic Table
+message: If you use this dataset or software, please cite it as below.
+type: dataset
+authors:
+  - given-names: Daniel
+    family-names: Leonforte
+    affiliation: Eigenart Filmproduktion, Wiesbaden, Germany
+repository-code: "https://github.com/dl-eigenart/driven-states-registry"
+url: "https://dl-eigenart.github.io/driven-states-registry/"
+version: 0.1.0
+date-released: "2026-08-20"
+license: CC-BY-4.0
+license-url: https://creativecommons.org/licenses/by/4.0/
+abstract: >-
+  An openly graded registry of material states that exist only while a drive is
+  running - light-induced phases and Floquet-engineered bands - together with a
+  machine-readable description layer for the controllability of matter. Version
+  0.1.0 records 82 driven states across 58 host materials from six domains, each
+  with drive parameters, lifetime, mechanism, an explicit evidence level and a
+  primary source with DOI. Compilation was AI-assisted under human direction and
+  checked against primary literature; no entry has been reviewed by a domain
+  expert.
+keywords:
+  - Floquet engineering
+  - light-induced superconductivity
+  - photoinduced phase transition
+  - charge density wave
+  - non-equilibrium materials
+  - materials database
+  - FAIR data

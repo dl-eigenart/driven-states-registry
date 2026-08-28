@@ -1,0 +1,57 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "erfeo3",
+  "name": "Erbium orthoferrite",
+  "formula": "ErFeO3",
+  "class": "compound",
+  "equilibrium_context": "Canted antiferromagnet with weak ferromagnetism; no static internal field of this kind",
+  "driven_states": [
+    {
+      "id": "ds_phonon_induced_effective_magnetic_field",
+      "emergent_property": "Nonlinear mode mixing drives not only displacements but rotations of the crystal-field atoms. This acts like an effective magnetic field of order one tesla and excites a spin precession - the first direct demonstration of phono-magnetism.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 0.07,
+        "wavelength_um": 18.0,
+        "frequency_THz": 17.0,
+        "pulse_duration_s": 1e-13,
+        "polarization": "linear; the effective field changes sign with the pump polarization",
+        "driven_mode": "infrared-active Fe-O stretching mode, ionic Raman scattering"
+      },
+      "lifetime_s": 1e-12,
+      "evidence_level": "reproduced",
+      "source": "Nova, Cartella, Cantaluppi, Foerst, Bossini, Mikhaylovskiy, Kimel, Merlin & Cavalleri, Nature Physics 13, 132 (2017), doi:10.1038/nphys3925",
+      "caveat": "The effective magnetic field is a descriptive quantity, not a measured field; it is inferred from the amplitude of the spin precession. No magnetic order changes, it is only excited coherently.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "lattice_strain",
+      "threshold": {
+        "quantity": "no threshold, quadratic scaling with the pump amplitude",
+        "value": null,
+        "unit": "-",
+        "verified": true
+      },
+      "temperature_window_K": [
+        10,
+        100
+      ],
+      "measured_quantity": "spin precession in the magneto-optical Kerr effect"
+    }
+  ],
+  "sources": [
+    "Nova et al., Nature Physics 13, 132 (2017), doi:10.1038/nphys3925"
+  ],
+  "gaps": [
+    "Field strength and fluence not verified."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

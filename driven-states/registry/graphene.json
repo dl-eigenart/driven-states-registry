@@ -1,0 +1,153 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "graphene",
+  "name": "Graphene",
+  "formula": "C",
+  "class": "element",
+  "equilibrium_context": "Two-dimensional Dirac semimetal, topologically trivial, time-reversal symmetric; epitaxially on SiC a substrate-induced gap at the Dirac point of about 0.27 eV",
+  "summary": "The prototype since Oka and Aoki 2009 and the sharpest point of contention: the Floquet BANDS have been spectroscopically established since 2025/2026, the attribution of the TRANSPORT signal to their topology is open.",
+  "driven_states": [
+    {
+      "id": "ds_floquet_bloch_sidebands",
+      "emergent_property": "First-order Floquet-Bloch sidebands of the Dirac cone. No hybridization gap resolved: calculated 70 and 21 meV respectively, both below the respective energy resolution of 155 and 53 meV. Significance: Floquet engineering is possible at all in a semimetal with decoherence times of a few tens of femtoseconds.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 0.65,
+        "wavelength_um": 1.91,
+        "fluence_mJ_per_cm2": 1.23,
+        "pulse_duration_s": 1e-13,
+        "polarization": "linear, angle tuned to nearly s",
+        "field_MV_per_cm": 3.0
+      },
+      "lifetime_s": 1.5e-13,
+      "evidence_level": "reproduced",
+      "source": "Merboldt et al., Nature Physics 21, 1093 (2025), doi:10.1038/s41567-025-02889-7",
+      "caveat": "Two independent groups, back to back in the same issue - but no demonstration of a gap; the actual topological effect remains unproven in both works. The distinction from Volkov states is made not by omission but via the momentum asymmetry of the sideband as a fingerprint of quantum-path interference - methodologically weaker than a null test and dependent on the quality of the simulation.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "electronic",
+      "threshold": {
+        "quantity": "none - Floquet dressing has no threshold",
+        "value": null,
+        "unit": "-",
+        "verified": true
+      },
+      "temperature_window_K": [
+        31,
+        300
+      ],
+      "further_sources": [
+        "Choi, Mogi, De Giovannini et al., Nature Physics 21, 1100 (2025), doi:10.1038/s41567-025-02888-8 (independent group)"
+      ],
+      "measured_quantity": "time- and angle-resolved photoemission, sideband intensity and asymmetry"
+    },
+    {
+      "id": "ds_floquet_hybridization_gap",
+      "emergent_property": "Light-induced hybridization gap at the Floquet band crossings: 241 +/- 18 meV at 490 meV photon energy and 4.1 mJ/cm^2, accompanied by coherent sidebands. Pronounced momentum anisotropy - the gap vanishes along the light polarization and is maximal perpendicular to it; two Dirac nodes protected by space-time symmetry remain, and their position can be steered by polarization.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 0.49,
+        "wavelength_um": 2.53,
+        "fluence_mJ_per_cm2": 4.1,
+        "pulse_duration_s": 1.35e-13,
+        "polarization": "linear p along Gamma-K",
+        "field_MV_per_cm": 1.8
+      },
+      "lifetime_s": 1.5e-13,
+      "evidence_level": "single_group",
+      "source": "Wang, Cai, Tang et al., Nature Materials 25, 1140 (2026), doi:10.1038/s41563-026-02549-y",
+      "caveat": "The turning point of the field: for the first time a gap that one sees rather than infers by calculation - ratio of gap to resolution 3.4 versus 0.45 and 0.40 in the 2025 works. However: only one group (Tsinghua), the gap extraction hinges on multi-peak fits whose result depends on the momentum integration window, and the Floquet parameter already lies outside the clear weak-field regime. The Floquet Chern insulator is therefore NOT demonstrated: at linear polarization the gap is not topological.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "electronic",
+      "threshold": {
+        "quantity": "none - the gap grows continuously with the field",
+        "value": null,
+        "unit": "-",
+        "verified": true
+      },
+      "temperature_window_K": [
+        80,
+        80
+      ],
+      "measured_quantity": "angle-resolved photoemission, hybridization gap at the avoided crossing"
+    },
+    {
+      "id": "ds_light_induced_anomalous_hall",
+      "emergent_property": "Transverse Hall conductance without magnetic field, sign follows the helicity; plateau at 1.8 +/- 0.4 e^2/h for Fermi energies below about 30 meV, plateau width about 60 meV, close to the calculated Floquet gap of 69 meV.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 0.191,
+        "wavelength_um": 6.5,
+        "fluence_mJ_per_cm2": 0.23,
+        "pulse_duration_s": 5e-13,
+        "polarization": "circular, sign reversal",
+        "field_MV_per_cm": 0.26
+      },
+      "lifetime_s": 5e-13,
+      "evidence_level": "contested",
+      "source": "McIver, Schulte, Stein, Matsuyama, Jotzu, Meier & Cavalleri, Nature Physics 16, 38 (2020), doi:10.1038/s41567-019-0698-y",
+      "caveat": "The topological interpretation is NOT secure. Three independent points of criticism: first, the bulk of the signal, even in the authors' own modeling, stems from a population asymmetry rather than from a Berry-curvature anomalous velocity; second, an independent experiment (Candussio) produces a qualitatively similar circular Hall effect purely kinetically and thermally; third, helicity-dependent photoresistance measurements are demonstrably susceptible to thermal gradients induced by beam displacement. All transport data come from one group; an independent replication is not known.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "unresolved",
+      "temperature_window_K": [
+        80,
+        80
+      ],
+      "further_sources": [
+        "Sato et al., Phys. Rev. B 99, 214302 (2019), doi:10.1103/PhysRevB.99.214302 (Berry contribution small)",
+        "Candussio et al., Phys. Rev. B 105, 155416 (2022), doi:10.1103/PhysRevB.105.155416 (thermal-kinetic alternative)",
+        "Murotani et al., Phys. Rev. Lett. 131, 096901 (2023), doi:10.1103/PhysRevLett.131.096901",
+        "Yang et al., Nat. Commun. 13 (2022), doi:10.1038/s41467-022-34198-5 (beam-displacement artifacts)"
+      ],
+      "measured_quantity": "Hall conductance in e^2/h, on-chip THz transport via photoconductive switch"
+    },
+    {
+      "id": "ds_thz_circular_hall",
+      "emergent_property": "Helicity-dependent transverse photoconductivity without magnetic field, with sign reversal; linear in intensity at low gate voltages, quadratic at high ones.",
+      "stability": "driven",
+      "drive": {
+        "type": "thz",
+        "photon_energy_eV": 0.008,
+        "wavelength_um": 148.0,
+        "frequency_THz": 2.02,
+        "pulse_duration_s": 1e-07,
+        "polarization": "circular",
+        "field_MV_per_cm": 0.011
+      },
+      "lifetime_s": 1e-07,
+      "evidence_level": "single_group",
+      "source": "Candussio et al., Phys. Rev. B 105, 155416 (2022), doi:10.1103/PhysRevB.105.155416",
+      "caveat": "Deliberately listed as a separate entry because it carries the thermal-kinetic counter-position with its own data: the authors attribute the signal to momentum alignment by the combined THz and static field as well as to dynamic heating and cooling of the electron gas - no Floquet topology, no Berry curvature. Note: a different regime, field about forty times smaller and pulse duration five orders of magnitude longer than in McIver. The entry does not refute McIver directly, but it shows that a helicity-dependent Hall effect arises without any topological ingredient.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "thermal",
+      "temperature_window_K": [
+        4,
+        4
+      ],
+      "measured_quantity": "transverse photovoltage as a function of backgate and intensity"
+    }
+  ],
+  "sources": [
+    "Merboldt et al., Nature Physics 21, 1093 (2025), doi:10.1038/s41567-025-02889-7",
+    "Choi et al., Nature Physics 21, 1100 (2025), doi:10.1038/s41567-025-02888-8",
+    "Wang et al., Nature Materials 25, 1140 (2026), doi:10.1038/s41563-026-02549-y",
+    "McIver et al., Nature Physics 16, 38 (2020), doi:10.1038/s41567-019-0698-y",
+    "Candussio et al., Phys. Rev. B 105, 155416 (2022), doi:10.1103/PhysRevB.105.155416"
+  ],
+  "gaps": [
+    "The Floquet bands demonstrably exist; whether the 2020 transport signal is to be attributed to their topology is open, and the evidence leans rather in the opposite direction.",
+    "No independent replication of the transport experiment as of August 2026."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

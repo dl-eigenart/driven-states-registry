@@ -1,0 +1,57 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "linbo3",
+  "name": "Lithium niobate",
+  "formula": "LiNbO3",
+  "class": "compound",
+  "equilibrium_context": "Strong ferroelectric, Curie temperature about 1480 K, large spontaneous polarization",
+  "driven_states": [
+    {
+      "id": "ds_transient_polarization_reversal",
+      "emergent_property": "Resonant excitation of a high-frequency auxiliary phonon mode leads, via strong anharmonic coupling, to a directional displacement along the ferroelectric mode; the polarization is transiently reversed, visible as a sign change of the phase-resolved second harmonic.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 0.08,
+        "wavelength_um": 15.0,
+        "frequency_THz": 19.0,
+        "pulse_duration_s": 1e-13,
+        "polarization": "linear along the ferroelectric axis",
+        "driven_mode": "highest A1 mode, 19 THz, anharmonically coupled to the soft A1 mode"
+      },
+      "lifetime_s": 2e-12,
+      "evidence_level": "single_group",
+      "source": "Mankowsky, von Hoegen, Foerst & Cavalleri, Phys. Rev. Lett. 118, 197601 (2017), doi:10.1103/PhysRevLett.118.197601",
+      "caveat": "A transient ionic displacement, not remanent domain switching. After a few picoseconds the polarization returns to its initial state. The interpretation as a genuine reversal rests on the modeling of the sign of the second harmonic.",
+      "equivalent_equilibrium_state": "partial",
+      "mechanism": "lattice_strain",
+      "threshold": {
+        "quantity": "sign reversal only above a critical excitation amplitude",
+        "value": null,
+        "unit": "MV/cm",
+        "verified": false
+      },
+      "temperature_window_K": [
+        300,
+        300
+      ],
+      "measured_quantity": "phase-resolved second harmonic"
+    }
+  ],
+  "sources": [
+    "Mankowsky et al., Phys. Rev. Lett. 118, 197601 (2017), doi:10.1103/PhysRevLett.118.197601"
+  ],
+  "gaps": [
+    "Field strength not verified."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

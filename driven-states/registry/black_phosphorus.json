@@ -1,0 +1,60 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "black_phosphorus",
+  "name": "Black phosphorus",
+  "formula": "P",
+  "class": "element",
+  "equilibrium_context": "Anisotropic semiconductor, direct band gap at the zone center, tuned to 330 meV by caesium surface doping",
+  "driven_states": [
+    {
+      "id": "ds_pseudospin_selective_floquet_gap",
+      "emergent_property": "Floquet sidebands plus a light-induced dynamical hybridization gap at the resonance points: 79 +/- 20 meV at 380 meV pump energy and 0.7 mJ/cm^2, scaling with the square root of the fluence and therefore linearly in the field. Strict selection rule: renormalization only for pump polarization along the armchair axis, not along zigzag.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 0.38,
+        "wavelength_um": 3.26,
+        "fluence_mJ_per_cm2": 0.7,
+        "pulse_duration_s": 9e-14,
+        "polarization": "linear s, field along armchair"
+      },
+      "lifetime_s": 1.3e-13,
+      "evidence_level": "single_group",
+      "source": "Zhou et al., Nature 614, 75 (2023), doi:10.1038/s41586-022-05610-3",
+      "caveat": "Only one group (Tsinghua), four papers with the same setup. The uncertainty of the gap is 25 per cent. The caesium surface doping alters the system relative to undoped black phosphorus. The fluence scaling is tested over less than one decade. Volkov states are strongly excluded: s polarization plus the general argument that Volkov states do not renormalize the band structure and therefore cannot mimic a measured gap.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "electronic",
+      "threshold": {
+        "quantity": "no field threshold, but a sharp resonance condition near the band gap of 330 meV",
+        "value": null,
+        "unit": "eV",
+        "verified": true
+      },
+      "temperature_window_K": [
+        80,
+        80
+      ],
+      "further_sources": [
+        "Bao et al., Nat. Commun. 15 (2024), doi:10.1038/s41467-024-54760-7",
+        "Fan et al., Sci. Adv. 11 (2025), doi:10.1126/sciadv.adw2744"
+      ],
+      "measured_quantity": "angle-resolved photoemission, hybridization gap"
+    }
+  ],
+  "sources": [
+    "Zhou et al., Nature 614, 75 (2023), doi:10.1038/s41586-022-05610-3"
+  ],
+  "gaps": [
+    "All four papers from the same group with the same setup."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

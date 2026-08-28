@@ -1,0 +1,267 @@
+{
+  "schema_version": "0.1",
+  "id": "nbre",
+  "name": "Niobium-rhenium",
+  "formula": "Nb0.18Re0.82",
+  "class": "alloy",
+  "summary": "Noncentrosymmetric superconductor with a triplet admixture. The trigger for the Reactive Periodic Table and at the same time its most honest borderline case: the interesting variable (pairing symmetry) has been demonstrated, but cannot be set externally.",
+  "degrees_of_freedom": [
+    {
+      "id": "sc_order",
+      "kind": "electronic",
+      "domain": {
+        "type": "discrete",
+        "values": [
+          "normal",
+          "superconducting"
+        ]
+      }
+    },
+    {
+      "id": "pairing_symmetry",
+      "kind": "spin",
+      "domain": {
+        "type": "discrete",
+        "values": [
+          "singlet_dominant",
+          "singlet_triplet_mixed"
+        ]
+      },
+      "description": "Mixing enforced by the absence of inversion symmetry"
+    },
+    {
+      "id": "crystal_symmetry",
+      "kind": "structural",
+      "domain": {
+        "type": "discrete",
+        "values": [
+          "centrosymmetric_reference",
+          "noncentrosymmetric_alpha_Mn"
+        ]
+      },
+      "description": "Space group I-43m, alpha-Mn structure. Fixed in the finished crystal. The centrosymmetric comparison value is included because a degree of freedom without an alternative is not a degree of freedom - it is what makes the edge c_sym_pairing evaluable in the first place."
+    }
+  ],
+  "inputs": [
+    {
+      "id": "temperature",
+      "kind": "thermal",
+      "range": {
+        "min": 0.05,
+        "max": 300,
+        "unit": "K"
+      },
+      "latency_s": 1.0,
+      "energy_cost": {
+        "model": "continuous_power",
+        "value": null,
+        "unit": "W"
+      },
+      "reversible": true
+    },
+    {
+      "id": "magnetic_field",
+      "kind": "magnetic_field",
+      "range": {
+        "min": 0,
+        "max": 15,
+        "unit": "T"
+      },
+      "latency_s": 0.01,
+      "energy_cost": {
+        "model": "continuous_power",
+        "value": null,
+        "unit": "W"
+      },
+      "reversible": true
+    },
+    {
+      "id": "composition",
+      "kind": "chemical",
+      "range": {
+        "min": 0.1,
+        "max": 0.4,
+        "unit": "1"
+      },
+      "latency_s": 86400,
+      "energy_cost": {
+        "model": "unknown",
+        "value": null,
+        "unit": "J"
+      },
+      "reversible": false,
+      "notes": "Nb fraction x in Nb_x Re_1-x. Shifts Tc, but only during synthesis."
+    }
+  ],
+  "outputs": [
+    {
+      "id": "resistivity",
+      "quantity": "resistivity",
+      "unit": "Ohm*m",
+      "readout": "transport",
+      "readout_latency_s": 1e-06,
+      "nondestructive": true
+    },
+    {
+      "id": "spin_polarization",
+      "quantity": "Spin polarization of the supercurrent",
+      "unit": "1",
+      "readout": "transport",
+      "readout_latency_s": 1e-06,
+      "nondestructive": true
+    }
+  ],
+  "couplings": [
+    {
+      "id": "c_temp_sc",
+      "from": "temperature",
+      "to": "sc_order",
+      "relation": {
+        "type": "threshold",
+        "threshold": 8.8,
+        "low": "superconducting",
+        "high": "normal"
+      },
+      "latency_s": 1.0,
+      "energy_cost": {
+        "model": "continuous_power",
+        "value": null,
+        "unit": "W"
+      },
+      "validity": {
+        "condition": "applies to x = 0.18 (Tc resistive 8.75 K, calorimetric 8.7 K); across the system Tc ranges from 6.1 K in 20 nm films up to 9.7 K"
+      },
+      "confidence": "medium",
+      "source": "Karki et al., Phys. Rev. B 83, 144525 (2011), doi:10.1103/PhysRevB.83.144525"
+    },
+    {
+      "id": "c_sym_pairing",
+      "from": "crystal_symmetry",
+      "to": "pairing_symmetry",
+      "relation": {
+        "type": "lookup",
+        "table": [
+          [
+            "centrosymmetric_reference",
+            "singlet_dominant"
+          ],
+          [
+            "noncentrosymmetric_alpha_Mn",
+            "singlet_triplet_mixed"
+          ]
+        ]
+      },
+      "latency_s": 1e-12,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "confidence": "medium",
+      "source": "Antisymmetric spin-orbit coupling in noncentrosymmetric superconductors; Bauer & Sigrist (eds.), Non-Centrosymmetric Superconductors (2012)",
+      "notes": "The core statement of this material: the structure enforces the pairing symmetry. In terms of the paradigm, an expression that arises from the variable and is not imposed afterwards."
+    },
+    {
+      "id": "c_pairing_spin",
+      "from": "pairing_symmetry",
+      "to": "spin_polarization",
+      "relation": {
+        "type": "lookup",
+        "table": [
+          [
+            "singlet_dominant",
+            0.0
+          ],
+          [
+            "singlet_triplet_mixed",
+            0.2
+          ]
+        ]
+      },
+      "latency_s": 1e-09,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "confidence": "low",
+      "source": "Order of magnitude; the triplet fraction is disputed and not directly quantified",
+      "notes": "Deliberately low. This edge is the weakest point of the entry."
+    },
+    {
+      "id": "c_field_sc",
+      "from": "magnetic_field",
+      "to": "sc_order",
+      "relation": {
+        "type": "threshold",
+        "threshold": 14.0,
+        "low": "superconducting",
+        "high": "normal"
+      },
+      "latency_s": 0.01,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "confidence": "medium",
+      "source": "Karki et al., Phys. Rev. B 83, 144525 (2011); WHH extrapolation Hc2(0) = 14.0 T, GL fit 17.3 T",
+      "notes": "Value and statement corrected relative to v0.1. Hc2(0) = 14.0 T lies BELOW the Pauli limit (16.4 to 16.8 T), not above it; the Maki parameter is about 1.2. Karki explicitly points out that an exceedance would first have to be checked on single crystals and that the triplet admixture is weak in the polycrystal."
+    }
+  ],
+  "states": [
+    {
+      "id": "normal",
+      "label": "normal conducting",
+      "stability": "equilibrium",
+      "lifetime_s": null
+    },
+    {
+      "id": "sc_mixed",
+      "label": "superconducting with singlet-triplet mixing",
+      "stability": "equilibrium",
+      "lifetime_s": null,
+      "properties": {
+        "tc_K": 8.8
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t_sc",
+      "from_state": "normal",
+      "to_state": "sc_mixed",
+      "trigger": {
+        "variable": "temperature",
+        "operator": "<",
+        "value": 8.8,
+        "unit": "K"
+      },
+      "latency_s": 1.0,
+      "energy_density_J_per_m3": null,
+      "reversible": true,
+      "confidence": "medium",
+      "source": "Karki et al., Phys. Rev. B 83, 144525 (2011)"
+    }
+  ],
+  "gaps": [
+    "The triplet fraction cannot be set externally. In this entry there is no actuator acting on pairing_symmetry. This is exactly the gap between measuring and controlling identified in the QFI bridge.",
+    "Tc values in the literature scatter considerably with composition; the value of 8.8 K applies only to x = 0.18.",
+    "The attribution of a 'topologically protected surface state' named in the trigger document is not documented for NbRe and has not been adopted here.",
+    "The statement 'Hc2 near or above the Pauli limit' adopted in v0.1 was wrong and has been removed. This also removes the evidence for a triplet admixture that rested on it."
+  ],
+  "sources": [
+    "Karki et al., Phys. Rev. B 83, 144525 (2011), doi:10.1103/PhysRevB.83.144525",
+    "Cirillo et al., Phys. Rev. B 91, 134508 (2015), doi:10.1103/PhysRevB.91.134508 (two-gap structure)",
+    "Bauer & Sigrist (eds.), Non-Centrosymmetric Superconductors, Lect. Notes Phys. 847 (2012), doi:10.1007/978-3-642-24624-1"
+  ],
+  "verification_status": "verified",
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

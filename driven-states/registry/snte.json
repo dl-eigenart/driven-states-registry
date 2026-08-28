@@ -1,0 +1,56 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "snte",
+  "name": "Tin telluride",
+  "formula": "SnTe",
+  "class": "compound",
+  "equilibrium_context": "Polar semiconductor; in the low-temperature rhombohedrally distorted phase topologically TRIVIAL due to inversion breaking; no Dirac cone in equilibrium",
+  "driven_states": [
+    {
+      "id": "ds_floquet_topological_state",
+      "emergent_property": "Transiently appearing Dirac cone in the band gap - the first direct spectroscopic evidence of a Floquet TOPOLOGICAL state. Simultaneously, renormalization of the conduction band dispersion through hybridisation with Floquet sidebands. Proposed mechanism: light-driven band inversion with a change of orbital character.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 0.88,
+        "wavelength_um": 1.41,
+        "pulse_duration_s": 1e-13,
+        "polarization": "linear s and p, identical result"
+      },
+      "lifetime_s": 1.5e-13,
+      "evidence_level": "single_group",
+      "source": "Chassot et al., Nature Physics 22, 1282 (2026), doi:10.1038/s41567-026-03341-0",
+      "caveat": "The claim of a topological state is considerably stronger than the measurement: what is observed is a transient Dirac cone plus band renormalization; the topological character is an interpretation supported by DFT, not by the measurement of a topological observable. Absolute field and fluence values are missing. Publication only in June 2026, no time for reproduction. The distinction from a Volkov state via the polarization null test is clean.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "electronic",
+      "threshold": {
+        "quantity": "no field threshold, but a sharp resonance condition at the band gap - no effect at 1.55 eV",
+        "value": 0.88,
+        "unit": "eV",
+        "verified": true
+      },
+      "temperature_window_K": [
+        30,
+        30
+      ],
+      "measured_quantity": "angle-resolved photoemission"
+    }
+  ],
+  "sources": [
+    "Chassot et al., Nature Physics 22, 1282 (2026), doi:10.1038/s41567-026-03341-0"
+  ],
+  "gaps": [
+    "Field and fluence values not in the main text.",
+    "Topological assignment inferred, not measured."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

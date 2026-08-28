@@ -1,0 +1,363 @@
+{
+  "schema_version": "0.1",
+  "id": "c",
+  "name": "Carbon",
+  "formula": "C",
+  "class": "allotrope_family",
+  "z": 6,
+  "summary": "Largest state space of all elements. The same atoms yield an insulator (diamond, band gap 5.47 eV) and a semimetal with extreme mobility (graphene). Within the schema it demonstrates the separation between state variety and controllability: the choice of allotrope is a fabrication parameter, not a runtime parameter.",
+  "degrees_of_freedom": [
+    {
+      "id": "allotrope",
+      "kind": "structural",
+      "domain": {
+        "type": "discrete",
+        "values": [
+          "diamond_sp3",
+          "graphite_sp2",
+          "graphene_sp2",
+          "cnt_sp2",
+          "fullerene_sp2"
+        ]
+      },
+      "description": "Hybridization and network topology"
+    },
+    {
+      "id": "carrier_density_2d",
+      "kind": "electronic",
+      "domain": {
+        "type": "continuous",
+        "min": -5e+17,
+        "max": 5e+17,
+        "unit": "m^-2"
+      },
+      "description": "Field-controllable only in the graphene state; the sign distinguishes electrons from holes"
+    },
+    {
+      "id": "nv_spin",
+      "kind": "spin",
+      "domain": {
+        "type": "discrete",
+        "values": [
+          "ms_0",
+          "ms_plus1",
+          "ms_minus1"
+        ]
+      },
+      "description": "Electron spin of the nitrogen-vacancy center in diamond"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "gate_voltage",
+      "kind": "gate_voltage",
+      "range": {
+        "min": -100,
+        "max": 100,
+        "unit": "V"
+      },
+      "latency_s": 1e-11,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "reversible": true,
+      "notes": "Applies only to allotrope=graphene_sp2"
+    },
+    {
+      "id": "synthesis_pressure",
+      "kind": "hydrostatic_pressure",
+      "range": {
+        "min": 0,
+        "max": 15000000000.0,
+        "unit": "Pa"
+      },
+      "latency_s": 3600,
+      "energy_cost": {
+        "model": "per_volume",
+        "value": null,
+        "unit": "J/m^3"
+      },
+      "reversible": false,
+      "notes": "Graphite to diamond: about 5 GPa at 1500 K. A fabrication step, not a runtime actuation route."
+    },
+    {
+      "id": "microwave",
+      "kind": "microwave",
+      "range": {
+        "min": 2600000000.0,
+        "max": 3200000000.0,
+        "unit": "Hz"
+      },
+      "latency_s": 1e-08,
+      "energy_cost": {
+        "model": "continuous_power",
+        "value": null,
+        "unit": "W"
+      },
+      "reversible": true,
+      "notes": "Addresses the NV spin at the 2.87 GHz zero-field splitting"
+    },
+    {
+      "id": "magnetic_field",
+      "kind": "magnetic_field",
+      "range": {
+        "min": 0,
+        "max": 1,
+        "unit": "T"
+      },
+      "latency_s": 0.001,
+      "energy_cost": {
+        "model": "continuous_power",
+        "value": null,
+        "unit": "W"
+      },
+      "reversible": true
+    }
+  ],
+  "outputs": [
+    {
+      "id": "sheet_conductivity",
+      "quantity": "Sheet conductivity",
+      "unit": "S",
+      "readout": "transport",
+      "readout_latency_s": 1e-06,
+      "nondestructive": true
+    },
+    {
+      "id": "band_gap",
+      "quantity": "Band gap",
+      "unit": "eV",
+      "readout": "spectroscopy",
+      "readout_latency_s": 1.0,
+      "nondestructive": true
+    },
+    {
+      "id": "nv_fluorescence",
+      "quantity": "Fluorescence contrast of the NV center",
+      "unit": "1",
+      "readout": "optical",
+      "readout_latency_s": 1e-06,
+      "nondestructive": true
+    }
+  ],
+  "couplings": [
+    {
+      "id": "c_allo_gap",
+      "from": "allotrope",
+      "to": "band_gap",
+      "relation": {
+        "type": "lookup",
+        "table": [
+          [
+            "diamond_sp3",
+            5.47
+          ],
+          [
+            "graphite_sp2",
+            0.0
+          ],
+          [
+            "graphene_sp2",
+            0.0
+          ],
+          [
+            "cnt_sp2",
+            0.8
+          ],
+          [
+            "fullerene_sp2",
+            1.6
+          ]
+        ]
+      },
+      "latency_s": 1e-12,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "confidence": "high",
+      "source": "Standard values; CNT value from Eg approx. 0.84 eV*nm / d for semiconducting chirality, d = 1 nm"
+    },
+    {
+      "id": "c_gate_n2d",
+      "from": "gate_voltage",
+      "to": "carrier_density_2d",
+      "relation": {
+        "type": "linear",
+        "gain": 720000000000000.0
+      },
+      "latency_s": 1e-11,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "validity": {
+        "condition": "300 nm SiO2, capacitance 1.15e-4 F/m^2, only allotrope=graphene_sp2"
+      },
+      "confidence": "high",
+      "source": "Novoselov et al., Science 306, 666 (2004)"
+    },
+    {
+      "id": "c_n2d_sigma",
+      "from": "carrier_density_2d",
+      "to": "sheet_conductivity",
+      "relation": {
+        "type": "power",
+        "exponent": 1.0,
+        "scale": 2.4e-19
+      },
+      "latency_s": 1e-12,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "validity": {
+        "condition": "Mobility 15000 cm^2/(V*s), typical for graphene on SiO2"
+      },
+      "confidence": "medium",
+      "source": "Bolotin et al., Solid State Commun. 146, 351 (2008) for suspended graphene up to 200000 cm^2/(V*s)"
+    },
+    {
+      "id": "c_mw_spin",
+      "from": "microwave",
+      "to": "nv_spin",
+      "relation": {
+        "type": "resonant",
+        "center": 2870000000.0,
+        "width": 10000000.0,
+        "low": "ms_0",
+        "high": "ms_minus1"
+      },
+      "latency_s": 1e-08,
+      "energy_cost": {
+        "model": "continuous_power",
+        "value": null,
+        "unit": "W"
+      },
+      "confidence": "high",
+      "source": "Doherty et al., Phys. Rep. 528, 1 (2013)",
+      "notes": "Spin addressing is a resonance, not a threshold - modelled incorrectly in v0.1. At B = 0, ms = +1 and ms = -1 are degenerate; in a bias field the transitions split as D -/+ gamma*B, and the addressed sublevel follows the sign of the detuning. The only degree of freedom in the data set that can be addressed coherently at room temperature; coherence time up to 1.8 ms in isotopically purified diamond."
+    },
+    {
+      "id": "c_spin_fluor",
+      "from": "nv_spin",
+      "to": "nv_fluorescence",
+      "relation": {
+        "type": "lookup",
+        "table": [
+          [
+            "ms_0",
+            1.0
+          ],
+          [
+            "ms_plus1",
+            0.7
+          ],
+          [
+            "ms_minus1",
+            0.7
+          ]
+        ]
+      },
+      "latency_s": 1e-06,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "confidence": "high",
+      "source": "Doherty et al. (2013)"
+    },
+    {
+      "id": "c_bfield_spin",
+      "from": "magnetic_field",
+      "to": "nv_spin",
+      "relation": {
+        "type": "qualitative",
+        "direction": "increases"
+      },
+      "latency_s": 0.001,
+      "energy_cost": {
+        "model": "continuous_power",
+        "value": null,
+        "unit": "W"
+      },
+      "confidence": "high",
+      "source": "Zeeman splitting 28 GHz/T; the basis of NV magnetometry"
+    }
+  ],
+  "states": [
+    {
+      "id": "diamond",
+      "label": "Diamond",
+      "stability": "equilibrium",
+      "lifetime_s": null,
+      "properties": {
+        "band_gap_eV": 5.47,
+        "mohs": 10
+      }
+    },
+    {
+      "id": "graphene",
+      "label": "Graphene, monolayer",
+      "stability": "equilibrium",
+      "lifetime_s": null,
+      "properties": {
+        "band_gap_eV": 0.0
+      }
+    },
+    {
+      "id": "graphite",
+      "label": "Graphite",
+      "stability": "equilibrium",
+      "lifetime_s": null,
+      "properties": {
+        "band_gap_eV": 0.0
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t_graphite_diamond",
+      "from_state": "graphite",
+      "to_state": "diamond",
+      "trigger": {
+        "variable": "synthesis_pressure",
+        "operator": ">=",
+        "value": 5000000000.0,
+        "unit": "Pa"
+      },
+      "latency_s": 3600,
+      "energy_density_J_per_m3": null,
+      "reversible": false,
+      "confidence": "high",
+      "source": "Bundy et al., Nature 176, 51 (1955)",
+      "notes": "reversible=false. The evaluator excludes this edge from feedback loops."
+    }
+  ],
+  "gaps": [
+    "The choice of allotrope is listed as a degree of freedom in the schema, but in practice it is a fabrication parameter and not a runtime parameter. This distinction should get its own field in schema v0.2 (actuation_stage: fabrication | runtime).",
+    "Mobility values for graphene scatter by more than an order of magnitude depending on the substrate."
+  ],
+  "sources": [
+    "Novoselov et al., Science 306, 666 (2004)",
+    "Bolotin et al., Solid State Commun. 146, 351 (2008)",
+    "Doherty et al., Physics Reports 528, 1 (2013)",
+    "Bundy et al., Nature 176, 51 (1955)",
+    "Balasubramanian et al., Nature Materials 8, 383 (2009), doi:10.1038/nmat2420"
+  ],
+  "verification_status": "verified",
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

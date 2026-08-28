@@ -1,0 +1,57 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "kmoo3",
+  "name": "Potassium molybdenum bronze, blue bronze",
+  "formula": "K0.3MoO3",
+  "class": "compound",
+  "equilibrium_context": "Quasi-one-dimensional Peierls charge density wave below 183 K",
+  "driven_states": [
+    {
+      "id": "ds_nonthermal_cdw_melt",
+      "emergent_property": "Non-thermally melted metallic state with an unchanged lattice: the electronic order is erased on the sub-picosecond scale while the periodic lattice distortion is still standing - an electronic metallic state within a distorted structure.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "wavelength_um": 0.8,
+        "fluence_mJ_per_cm2": 0.5,
+        "pulse_duration_s": 5e-14
+      },
+      "lifetime_s": 7e-13,
+      "evidence_level": "established",
+      "source": "Tomeljak et al., Phys. Rev. Lett. 102, 066404 (2009), doi:10.1103/PhysRevLett.102.066404",
+      "caveat": "Purely transient, not a hidden state in the strict sense. Included as a reference case for the decoupling of electronic and structural order in a quasi-one-dimensional system. Despite decades of work, no long-lived hidden state analogous to 1T-TaS2 has been reported in K0.3MoO3.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "electronic",
+      "threshold": {
+        "quantity": "absorbed energy density equal to the electronic energy difference between metal and CDW",
+        "value": null,
+        "unit": "J/m^3",
+        "verified": true
+      },
+      "switching_time_s": 2e-13,
+      "temperature_window_K": [
+        10,
+        183
+      ],
+      "measured_quantity": "transient reflectivity and diffraction",
+      "quenchable_by": "self-relaxation"
+    }
+  ],
+  "sources": [
+    "Tomeljak et al., Phys. Rev. Lett. 102, 066404 (2009), doi:10.1103/PhysRevLett.102.066404"
+  ],
+  "gaps": [
+    "Fluence given as a range, not documented as a single value."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

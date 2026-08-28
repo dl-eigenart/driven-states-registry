@@ -1,0 +1,57 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "wte2",
+  "name": "Tungsten ditelluride, Td phase",
+  "formula": "WTe2",
+  "class": "compound",
+  "equilibrium_context": "Type-II Weyl semimetal, non-centrosymmetric",
+  "driven_states": [
+    {
+      "id": "ds_thz_shear_switch_weyl_annihilation",
+      "emergent_property": "THz-driven large-amplitude interlayer shear strain drives the system into a metastable, centrosymmetric polytype: the Weyl nodes are annihilated in pairs and the topological invariant changes. Shear displacement about 8 picometers, corresponding to 1.3 per cent strain, built up over about 25 picoseconds.",
+      "stability": "metastable",
+      "drive": {
+        "type": "thz",
+        "photon_energy_eV": 0.0062,
+        "wavelength_um": 200.0,
+        "frequency_THz": 1.5,
+        "pulse_duration_s": 1e-12,
+        "polarization": "linear",
+        "field_MV_per_cm": 7.5
+      },
+      "lifetime_s": 7e-11,
+      "evidence_level": "single_group",
+      "source": "Sie, Nyby, Pemmaraju, Park, Shen et al., Nature 565, 61 (2019), doi:10.1038/s41586-018-0809-4",
+      "caveat": "The change of topology is inferred, not measured: what is demonstrated is the structure via diffraction and the inversion symmetry via second harmonic generation; that the Weyl nodes thereby disappear follows from a symmetry argument and calculation. No transport, no Berry curvature measurement in the driven state. The field of 7.5 MV/cm is close to the damage threshold - lattice heating is not fully excluded, but the anharmonic mode softening argues for a coherently driven pathway.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "mixed",
+      "threshold": {
+        "quantity": "deviation from harmonic shear behavior only at very high field",
+        "value": 7.5,
+        "unit": "MV/cm",
+        "verified": true
+      },
+      "temperature_window_K": [
+        300,
+        300
+      ],
+      "measured_quantity": "relativistic electron diffraction, shear displacement in picometers; second harmonic generation as an indicator of inversion symmetry"
+    }
+  ],
+  "sources": [
+    "Sie et al., Nature 565, 61 (2019), doi:10.1038/s41586-018-0809-4"
+  ],
+  "gaps": [
+    "Change of topology inferred, not measured."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "late3",
+  "name": "Lanthanum tritelluride",
+  "formula": "LaTe3",
+  "class": "compound",
+  "equilibrium_context": "Unidirectional incommensurate charge density wave along the c axis with a transition temperature above room temperature; small in-plane anisotropy between a and c",
+  "summary": "Model case for light-induced CREATION of order rather than melting.",
+  "driven_states": [
+    {
+      "id": "ds_light_induced_a_axis_cdw",
+      "emergent_property": "Creation of a new charge density wave along the a axis which does not exist in equilibrium, accompanied by a weakening of the c-axis CDW. A transient non-thermal phase with no equilibrium counterpart.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "wavelength_um": 0.8,
+        "fluence_mJ_per_cm2": 2.0,
+        "pulse_duration_s": 1e-13
+      },
+      "lifetime_s": 1e-11,
+      "evidence_level": "reproduced",
+      "source": "Kogar, Zong et al., Nature Physics 16, 159 (2020), doi:10.1038/s41567-019-0705-3",
+      "caveat": "The evidence is purely diffractive, via superlattice reflections; the associated lattice distortion amplitude and the electronic gap structure of the a-axis CDW state have not been determined independently. Whether this is long-range order or correlated fluctuations of finite correlation length is not conclusively settled.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "electronic",
+      "switching_time_s": 1e-12,
+      "temperature_window_K": [
+        100,
+        300
+      ],
+      "measured_quantity": "ultrafast electron diffraction, superlattice reflections along a*",
+      "quenchable_by": "self-relaxation"
+    },
+    {
+      "id": "ds_defect_laden_transient_cdw",
+      "emergent_property": "Transient CDW state with a high density of topological defects: the amplitude recovers within about one picosecond, the phase coherence only considerably later, limited by defect annihilation. In the intervening window the long-range order is suppressed even though the amplitude has already returned.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "wavelength_um": 0.8,
+        "fluence_mJ_per_cm2": 1.5,
+        "pulse_duration_s": 1e-13
+      },
+      "lifetime_s": 1e-09,
+      "evidence_level": "reproduced",
+      "source": "Zong, Kogar et al., Nature Physics 15, 27 (2019), doi:10.1038/s41567-018-0311-9",
+      "caveat": "The evidence for the defects is indirect, via time-scale separation and scaling behavior; there is no direct imaging of individual defects. Strictly speaking not a hidden state in the sense of a new order, but a defect-dominated non-equilibrium state of the same order; included as an intermediate step on the way to hidden phases.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "electronic",
+      "threshold": {
+        "quantity": "critical fluence for defect creation, Kibble-Zurek-like",
+        "value": null,
+        "unit": "mJ/cm^2",
+        "verified": false
+      },
+      "switching_time_s": 1e-12,
+      "temperature_window_K": [
+        100,
+        300
+      ],
+      "measured_quantity": "ultrafast electron diffraction, amplitude and correlation length separated",
+      "quenchable_by": "annihilation of the defect pairs"
+    }
+  ],
+  "sources": [
+    "Kogar, Zong et al., Nature Physics 16, 159 (2020), doi:10.1038/s41567-019-0705-3",
+    "Zong, Kogar et al., Nature Physics 15, 27 (2019), doi:10.1038/s41567-018-0311-9"
+  ],
+  "gaps": [
+    "Fluence values estimated from the description, not verified against the full text."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

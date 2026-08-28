@@ -1,0 +1,56 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "v4o7",
+  "name": "Vanadium Magneli phase",
+  "formula": "V4O7",
+  "class": "compound",
+  "equilibrium_context": "Insulator-metal transition at about 250 K (Magneli series VnO2n-1)",
+  "driven_states": [
+    {
+      "id": "ds_correlated_melt",
+      "emergent_property": "Ultrashort pulse excitation melts the correlated insulating state; the transient shows a second-order transition with separately identifiable electronic and lattice contributions.",
+      "stability": "driven",
+      "host_state": "correlated insulator",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "wavelength_um": 0.8,
+        "fluence_mJ_per_cm2": null,
+        "pulse_duration_s": 1e-13
+      },
+      "lifetime_s": 1e-11,
+      "switching_time_s": 1e-12,
+      "threshold": {
+        "quantity": "no sharp threshold, second-order transition",
+        "value": null,
+        "unit": "-",
+        "verified": false
+      },
+      "temperature_window_K": [
+        80,
+        250
+      ],
+      "mechanism": "mixed",
+      "evidence_level": "single_group",
+      "source": "Bartenev et al., Adv. Electron. Mater. (2025), doi:10.1002/aelm.202400539",
+      "further_sources": [],
+      "caveat": "The work separates electronic and lattice contributions explicitly, but does not classify the transition as purely electronic. Second order, therefore conceptually different from the first-order VO2 case. A very recent, unconfirmed single study - evidence level deliberately kept low. Photon energy assumed to be a typical Ti:sapphire excitation, not verified against the full text."
+    }
+  ],
+  "sources": [
+    "Bartenev et al., Adv. Electron. Mater. (2025), doi:10.1002/aelm.202400539"
+  ],
+  "gaps": [
+    "Photon energy, fluence and lifetime not verified against the full text."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

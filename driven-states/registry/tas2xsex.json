@@ -1,0 +1,56 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "tas2xsex",
+  "name": "Selenium-substituted tantalum disulfide",
+  "formula": "1T-TaS(2-x)Se(x)",
+  "class": "compound",
+  "equilibrium_context": "Mott insulator for x = 0 and 0.5, superconductor for x = 1.0; commensurate CDW in the ground state",
+  "driven_states": [
+    {
+      "id": "ds_hidden_domain_texture",
+      "emergent_property": "Hidden CDW domain structure with a spatial anomaly (displaced domains) or an orientational anomaly (rotated domains), stacked star-shaped polaron clusters, estimated photodoping of about one ninth per cluster, accompanied by an insulator-metal transition.",
+      "stability": "metastable",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "wavelength_um": 0.8,
+        "fluence_mJ_per_cm2": 3.0,
+        "pulse_duration_s": 1e-13
+      },
+      "lifetime_s": 1000.0,
+      "evidence_level": "single_group",
+      "source": "Sun et al., Sci. Adv. 4, eaas9660 (2018), doi:10.1126/sciadv.aas9660",
+      "caveat": "Direct real-space imaging of the hidden domains, therefore more than phenomenology. The assignment of a photodoping of one ninth is, however, model-dependent. The stacking direction is not captured by plan-view transmission electron microscopy; consistency with the stacking collapse finding has not been checked explicitly.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "electronic",
+      "threshold": {
+        "quantity": "fluence, composition-dependent",
+        "value": 1.0,
+        "unit": "mJ/cm^2",
+        "verified": false
+      },
+      "temperature_window_K": [
+        10,
+        70
+      ],
+      "measured_quantity": "in-situ transmission electron microscopy of the domain structure",
+      "quenchable_by": "heating"
+    }
+  ],
+  "sources": [
+    "Sun et al., Sci. Adv. 4, eaas9660 (2018), doi:10.1126/sciadv.aas9660"
+  ],
+  "gaps": [
+    "Third dimension (stacking) not captured."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

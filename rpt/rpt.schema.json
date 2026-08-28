@@ -1,0 +1,825 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eigenart-filmproduktion.de/schema/rpt-0.1.json",
+  "title": "Reactive Periodic Table – Element/Material Descriptor",
+  "description": "Description layer for the controllable degrees of freedom of elements and materials. The defensible core is not the catalogue but the evaluable coupling graph with energy and latency costs.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "name",
+    "class",
+    "degrees_of_freedom",
+    "inputs",
+    "outputs",
+    "couplings",
+    "provenance"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "formula": {
+      "type": "string"
+    },
+    "class": {
+      "enum": [
+        "element",
+        "compound",
+        "alloy",
+        "allotrope_family",
+        "heterostructure"
+      ]
+    },
+    "z": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 118
+    },
+    "summary": {
+      "type": "string"
+    },
+    "degrees_of_freedom": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "domain"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "kind": {
+            "enum": [
+              "electronic",
+              "structural",
+              "spin",
+              "orbital",
+              "vibrational",
+              "chemical",
+              "topological",
+              "compositional"
+            ]
+          },
+          "domain": {
+            "type": "object",
+            "oneOf": [
+              {
+                "required": [
+                  "type",
+                  "min",
+                  "max"
+                ],
+                "properties": {
+                  "type": {
+                    "const": "continuous"
+                  },
+                  "min": {
+                    "type": "number"
+                  },
+                  "max": {
+                    "type": "number"
+                  },
+                  "unit": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "required": [
+                  "type",
+                  "values"
+                ],
+                "properties": {
+                  "type": {
+                    "const": "discrete"
+                  },
+                  "values": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 2
+                  }
+                },
+                "additionalProperties": false
+              }
+            ]
+          },
+          "default": {},
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "inputs": {
+      "description": "Actuators: quantities that can be applied from outside.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "range",
+          "latency_s",
+          "reversible"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "kind": {
+            "enum": [
+              "chemical",
+              "current",
+              "electric_field",
+              "gate_voltage",
+              "hydrostatic_pressure",
+              "magnetic_field",
+              "microwave",
+              "optical",
+              "strain",
+              "thermal",
+              "thz"
+            ]
+          },
+          "range": {
+            "type": "object",
+            "required": [
+              "min",
+              "max",
+              "unit"
+            ],
+            "properties": {
+              "min": {
+                "type": "number"
+              },
+              "max": {
+                "type": "number"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "latency_s": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "Smallest realistic settling time of the actuator."
+          },
+          "energy_cost": {
+            "type": "object",
+            "required": [
+              "model",
+              "value",
+              "unit"
+            ],
+            "properties": {
+              "model": {
+                "enum": [
+                  "continuous_power",
+                  "negligible",
+                  "per_cycle",
+                  "per_unit_change",
+                  "per_volume",
+                  "unknown"
+                ]
+              },
+              "value": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "reversible": {
+            "type": "boolean"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "outputs": {
+      "description": "Observables read as the result of propagation.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "quantity",
+          "unit"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "quantity": {
+            "type": "string"
+          },
+          "unit": {
+            "type": "string"
+          },
+          "readout": {
+            "enum": [
+              "transport",
+              "optical",
+              "magnetometry",
+              "diffraction",
+              "spectroscopy",
+              "calorimetry",
+              "qfi_witness",
+              "mechanical"
+            ]
+          },
+          "readout_latency_s": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "nondestructive": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "couplings": {
+      "description": "Core of the schema: directed edges carrying an evaluable relation, cost and latency. This is where the delimitation from plain materials databases lies.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "from",
+          "to",
+          "relation",
+          "latency_s",
+          "confidence"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "from": {
+            "type": "string",
+            "description": "id of an input or a degree_of_freedom"
+          },
+          "to": {
+            "type": "string",
+            "description": "id of a degree_of_freedom or an output"
+          },
+          "relation": {
+            "type": "object",
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "enum": [
+                  "linear",
+                  "affine",
+                  "power",
+                  "exponential",
+                  "threshold",
+                  "hysteretic",
+                  "saturating",
+                  "lookup",
+                  "qualitative",
+                  "resonant"
+                ]
+              },
+              "gain": {
+                "type": "number"
+              },
+              "offset": {
+                "type": "number"
+              },
+              "exponent": {
+                "type": "number"
+              },
+              "scale": {
+                "type": "number"
+              },
+              "threshold": {
+                "type": "number"
+              },
+              "threshold_up": {
+                "type": "number"
+              },
+              "threshold_down": {
+                "type": "number"
+              },
+              "low": {
+                "type": [
+                  "number",
+                  "string"
+                ]
+              },
+              "high": {
+                "type": [
+                  "number",
+                  "string"
+                ]
+              },
+              "saturation": {
+                "type": "number"
+              },
+              "table": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2
+                }
+              },
+              "direction": {
+                "enum": [
+                  "increases",
+                  "decreases",
+                  "nonmonotonic"
+                ]
+              },
+              "center": {
+                "type": "number",
+                "description": "Resonance center, for relation type resonant"
+              },
+              "width": {
+                "type": "number",
+                "description": "Resonance linewidth, for relation type resonant"
+              }
+            },
+            "additionalProperties": false
+          },
+          "latency_s": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "energy_cost": {
+            "type": "object",
+            "required": [
+              "model",
+              "value",
+              "unit"
+            ],
+            "properties": {
+              "model": {
+                "enum": [
+                  "per_volume",
+                  "per_cycle",
+                  "per_unit_change",
+                  "continuous_power",
+                  "negligible",
+                  "unknown"
+                ]
+              },
+              "value": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "validity": {
+            "type": "object",
+            "properties": {
+              "condition": {
+                "type": "string"
+              },
+              "temperature_K": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "additionalProperties": false
+          },
+          "confidence": {
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ],
+            "description": "How well the edge is backed by primary literature."
+          },
+          "source": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "combine": {
+            "enum": [
+              "overwrite",
+              "add",
+              "max"
+            ],
+            "description": "How multiple edges into the same target node are combined. Default overwrite."
+          }
+        }
+      }
+    },
+    "states": {
+      "description": "Material states. stability distinguishes equilibrium, metastable and driven (layer 3b).",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "stability"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "stability": {
+            "enum": [
+              "equilibrium",
+              "metastable",
+              "driven"
+            ]
+          },
+          "properties": {
+            "type": "object"
+          },
+          "lifetime_s": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "null means unlimited as long as the condition holds"
+          },
+          "source": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "transitions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "from_state",
+          "to_state",
+          "trigger",
+          "reversible"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "from_state": {
+            "type": "string"
+          },
+          "to_state": {
+            "type": "string"
+          },
+          "trigger": {
+            "type": "object",
+            "required": [
+              "variable",
+              "operator",
+              "value"
+            ],
+            "properties": {
+              "variable": {
+                "type": "string"
+              },
+              "operator": {
+                "enum": [
+                  ">",
+                  ">=",
+                  "<",
+                  "<=",
+                  "=="
+                ]
+              },
+              "value": {
+                "type": [
+                  "number",
+                  "string"
+                ]
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "latency_s": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "energy_density_J_per_m3": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "reversible": {
+            "type": "boolean"
+          },
+          "hysteresis": {
+            "type": "object",
+            "properties": {
+              "width": {
+                "type": "number"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "confidence": {
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "source": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "driven_states": {
+      "description": "Non-equilibrium extension: states that exist only while the drive is running. Not representable in equilibrium databases, by construction.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "drive",
+          "emergent_property",
+          "evidence_level"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "drive": {
+            "type": "object",
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "enum": [
+                  "optical_pulse",
+                  "cw_optical",
+                  "thz",
+                  "microwave",
+                  "ac_field",
+                  "acoustic"
+                ]
+              },
+              "photon_energy_eV": {
+                "type": "number"
+              },
+              "frequency_Hz": {
+                "type": "number"
+              },
+              "fluence_mJ_per_cm2": {
+                "type": "number"
+              },
+              "polarization": {
+                "type": "string"
+              },
+              "pulse_duration_s": {
+                "type": "number"
+              }
+            },
+            "additionalProperties": false
+          },
+          "emergent_property": {
+            "type": "string"
+          },
+          "host_state": {
+            "type": "string"
+          },
+          "lifetime_s": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "threshold": {
+            "type": "object",
+            "properties": {
+              "quantity": {
+                "type": "string"
+              },
+              "value": {
+                "type": "number"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "evidence_level": {
+            "enum": [
+              "established",
+              "reproduced",
+              "single_group",
+              "contested"
+            ]
+          },
+          "source": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "stability": {
+            "enum": [
+              "driven",
+              "metastable",
+              "driven_to_metastable"
+            ]
+          },
+          "mechanism": {
+            "enum": [
+              "electronic",
+              "thermal",
+              "lattice_strain",
+              "field_tunneling",
+              "mixed",
+              "unresolved"
+            ]
+          },
+          "equivalent_equilibrium_state": {
+            "enum": [
+              "no",
+              "yes",
+              "partial"
+            ],
+            "description": "Does the produced state exist in the equilibrium phase diagram? 'yes' marks switching between equilibrium states."
+          },
+          "measured_quantity": {
+            "type": "string",
+            "description": "What was actually measured. Decisive, because many assignments are inferred rather than measured."
+          },
+          "temperature_window_K": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          }
+        }
+      }
+    },
+    "feedback_loops": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "path",
+          "sign"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "path": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 2,
+            "description": "sequence of coupling ids forming a cycle"
+          },
+          "sign": {
+            "enum": [
+              "positive",
+              "negative"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "gaps": {
+      "description": "Honest gaps. A requirement of the working discipline, not of the schema.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "verification_status": {
+      "enum": [
+        "verified",
+        "pending",
+        "unverified"
+      ]
+    },
+    "provenance": {
+      "type": "object",
+      "description": "How this entry came about. Mandatory, because a register whose provenance is unclear cannot be judged. AI-assisted compilation with complete source attribution is defensible; concealed compilation is not.",
+      "required": [
+        "compiled",
+        "compiled_on",
+        "source_check",
+        "peer_reviewed"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "compiled": {
+          "enum": [
+            "ai_assisted",
+            "manual",
+            "mixed"
+          ],
+          "description": "ai_assisted: literature search and field extraction performed by an AI agent under human direction."
+        },
+        "compiled_on": {
+          "type": "string",
+          "description": "ISO date"
+        },
+        "source_check": {
+          "enum": [
+            "primary_literature",
+            "secondary",
+            "none"
+          ],
+          "description": "primary_literature: every number and citation checked against the cited work, DOI verified."
+        },
+        "peer_reviewed": {
+          "type": "boolean",
+          "description": "Reviewed by a domain expert who is not the compiler. False for every entry at the time of first publication."
+        },
+        "reviewer": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Name and affiliation of the reviewer, once one exists."
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "v2o3",
+  "name": "Vanadium sesquioxide",
+  "formula": "V2O3",
+  "class": "compound",
+  "equilibrium_context": "Antiferromagnetic Mott insulator (monoclinic) to paramagnetic metal (corundum) at 150 to 180 K; prototype of the Mott-Hubbard transition",
+  "summary": "Two cleanly separable driven states: a light-stabilized monoclinic metallic phase that does not exist in equilibrium, and a THz-field-driven transition with a documented crossover from electronic to thermal dynamics.",
+  "driven_states": [
+    {
+      "id": "ds_metastable_monoclinic_metal",
+      "emergent_property": "Light stabilizes the monoclinic metallic phase, which does not exist in equilibrium or in homogeneous material. It arises only when photoexcitation acts on the nanotextured, strained monoclinic low-temperature phase.",
+      "stability": "metastable",
+      "host_state": "monoclinic AF Mott insulator",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "wavelength_um": 0.8,
+        "fluence_mJ_per_cm2": null,
+        "pulse_duration_s": 1e-13
+      },
+      "lifetime_s": 1e-09,
+      "switching_time_s": 1e-12,
+      "threshold": {
+        "quantity": "fluence",
+        "value": null,
+        "unit": "mJ/cm^2",
+        "verified": false
+      },
+      "temperature_window_K": [
+        100,
+        180
+      ],
+      "mechanism": "lattice_strain",
+      "evidence_level": "single_group",
+      "source": "Ronchi et al., Nat. Commun. 13 (2022), doi:10.1038/s41467-022-31298-0",
+      "further_sources": [
+        "Lantz et al., Nat. Commun. 8 (2017), doi:10.1038/ncomms13917 (A1g phonon hardening instead of softening, strong non-thermal argument)",
+        "Amano et al., Nat. Phys. (2024), doi:10.1038/s41567-024-02628-4 (propagation via photoinduced strain waves)"
+      ],
+      "caveat": "Well justified as non-thermal: an A1g phonon hardening excludes pure overheating, since heating leads to softening. But Amano et al. show that in granular films the transition is carried by a photoinduced strain wave and does not occur in single crystals - so it is strongly morphology-dependent, not purely electronic. The Ronchi interpretation hinges on a Landau-Ginzburg model and has not been independently reproduced."
+    },
+    {
+      "id": "ds_thz_electronic_mott",
+      "emergent_property": "An intense THz field pulse triggers an instantaneous sub-picosecond insulator-metal transition and thereby bypasses the thermal regime of the purely electrically driven transition, which sets in only after some tens of picoseconds via Joule heating.",
+      "stability": "driven",
+      "host_state": "monoclinic AF Mott insulator",
+      "drive": {
+        "type": "thz",
+        "photon_energy_eV": 0.004,
+        "wavelength_um": 300.0,
+        "pulse_duration_s": 1e-12
+      },
+      "lifetime_s": 1e-11,
+      "switching_time_s": 1e-12,
+      "threshold": {
+        "quantity": "electric field",
+        "value": 10000000.0,
+        "unit": "V/m",
+        "verified": false
+      },
+      "temperature_window_K": [
+        80,
+        160
+      ],
+      "mechanism": "field_tunneling",
+      "evidence_level": "single_group",
+      "source": "Giorgianni, Sakai & Lupi, Nat. Commun. 10, 1159 (2019), doi:10.1038/s41467-019-09137-6",
+      "further_sources": [
+        "Nat. Commun. 11 (2020), doi:10.1038/s41467-020-16752-1 (non-thermal resistive switching in Mott nanowires)"
+      ],
+      "caveat": "Valuable because the work addresses the thermal versus electronic question directly: it shows a temperature-dependent crossover from fast quantum-mechanical to slow thermal-dissipative dynamics. The purely electronic assignment holds only in the low-temperature, short-time window. Single group."
+    }
+  ],
+  "sources": [
+    "Ronchi et al., Nat. Commun. 13 (2022), doi:10.1038/s41467-022-31298-0",
+    "Giorgianni, Sakai & Lupi, Nat. Commun. 10, 1159 (2019), doi:10.1038/s41467-019-09137-6",
+    "Lantz et al., Nat. Commun. 8 (2017), doi:10.1038/ncomms13917"
+  ],
+  "gaps": [
+    "Fluence threshold and exact lifetime of the monoclinic metallic phase not verified against the full text.",
+    "Field threshold of the THz case given as an order of magnitude, not checked against the full text."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

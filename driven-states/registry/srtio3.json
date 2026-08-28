@@ -1,0 +1,157 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "srtio3",
+  "name": "Strontium titanate",
+  "formula": "SrTiO3",
+  "class": "compound",
+  "equilibrium_context": "Quantum paraelectric, centrosymmetric at all temperatures, no ferroelectricity in equilibrium; antiferrodistortive transition at 105 K",
+  "summary": "The most prominent and most fiercely contested case in the field. Four states, two of them contested.",
+  "driven_states": [
+    {
+      "id": "ds_metastable_polar_midir",
+      "emergent_property": "Excitation of the highest-frequency A2u mode in the mid-infrared produces a non-centrosymmetric polar phase with polarization along [1-10], demonstrated by time-delay-independent second harmonic generation. A low-frequency polar mode hardens as the signal grows, as in a para-ferroelectric transition.",
+      "stability": "driven_to_metastable",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 0.083,
+        "wavelength_um": 15.0,
+        "frequency_THz": 20.0,
+        "fluence_mJ_per_cm2": 30.0,
+        "pulse_duration_s": 1e-13,
+        "field_MV_per_cm": 18.0,
+        "driven_mode": "highest-frequency A2u infrared mode, 83 meV"
+      },
+      "lifetime_s": 10000.0,
+      "evidence_level": "contested",
+      "source": "Nova, Disa, Fechner & Cavalleri, Science 364, 1075 (2019), doi:10.1126/science.aaw4911",
+      "caveat": "Not a single-pulse effect, but a cumulative transformation over tens of thousands of pulses. The authors themselves explain the domain structure photoflexoelectrically (two oppositely oriented domains, no monodomain state) and invoke pre-existing polar nanoregions. The evidence is optical plus capacitively coupled current pulses; there is no direct measurement of a remanent macroscopic polarization and no hysteresis curve. The observation is robust, the label ferroelectricity is not.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "lattice_strain",
+      "threshold": {
+        "quantity": "accumulation, saturation after about 1e4 to 1e5 pulses at 1 kHz",
+        "value": null,
+        "unit": "pulses",
+        "verified": true
+      },
+      "temperature_window_K": [
+        4,
+        290
+      ],
+      "further_sources": [
+        "Fechner et al., Nature Materials (2024), doi:10.1038/s41563-023-01791-y (X-ray diffuse scattering: quenching of octahedral rotation fluctuations)",
+        "Libbi, Monacelli & Kozinsky, Nat. Commun. 17, 6699 (2026), doi:10.1038/s41467-026-72675-3 (theory)"
+      ],
+      "measured_quantity": "second harmonic generation, phonon spectra"
+    },
+    {
+      "id": "ds_thz_hidden_ferroelectric",
+      "emergent_property": "A single intense THz cycle drives the ferroelectric soft mode ionically along the pathway into the positions of a new, symmetry-broken structure. The symmetry lowering shows up in markedly altered phonon spectra.",
+      "stability": "driven",
+      "drive": {
+        "type": "thz",
+        "frequency_THz": 0.6,
+        "field_MV_per_cm": 0.5,
+        "pulse_duration_s": 1e-12,
+        "driven_mode": "ferroelectric TO1 soft mode"
+      },
+      "lifetime_s": 1e-11,
+      "evidence_level": "contested",
+      "source": "Li, Qiu, Zhang, Baldini, Lu, Rappe & Nelson, Science 364, 1079 (2019), doi:10.1126/science.aaw4913",
+      "caveat": "Despite the title, the state is purely transient (about 10 ps) and therefore not a metastable state. The evidence is indirect, via phonon spectra and second harmonic generation. Cheng et al. show for KTaO3 that long-lived second harmonic signals can also originate from defect-induced local polar structures, which bears back on this class of experiments.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "mixed",
+      "threshold": {
+        "quantity": "nonlinear rise above about 200 to 300 kV/cm",
+        "value": 0.25,
+        "unit": "MV/cm",
+        "verified": false
+      },
+      "temperature_window_K": [
+        4,
+        50
+      ],
+      "further_sources": [
+        "Cheng et al., Phys. Rev. Lett. 130, 126902 (2023), doi:10.1103/PhysRevLett.130.126902 (control test on KTaO3)",
+        "arXiv:2512.01253 (competing lattice and defect dynamics)"
+      ],
+      "measured_quantity": "phonon spectra, second harmonic generation"
+    },
+    {
+      "id": "ds_thz_dynamical_multiferroic_magnetization",
+      "emergent_property": "Resonant driving of the infrared-active soft mode with a circularly polarised THz field produces a circulating ionic motion and thereby a magnetization along the rotation axis - dynamical multiferroicity.",
+      "stability": "driven",
+      "drive": {
+        "type": "thz",
+        "frequency_THz": 2.5,
+        "pulse_duration_s": 1e-12,
+        "polarization": "circular, sign follows the handedness",
+        "driven_mode": "infrared-active polar soft mode, circularly excited"
+      },
+      "lifetime_s": 1e-12,
+      "evidence_level": "single_group",
+      "source": "Basini, Pancaldi, Wehinger et al., Nature 628, 534 (2024), doi:10.1038/s41586-024-07175-9",
+      "caveat": "Not an ordered state, but a driven magnetization; the signal disappears with the pulse. Attributing the Kerr signal to a genuine magnetization rather than to a non-magnetic optical artifact is the critical point of the work and has so far been shown by one group.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "lattice_strain",
+      "threshold": {
+        "quantity": "no threshold, quadratic scaling with the field amplitude",
+        "value": null,
+        "unit": "-",
+        "verified": true
+      },
+      "temperature_window_K": [
+        10,
+        300
+      ],
+      "measured_quantity": "time-resolved magneto-optical Kerr effect"
+    },
+    {
+      "id": "ds_thz_phonon_upconversion",
+      "emergent_property": "The lowest-frequency optical phonon mode is driven far into the anharmonic regime; energy is transferred nonlinearly to higher-frequency modes. The ionic displacements are imaged directly with femtosecond X-ray pulses.",
+      "stability": "driven",
+      "drive": {
+        "type": "thz",
+        "frequency_THz": 0.8,
+        "pulse_duration_s": 1e-12,
+        "driven_mode": "TO1 soft mode, coupling to modes between 5 and 15 THz"
+      },
+      "lifetime_s": 1e-12,
+      "evidence_level": "single_group",
+      "source": "Kozina, Fechner, Marsik et al., Nature Physics 15, 387 (2019), doi:10.1038/s41567-018-0408-1",
+      "caveat": "Purely a lattice state, no new electronic or polar order. The entry documents the driving mechanism underlying the ferroelectricity entries and is therefore methodologically relevant, not as a material state in its own right.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "lattice_strain",
+      "threshold": {
+        "quantity": "upconversion sets in above the harmonic displacement amplitude",
+        "value": null,
+        "unit": "kV/cm",
+        "verified": false
+      },
+      "temperature_window_K": [
+        100,
+        300
+      ],
+      "measured_quantity": "femtosecond X-ray diffraction, ionic displacement"
+    }
+  ],
+  "sources": [
+    "Nova et al., Science 364, 1075 (2019), doi:10.1126/science.aaw4911",
+    "Li et al., Science 364, 1079 (2019), doi:10.1126/science.aaw4913",
+    "Basini et al., Nature 628, 534 (2024), doi:10.1038/s41586-024-07175-9",
+    "Kozina et al., Nature Physics 15, 387 (2019), doi:10.1038/s41567-018-0408-1"
+  ],
+  "gaps": [
+    "The dispute is not settled: Fechner et al. 2024 support the ferroelectricity reading microscopically, while the KTaO3 control test and the defect explanations argue against it.",
+    "Nature Physics work from 2025 shows that the equilibrium material itself is more inhomogeneous than assumed - this complicates separating light-generated order from light-aligned pre-existing polar nanoregions."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

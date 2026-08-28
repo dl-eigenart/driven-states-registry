@@ -1,0 +1,54 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "lnsco",
+  "name": "Neodymium-doped lanthanum strontium cuprate",
+  "formula": "La1.48Nd0.4Sr0.12CuO4",
+  "class": "compound",
+  "equilibrium_context": "Three-dimensional superconductivity strongly suppressed by charge stripe order; no Josephson plasmon in the range investigated",
+  "driven_states": [
+    {
+      "id": "ds_nir_plasma_edge_without_condensate",
+      "emergent_property": "After near-infrared excitation with E parallel to c, a clear plasma edge appears in the c-axis THz reflectivity, whose position nearly coincides with the Josephson plasma resonance of equally doped LSCO. The conductivity can, however, be described by a Drude model with a very small scattering rate; the imaginary conductivity shows no 1/omega divergence at any time.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "wavelength_um": 0.8,
+        "pulse_duration_s": 1e-13,
+        "polarization": "E parallel to c"
+      },
+      "lifetime_s": 1e-11,
+      "evidence_level": "single_group",
+      "source": "Nishida et al., Phys. Rev. B 107, 174523 (2023), doi:10.1103/PhysRevB.107.174523",
+      "caveat": "Important counterpoint: a plasma edge alone does not establish superconductivity. The authors themselves emphasize the absence of the 1/omega divergence and discuss coherent interlayer Drude transport as an alternative. The entry is to be read as a superconductivity-like signature without evidence of a condensate.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "unresolved",
+      "host_state": "charge-stripe-ordered",
+      "temperature_window_K": [
+        5,
+        70
+      ],
+      "further_sources": [
+        "Niwa et al., Phys. Rev. B 100, 104507 (2019), doi:10.1103/PhysRevB.100.104507"
+      ],
+      "measured_quantity": "c-axis THz reflectivity, and the complex conductivity derived from it"
+    }
+  ],
+  "sources": [
+    "Nishida et al., Phys. Rev. B 107, 174523 (2023), doi:10.1103/PhysRevB.107.174523"
+  ],
+  "gaps": [
+    "Fluence not verified.",
+    "Upper temperature limit estimated from the charge-ordering temperature."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

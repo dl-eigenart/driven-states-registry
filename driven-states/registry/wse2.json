@@ -1,0 +1,91 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "wse2",
+  "name": "Tungsten diselenide",
+  "formula": "WSe2",
+  "class": "compound",
+  "equilibrium_context": "Semiconductor, indirect gap about 1.2 eV, direct gap at the K point about 1.6 eV; inversion breaking in the monolayer produces Berry curvature at K and K'",
+  "driven_states": [
+    {
+      "id": "ds_floquet_sidebands_scattering_limited",
+      "emergent_property": "Floquet-Bloch sidebands at the valence band near K. No gap resolved: the expected Rabi gap of 100 to 200 meV was NOT observed. The core statement is the destruction of Floquet states by scattering as soon as electronic excitations are present.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 0.28,
+        "wavelength_um": 4.45,
+        "fluence_mJ_per_cm2": 2.0,
+        "pulse_duration_s": 2.7e-13,
+        "polarization": "linear s",
+        "field_MV_per_cm": 2.3
+      },
+      "lifetime_s": 3e-13,
+      "evidence_level": "reproduced",
+      "source": "Aeschlimann et al., Nano Letters 21, 5028 (2021), doi:10.1021/acs.nanolett.1c00801",
+      "caveat": "A null result for the gap, not a demonstration of a gap. The energy resolution of 150 meV is of the same order of magnitude as the expected gap, so the non-observation is only partly conclusive. The explanation via decoherence rests on a two-level model and TDDFT, not on a direct measurement of the scattering time. The Volkov distinction, by contrast, is clean: for s polarization the field lies in the plane, and the first-order Volkov contribution is exactly zero.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "electronic",
+      "threshold": {
+        "quantity": "none - Floquet dressing has no threshold",
+        "value": null,
+        "unit": "-",
+        "verified": true
+      },
+      "temperature_window_K": [
+        300,
+        300
+      ],
+      "further_sources": [
+        "Fragkos et al., Nat. Commun. 16, 5799 (2025), doi:10.1038/s41467-025-61076-7 (independent group)"
+      ],
+      "measured_quantity": "angle-resolved photoemission, sideband intensity"
+    },
+    {
+      "id": "ds_valley_polarized_floquet_bloch",
+      "emergent_property": "Strongly valley-polarized Floquet-Bloch states: the first-order sideband is markedly stronger at the K or K' valley for right- or left-circular driving polarization respectively, and the valley asymmetry is fully reversible via the helicity. The cause is valley-dependent quantum path interference between the Floquet and the Volkov channel.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.2,
+        "wavelength_um": 1.03,
+        "fluence_mJ_per_cm2": 5.7,
+        "pulse_duration_s": 1.35e-13,
+        "polarization": "circular"
+      },
+      "lifetime_s": 1.35e-13,
+      "evidence_level": "single_group",
+      "source": "Fragkos et al., Nat. Commun. 16, 5799 (2025), doi:10.1038/s41467-025-61076-7",
+      "caveat": "The weakest Volkov exclusion in the whole Floquet area. The authors state openly that pure Volkov simulations already reproduce most of the measured angular distributions and that only a residual feature forces the Floquet channel. The valley asymmetry is itself an interference quantity, not a pure Floquet observable. No gap and no band renormalization measured. An incidence angle of 65 degrees means a maximal Volkov contribution.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "electronic",
+      "threshold": {
+        "quantity": "none - Floquet dressing has no threshold",
+        "value": null,
+        "unit": "-",
+        "verified": true
+      },
+      "temperature_window_K": [
+        300,
+        300
+      ],
+      "measured_quantity": "momentum-resolved photoemission, sideband asymmetry between K and K'"
+    }
+  ],
+  "sources": [
+    "Aeschlimann et al., Nano Letters 21, 5028 (2021), doi:10.1021/acs.nanolett.1c00801",
+    "Fragkos et al., Nat. Commun. 16, 5799 (2025), doi:10.1038/s41467-025-61076-7"
+  ],
+  "gaps": [
+    "Both entries measure sideband intensities, not band renormalization - the weaker class of observation."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

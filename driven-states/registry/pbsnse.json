@@ -1,0 +1,43 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "pbsnse",
+  "name": "Bismuth-doped lead tin selenide",
+  "formula": "Bi:(Pb,Sn)Se",
+  "class": "compound",
+  "equilibrium_context": "Topological crystalline insulator with gapless surface states",
+  "driven_states": [
+    {
+      "id": "ds_photoinduced_topological_to_trivial_transition",
+      "emergent_property": "Photoinduced evolution from topological to trivial: the topological surface state opens a gap of up to 0.1 eV.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "pulse_duration_s": 1e-13,
+        "polarization": "linear"
+      },
+      "lifetime_s": 1e-12,
+      "evidence_level": "single_group",
+      "source": "Phys. Rev. Lett. 133, 236601 (2024), doi:10.1103/PhysRevLett.133.236601",
+      "caveat": "Included because of the topology, not because of the transport - only the band structure is measured, there is no transport signature. The mechanism is not electronic Floquet but a uniaxial distortion caused by the pulse; the assignment is made via the known phase diagram as a function of the lattice distortion, hence indirectly. Several pump parameters could not be substantiated and are left empty.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "mixed",
+      "measured_quantity": "time- and angle-resolved photoemission, gap size of the surface state"
+    }
+  ],
+  "sources": [
+    "Phys. Rev. Lett. 133, 236601 (2024), doi:10.1103/PhysRevLett.133.236601"
+  ],
+  "gaps": [
+    "Photon energy, fluence and temperature window could not be substantiated."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

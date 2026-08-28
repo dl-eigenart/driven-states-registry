@@ -1,0 +1,215 @@
+{
+  "schema_version": "0.1",
+  "id": "gd",
+  "name": "Gadolinium",
+  "formula": "Gd",
+  "class": "element",
+  "summary": "Representative of the lanthanides: many coupled degrees of freedom in the 4f shell, but slow and energy-intensive actuation. In the schema it shows the case of a high number of variables with poor actuation, and with the magnetocaloric effect it provides a coupling from spin to temperature.",
+  "degrees_of_freedom": [
+    {
+      "id": "magnetization",
+      "kind": "spin",
+      "domain": {
+        "type": "continuous",
+        "min": -2000000.0,
+        "max": 2000000.0,
+        "unit": "A/m"
+      },
+      "description": "4f7 configuration, S = 7/2, largest magnetic moment of all elements in the ground state"
+    },
+    {
+      "id": "magnetic_entropy",
+      "kind": "spin",
+      "domain": {
+        "type": "continuous",
+        "min": -12,
+        "max": 0,
+        "unit": "J/(kg*K)"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "magnetic_field",
+      "kind": "magnetic_field",
+      "range": {
+        "min": 0,
+        "max": 7,
+        "unit": "T"
+      },
+      "latency_s": 0.1,
+      "energy_cost": {
+        "model": "continuous_power",
+        "value": null,
+        "unit": "W"
+      },
+      "reversible": true
+    },
+    {
+      "id": "temperature",
+      "kind": "thermal",
+      "range": {
+        "min": 4,
+        "max": 500,
+        "unit": "K"
+      },
+      "latency_s": 1.0,
+      "energy_cost": {
+        "model": "per_volume",
+        "value": 1860000.0,
+        "unit": "J/(m^3*K)"
+      },
+      "reversible": true
+    }
+  ],
+  "outputs": [
+    {
+      "id": "adiabatic_temp_change",
+      "quantity": "adiabatic temperature change",
+      "unit": "K",
+      "readout": "calorimetry",
+      "readout_latency_s": 0.1,
+      "nondestructive": true
+    },
+    {
+      "id": "flux_density",
+      "quantity": "magnetic flux density",
+      "unit": "T",
+      "readout": "magnetometry",
+      "readout_latency_s": 0.001,
+      "nondestructive": true
+    }
+  ],
+  "couplings": [
+    {
+      "id": "c_field_mag",
+      "from": "magnetic_field",
+      "to": "magnetization",
+      "relation": {
+        "type": "saturating",
+        "gain": 1000000.0,
+        "saturation": 2000000.0
+      },
+      "latency_s": 0.1,
+      "energy_cost": {
+        "model": "continuous_power",
+        "value": null,
+        "unit": "W"
+      },
+      "confidence": "medium",
+      "source": "Dan'kov et al., Phys. Rev. B 57, 3478 (1998); saturation moment 7.55 mu_B per atom"
+    },
+    {
+      "id": "c_field_entropy",
+      "from": "magnetic_field",
+      "to": "magnetic_entropy",
+      "relation": {
+        "type": "linear",
+        "gain": -2.0
+      },
+      "latency_s": 0.1,
+      "energy_cost": {
+        "model": "continuous_power",
+        "value": null,
+        "unit": "W"
+      },
+      "validity": {
+        "condition": "near the Curie temperature of 293 K",
+        "temperature_K": [
+          270,
+          310
+        ]
+      },
+      "confidence": "medium",
+      "source": "Dan'kov, Tishin, Pecharsky & Gschneidner, Phys. Rev. B 57, 3478 (1998), doi:10.1103/PhysRevB.57.3478",
+      "notes": "Linear approximation. In reality the entropy change scales roughly with H^(2/3); the gain is chosen so that at 5 T it matches the measured -10 J/(kg*K)."
+    },
+    {
+      "id": "c_entropy_dtad",
+      "from": "magnetic_entropy",
+      "to": "adiabatic_temp_change",
+      "relation": {
+        "type": "linear",
+        "gain": -1.25
+      },
+      "latency_s": 0.1,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "validity": {
+        "condition": "adiabatic condition, dT = -T/c_p * dS with T = 293 K and c_p = 236 J/(kg*K); yields 12.5 K at 5 T"
+      },
+      "confidence": "medium",
+      "source": "Dan'kov et al., Phys. Rev. B 57, 3478 (1998)",
+      "notes": "Coupling from spin to temperature. Together with c_temp_mag it forms a cycle and is the physical basis of magnetic cooling."
+    },
+    {
+      "id": "c_temp_mag",
+      "from": "temperature",
+      "to": "magnetization",
+      "relation": {
+        "type": "threshold",
+        "threshold": 293,
+        "low": 2000000.0,
+        "high": 0.0
+      },
+      "latency_s": 1.0,
+      "energy_cost": {
+        "model": "per_volume",
+        "value": 1700000.0,
+        "unit": "J/(m^3*K)"
+      },
+      "confidence": "high",
+      "source": "Curie temperature 293 K, unusually close to room temperature"
+    }
+  ],
+  "states": [
+    {
+      "id": "ferromagnetic_hcp",
+      "label": "ferromagnetic, hcp",
+      "stability": "equilibrium",
+      "lifetime_s": null,
+      "properties": {
+        "curie_K": 293
+      }
+    },
+    {
+      "id": "paramagnetic",
+      "label": "paramagnetic",
+      "stability": "equilibrium",
+      "lifetime_s": null
+    }
+  ],
+  "feedback_loops": [
+    {
+      "id": "fb_magnetocaloric",
+      "path": [
+        "c_field_entropy",
+        "c_entropy_dtad",
+        "c_temp_mag"
+      ],
+      "sign": "negative",
+      "notes": "The field lowers the magnetic entropy, the material warms up, and the higher temperature lowers the magnetization. Self-limiting, and usable as a cooling cycle for exactly that reason."
+    }
+  ],
+  "gaps": [
+    "The magnetocaloric effect depends strongly on the temperature window; the linear approximations hold only near 293 K.",
+    "The 4f degrees of freedom beyond the total magnetization (orbital occupation, crystal field levels) are not represented in the schema, because no practical actuator exists for them.",
+    "Pecharsky & Gschneidner 1997 was listed as a source in v0.1, but it treats Gd5Si2Ge2 and not pure gadolinium. Replaced by Dan'kov et al. 1998."
+  ],
+  "sources": [
+    "Dan'kov, Tishin, Pecharsky & Gschneidner, Phys. Rev. B 57, 3478 (1998), doi:10.1103/PhysRevB.57.3478",
+    "Pecharsky & Gschneidner, Phys. Rev. Lett. 78, 4494 (1997), doi:10.1103/PhysRevLett.78.4494 - concerns Gd5Si2Ge2, not pure Gd"
+  ],
+  "verification_status": "verified",
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

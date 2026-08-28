@@ -1,0 +1,57 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "blg",
+  "name": "Bernal bilayer graphene",
+  "formula": "C",
+  "class": "heterostructure",
+  "equilibrium_context": "Dirac system with an electrically tunable gap; valley-contrasting Berry curvature under broken inversion symmetry",
+  "driven_states": [
+    {
+      "id": "ds_light_induced_valley_selective_hall",
+      "emergent_property": "Optically induced valley population generates a transverse Hall voltage without a magnetic field, Hall conductivity up to 0.04 e^2/h, tunable in situ via the displacement field. Maximum at very small gap plus a resonant maximum at about 120 meV; orders of magnitude larger than in MoS2.",
+      "stability": "driven",
+      "drive": {
+        "type": "cw_optical",
+        "photon_energy_eV": 0.1229,
+        "wavelength_um": 10.1,
+        "polarization": "circular, valley selection"
+      },
+      "lifetime_s": 1e-12,
+      "evidence_level": "reproduced",
+      "source": "Yin, Tan, Barcons-Ruiz et al., Science 375, 1398 (2022), doi:10.1126/science.abl4266",
+      "caveat": "The cleanest case in the topology domain, but topologically modest: the Berry curvature is an EQUILIBRIUM property of the gapped band, the light merely creates the valley-selective occupation. No new band topology arises, no Chern number, no Floquet physics. Included because a non-thermal, long-lived non-equilibrium occupation state is present whose transport signature is unambiguously of quantum-geometric origin - and because the work replaces the historically contested non-local valley signals with a direct local Hall measurement.",
+      "equivalent_equilibrium_state": "partial",
+      "mechanism": "electronic",
+      "threshold": {
+        "quantity": "no field threshold; sign and amplitude controllable via the displacement field",
+        "value": null,
+        "unit": "-",
+        "verified": true
+      },
+      "temperature_window_K": [
+        33,
+        33
+      ],
+      "further_sources": [
+        "Mak, McGill, Park & McEuen, Science 344, 1489 (2014), doi:10.1126/science.1250140 (precursor in TMD)"
+      ],
+      "measured_quantity": "Hall voltage and Hall conductivity in e^2/h, spatially resolved"
+    }
+  ],
+  "sources": [
+    "Yin et al., Science 375, 1398 (2022), doi:10.1126/science.abl4266"
+  ],
+  "gaps": [
+    "No new band topology - only occupation of an existing Berry curvature."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

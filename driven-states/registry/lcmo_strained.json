@@ -1,0 +1,58 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "lcmo_strained",
+  "name": "Strained lanthanum calcium manganite",
+  "formula": "La2/3Ca1/3MnO3",
+  "class": "compound",
+  "equilibrium_context": "A ferromagnetic metal when unstrained; under epitaxial strain tuned into an emergent charge-ordered insulating phase",
+  "driven_states": [
+    {
+      "id": "ds_hidden_metastable_metal",
+      "emergent_property": "Extreme photosusceptibility: a single optical pulse switches the material into a long-lived, metastable hidden metallic phase. A critical absorbed photon density is required, which activates local charge excitations that mediate magneto-lattice coupling.",
+      "stability": "metastable",
+      "host_state": "strain-induced charge-ordered insulator",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "wavelength_um": 0.8,
+        "pulse_duration_s": 1e-13
+      },
+      "lifetime_s": 1.0,
+      "switching_time_s": 1e-11,
+      "threshold": {
+        "quantity": "absorbed photon density",
+        "value": null,
+        "unit": "cm^-3",
+        "verified": false
+      },
+      "temperature_window_K": [
+        10,
+        100
+      ],
+      "quenchable_by": "heating",
+      "mechanism": "mixed",
+      "evidence_level": "single_group",
+      "source": "Zhang et al., Nature Materials 15, 956 (2016), doi:10.1038/nmat4695",
+      "further_sources": [
+        "Nature Materials 18 (2019), doi:10.1038/s41563-019-0533-y (multi-messenger nanoprobes of hidden magnetism)"
+      ],
+      "caveat": "The single-shot methodology rules out cumulative heating - a strong argument against a purely thermal origin, and methodologically the cleanest demonstration of metastability in the registry. The authors, however, describe the mechanism as cooperative via magneto-lattice coupling, not as a purely electronic Mott collapse. The photosusceptibility is a strain-engineering effect, not an intrinsic material property - transferability to unstrained material is not established."
+    }
+  ],
+  "sources": [
+    "Zhang et al., Nature Materials 15, 956 (2016), doi:10.1038/nmat4695"
+  ],
+  "gaps": [
+    "The critical absorbed photon density is documented, but the numerical value has not been verified against the full text."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

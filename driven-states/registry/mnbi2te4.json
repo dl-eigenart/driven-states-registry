@@ -1,0 +1,54 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "mnbi2te4",
+  "name": "Manganese bismuth telluride",
+  "formula": "MnBi2Te4",
+  "class": "compound",
+  "equilibrium_context": "Intrinsic magnetic topological insulator, A-type antiferromagnet with a Neel temperature of 25 K; the existence of an equilibrium mass gap at the surface Dirac cone has been contested for years",
+  "driven_states": [
+    {
+      "id": "ds_floquet_dirac_mass_gap_helicity_dependent",
+      "emergent_property": "Circularly polarized light opens a Dirac mass gap of about 35 meV. Core finding: below the Neel temperature opposite helicities produce distinctly different gaps, above it identical ones. The difference measures the hidden, spatially fluctuating equilibrium Dirac mass and demonstrates broken time reversal at the surface.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 0.155,
+        "wavelength_um": 8.0,
+        "polarization": "circular"
+      },
+      "lifetime_s": 5e-13,
+      "evidence_level": "single_group",
+      "source": "Bielinski et al., Nature Physics 21, 458 (2025), doi:10.1038/s41567-024-02769-6",
+      "caveat": "Discrimination against Volkov contributions is only partially possible: the authors explicitly state that the sidebands arise from dressing of both the initial and the final states; an s-polarization null test is ruled out in principle for circular excitation. The discrimination is made via the gap itself. Fluence and field strength are not reported in absolute numbers. MnBi2Te4 samples are notoriously inhomogeneous; given the long-running controversy about the equilibrium gap, restraint is appropriate.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "electronic",
+      "threshold": {
+        "quantity": "no field threshold; the helicity asymmetry has a temperature threshold at the Neel temperature",
+        "value": 25.0,
+        "unit": "K",
+        "verified": true
+      },
+      "temperature_window_K": [
+        8,
+        40
+      ],
+      "measured_quantity": "angle-resolved photoemission, Dirac mass gap"
+    }
+  ],
+  "sources": [
+    "Bielinski et al., Nature Physics 21, 458 (2025), doi:10.1038/s41567-024-02769-6"
+  ],
+  "gaps": [
+    "Fluence and field strength not reported, which hampers comparison with other systems."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

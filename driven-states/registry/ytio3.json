@@ -1,0 +1,57 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "ytio3",
+  "name": "Yttrium titanate",
+  "formula": "YTiO3",
+  "class": "compound",
+  "equilibrium_context": "Ferromagnetic Mott insulator with a suppressed Curie point at 27 K and a reduced saturation moment",
+  "driven_states": [
+    {
+      "id": "ds_photoinduced_high_tc_ferromagnetism",
+      "emergent_property": "Mode-selective excitation of an oxygen rotation mode at 9 THz leads at low temperatures to complete magnetic saturation and produces transient ferromagnetism up to above 80 K, that is about three times the thermodynamic transition temperature.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 0.037,
+        "wavelength_um": 33.0,
+        "frequency_THz": 9.0,
+        "fluence_mJ_per_cm2": 20.0,
+        "pulse_duration_s": 1e-13,
+        "driven_mode": "oxygen rotation and tilt mode at 9 THz; the anharmonically generated distortion modulates orbital order and exchange"
+      },
+      "lifetime_s": 1e-09,
+      "evidence_level": "single_group",
+      "source": "Disa, Curtis, Fechner et al., Nature 617, 73 (2023), doi:10.1038/s41586-023-05853-8",
+      "caveat": "Above the Curie temperature this is a driven magnetization in a regime of strong ferromagnetic fluctuations, and not demonstrably long-range order. The evidence is magneto-optical. In equilibrium the material is already a ferromagnet - so the transition temperature is shifted, no new type of order is created.",
+      "equivalent_equilibrium_state": "partial",
+      "mechanism": "lattice_strain",
+      "threshold": {
+        "quantity": "nonlinear fluence dependence, saturation above a critical amplitude",
+        "value": null,
+        "unit": "mJ/cm^2",
+        "verified": false
+      },
+      "temperature_window_K": [
+        4,
+        80
+      ],
+      "measured_quantity": "magneto-optical Kerr effect"
+    }
+  ],
+  "sources": [
+    "Disa et al., Nature 617, 73 (2023), doi:10.1038/s41586-023-05853-8"
+  ],
+  "gaps": [
+    "Field strength not verified, fluence only as a range."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

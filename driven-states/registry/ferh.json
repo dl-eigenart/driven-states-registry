@@ -1,0 +1,61 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "ferh",
+  "name": "Iron-rhodium",
+  "formula": "FeRh",
+  "class": "alloy",
+  "equilibrium_context": "G-type antiferromagnet below roughly 350 to 370 K, ferromagnetic above; first-order metamagnetic transition with wide hysteresis",
+  "summary": "Calibration point of the registry: a thermal shortcut to a phase that is stable anyway. Anyone reporting a new case should be able to show that it is not an FeRh.",
+  "driven_states": [
+    {
+      "id": "ds_photoinduced_ferromagnetic_order",
+      "emergent_property": "A femtosecond pulse generates ferromagnetic order: nucleation within about one picosecond, formation of macroscopic domains and of the accompanying lattice expansion on 10 to 100 picoseconds. Within the hysteresis the ferromagnetic phase persists after the pulse.",
+      "stability": "driven_to_metastable",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "wavelength_um": 0.8,
+        "fluence_mJ_per_cm2": 3.0,
+        "pulse_duration_s": 6e-14,
+        "polarization": "irrelevant, helicity-independent"
+      },
+      "lifetime_s": 1e-09,
+      "evidence_level": "established",
+      "source": "Ju, Hohlfeld, Bergman et al., Phys. Rev. Lett. 93, 197403 (2004), doi:10.1103/PhysRevLett.93.197403",
+      "caveat": "Borderline case, deliberately included. The ferromagnetic phase exists in equilibrium above 370 K; the light merely triggers the transition ultrafast instead of creating an inaccessible state. Whether a non-thermal, ultrafast contribution exists has been debated for more than twenty years and is not settled. Hence mechanism thermal and equivalent_equilibrium_state yes.",
+      "equivalent_equilibrium_state": "yes",
+      "mechanism": "thermal",
+      "threshold": {
+        "quantity": "fluence threshold; the starting temperature must lie close enough to the transition",
+        "value": 1.5,
+        "unit": "mJ/cm^2",
+        "verified": true
+      },
+      "temperature_window_K": [
+        250,
+        370
+      ],
+      "further_sources": [
+        "Mariager et al., Phys. Rev. Lett. 108, 087201 (2012), doi:10.1103/PhysRevLett.108.087201"
+      ],
+      "measured_quantity": "magnetization, lattice expansion",
+      "quenchable_by": "heat diffusion, recovery within nanoseconds to microseconds"
+    }
+  ],
+  "sources": [
+    "Ju et al., Phys. Rev. Lett. 93, 197403 (2004), doi:10.1103/PhysRevLett.93.197403"
+  ],
+  "gaps": [
+    "Fluence threshold scatters between groups and film thicknesses."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

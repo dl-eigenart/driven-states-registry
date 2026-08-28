@@ -1,0 +1,360 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eigenart-filmproduktion.de/schema/dsr-registry-0.1.json",
+  "title": "Driven States Registry - registry-only entry",
+  "description": "Lightweight entry type for host materials with documented driven states but no full coupling graph. Deliberately separate from the RPT full entry: inventing a graph just to satisfy the schema would be data fabrication.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "entry_type",
+    "id",
+    "name",
+    "formula",
+    "class",
+    "equilibrium_context",
+    "driven_states",
+    "sources",
+    "verification_status",
+    "provenance"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "entry_type": {
+      "const": "registry"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "formula": {
+      "type": "string"
+    },
+    "class": {
+      "enum": [
+        "element",
+        "compound",
+        "alloy",
+        "allotrope_family",
+        "heterostructure",
+        "organic"
+      ]
+    },
+    "equilibrium_context": {
+      "type": "string",
+      "description": "What the material does without a drive."
+    },
+    "summary": {
+      "type": "string"
+    },
+    "driven_states": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "emergent_property",
+          "stability",
+          "drive",
+          "lifetime_s",
+          "evidence_level",
+          "source",
+          "caveat"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "emergent_property": {
+            "type": "string"
+          },
+          "stability": {
+            "enum": [
+              "driven",
+              "metastable",
+              "driven_to_metastable"
+            ],
+            "description": "driven = exists only while the drive runs; metastable = survives the pulse by orders of magnitude."
+          },
+          "host_state": {
+            "type": "string"
+          },
+          "drive": {
+            "type": "object",
+            "required": [
+              "type"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "enum": [
+                  "optical_pulse",
+                  "cw_optical",
+                  "thz",
+                  "microwave",
+                  "ac_field",
+                  "electric_field",
+                  "current",
+                  "acoustic"
+                ]
+              },
+              "photon_energy_eV": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "wavelength_um": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "frequency_Hz": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "fluence_mJ_per_cm2": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "fluence_range_mJ_per_cm2": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "field_V_per_m": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "pulse_duration_s": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "polarization": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "driven_mode": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "field_MV_per_cm": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "frequency_THz": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            }
+          },
+          "lifetime_s": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "Lifetime in seconds. For very long-lived states, state the condition in the caveat."
+          },
+          "lifetime_range_s": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "switching_time_s": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "How fast the transition sets in, if reported."
+          },
+          "threshold": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "quantity": {
+                "type": "string"
+              },
+              "value": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "range": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "unit": {
+                "type": "string"
+              },
+              "verified": {
+                "type": "boolean"
+              }
+            }
+          },
+          "temperature_window_K": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "quenchable_by": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "How the state is reset: heating, second pulse, current."
+          },
+          "mechanism": {
+            "description": "The central dispute of the field: electronic, thermal, lattice- or strain-driven, or unresolved.",
+            "enum": [
+              "electronic",
+              "thermal",
+              "lattice_strain",
+              "field_tunneling",
+              "mixed",
+              "unresolved"
+            ]
+          },
+          "evidence_level": {
+            "enum": [
+              "established",
+              "reproduced",
+              "single_group",
+              "contested"
+            ]
+          },
+          "source": {
+            "type": "string"
+          },
+          "further_sources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "caveat": {
+            "type": "string",
+            "description": "Honest limitations: what is not shown, what is contested, which counter-position exists. The scientific value of the register sits here."
+          },
+          "equivalent_equilibrium_state": {
+            "enum": [
+              "no",
+              "yes",
+              "partial"
+            ],
+            "description": "Does the produced state exist in the equilibrium phase diagram? 'yes' marks switching between equilibrium states - these are borderline cases and must stay visible so that the category 'driven' is not diluted."
+          },
+          "measured_quantity": {
+            "type": "string",
+            "description": "What was actually measured. Decisive, because many assignments are inferred rather than measured."
+          }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Honest gaps at material level."
+    },
+    "verification_status": {
+      "enum": [
+        "verified",
+        "pending",
+        "unverified"
+      ]
+    },
+    "provenance": {
+      "type": "object",
+      "description": "How this entry came about. Mandatory, because a register whose provenance is unclear cannot be judged. AI-assisted compilation with complete source attribution is defensible; concealed compilation is not.",
+      "required": [
+        "compiled",
+        "compiled_on",
+        "source_check",
+        "peer_reviewed"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "compiled": {
+          "enum": [
+            "ai_assisted",
+            "manual",
+            "mixed"
+          ],
+          "description": "ai_assisted: literature search and field extraction performed by an AI agent under human direction."
+        },
+        "compiled_on": {
+          "type": "string",
+          "description": "ISO date"
+        },
+        "source_check": {
+          "enum": [
+            "primary_literature",
+            "secondary",
+            "none"
+          ],
+          "description": "primary_literature: every number and citation checked against the cited work, DOI verified."
+        },
+        "peer_reviewed": {
+          "type": "boolean",
+          "description": "Reviewed by a domain expert who is not the compiler. False for every entry at the time of first publication."
+        },
+        "reviewer": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Name and affiliation of the reviewer, once one exists."
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "lbco125",
+  "name": "Lanthanum barium cuprate, x = 0.125",
+  "formula": "La1.875Ba0.125CuO4",
+  "class": "compound",
+  "equilibrium_context": "Tc about 4 K, superconductivity almost extinguished at the point of the 1/8 anomaly; charge and spin stripe order",
+  "summary": "Negative result. It is in the registry because a registry without non-detections cannot represent the state of the controversy.",
+  "driven_states": [
+    {
+      "id": "ds_nir_no_superconductor",
+      "emergent_property": "Near-infrared excitation melts the competing stripe orders and does produce a pump-induced reflection edge along c, but at the same time the in-plane reflectivity decreases, which points to increased quasiparticle scattering rather than to condensate formation. The in-plane response is qualitatively different from a superconducting condensation.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "wavelength_um": 0.8,
+        "pulse_duration_s": 1e-13
+      },
+      "lifetime_s": 1e-11,
+      "evidence_level": "contested",
+      "source": "Zhang et al., Phys. Rev. X 14, 011036 (2024), doi:10.1103/PhysRevX.14.011036",
+      "caveat": "A non-detection under the chosen conditions, not proof of absence. The authors argue that pump photon energies far above the superconducting gap cannot in principle produce three-dimensional superconductivity - this does not rule out the mid-IR phonon-resonant route of Fausti 2011. Conversely, a Comment by the Cavalleri group disputes the data analyzis. Composition and pump conditions differ from LBCO x = 0.115.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "thermal",
+      "host_state": "stripe-ordered",
+      "temperature_window_K": [
+        5,
+        40
+      ],
+      "further_sources": [
+        "arXiv:2306.14438 (Comment by the Cavalleri group)",
+        "Nicoletti et al., Phys. Rev. B 90, 100503 (2014)"
+      ],
+      "measured_quantity": "reflectivity in the plane and along c"
+    }
+  ],
+  "sources": [
+    "Zhang et al., Phys. Rev. X 14, 011036 (2024), doi:10.1103/PhysRevX.14.011036"
+  ],
+  "gaps": [
+    "Fluence and lifetime not individually verified."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

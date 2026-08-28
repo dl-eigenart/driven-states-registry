@@ -1,0 +1,62 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "ti3o5",
+  "name": "Titanium oxide, lambda phase",
+  "formula": "Ti3O5",
+  "class": "compound",
+  "equilibrium_context": "beta-Ti3O5 (semiconductor) and lambda-Ti3O5 (metallic); in the bulk a semiconductor-metal transition at about 460 K, in nanocrystals lambda is frozen in at room temperature",
+  "summary": "The most extreme case of metastability in the register: bidirectionally photoswitchable at room temperature, both phases stable essentially indefinitely. The mechanism is uncontroversially NOT purely electronic - precisely the counterpart to VO2.",
+  "driven_states": [
+    {
+      "id": "ds_lambda_photoreversible",
+      "emergent_property": "A single laser pulse switches beta to lambda (semiconductor to metal) and back, at room temperature, bidirectionally and repeatably. Both phases are persistent. First photorewritable metal oxide state at room temperature.",
+      "stability": "metastable",
+      "host_state": "beta-Ti3O5, semiconducting",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.17,
+        "wavelength_um": 1.064,
+        "fluence_mJ_per_cm2": 10.0,
+        "pulse_duration_s": 1e-08
+      },
+      "lifetime_s": 10000000.0,
+      "switching_time_s": 8e-11,
+      "threshold": {
+        "quantity": "fluence",
+        "value": 10.0,
+        "unit": "mJ/cm^2",
+        "verified": true
+      },
+      "temperature_window_K": [
+        290,
+        300
+      ],
+      "quenchable_by": "second laser pulse of a different wavelength",
+      "mechanism": "lattice_strain",
+      "evidence_level": "established",
+      "source": "Ohkoshi et al., Nature Chemistry 2, 539 (2010), doi:10.1038/nchem.670",
+      "further_sources": [
+        "Mariette et al., Nat. Commun. 12 (2021), doi:10.1038/s41467-021-21316-y (strain wave pathway, time-resolved X-ray powder diffraction)",
+        "Commun. Mater. (2025), doi:10.1038/s43246-025-00896-y (anisotropic phase separation, fluence thresholds)"
+      ],
+      "caveat": "To be honest: the case is largely thermally or strain-driven, not electronic. The 2025 work shows that after 100 ps the transformation is carried by heat diffusion, with crystallite-size-dependent time constants of 40 to 180 ns. The value lies not in the mechanism but in the robust bistability: here metastability is uncontroversial. Damage threshold about 80 mJ/cm^2."
+    }
+  ],
+  "sources": [
+    "Ohkoshi et al., Nature Chemistry 2, 539 (2010), doi:10.1038/nchem.670",
+    "Mariette et al., Nat. Commun. 12 (2021), doi:10.1038/s41467-021-21316-y"
+  ],
+  "gaps": [
+    "The lifetime is given as a lower bound; it is limited by thermal activation over a real energy barrier, and has not been measured."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

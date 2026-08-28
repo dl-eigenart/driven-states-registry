@@ -1,0 +1,49 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "pending",
+  "id": "sns",
+  "name": "Tin sulfide",
+  "formula": "SnS",
+  "class": "compound",
+  "equilibrium_context": "Multivalley semiconductor of low crystal symmetry, orthorhombic, structurally related to black phosphorus",
+  "driven_states": [
+    {
+      "id": "ds_symmetry_controlled_floquet_parity",
+      "emergent_property": "Complete control over the parity of the Floquet-Bloch states solely through the relative orientation of drive polarization and crystal axes; selective parity inversion with respect to the equilibrium bands, and from this polarization- and valley-selective band renormalization.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "polarization": "linear, angle relative to the crystal axes tuned"
+      },
+      "lifetime_s": null,
+      "evidence_level": "single_group",
+      "source": "Fragkos et al., arXiv:2603.11878 (2026), doi:10.48550/arXiv.2603.11878",
+      "caveat": "Preprint, not peer-reviewed - the weakest source basis in the entire registry. The numerical drive parameters could not be verified from the full text and are therefore left open rather than estimated. One group, the same setup as for the WSe2 valleytronics entry. The finding rests substantially on TDDFT calculations. Remains marked as provisional until a journal version is available.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "electronic",
+      "threshold": {
+        "quantity": "none - Floquet dressing has no threshold",
+        "value": null,
+        "unit": "-",
+        "verified": true
+      },
+      "measured_quantity": "non-equilibrium linear dichroism in XUV photoemission"
+    }
+  ],
+  "sources": [
+    "Fragkos et al., arXiv:2603.11878 (2026), doi:10.48550/arXiv.2603.11878"
+  ],
+  "gaps": [
+    "Preprint without peer review. Drive parameters, lifetime and temperature window not verifiable.",
+    "verification_status remains pending until a journal version is available."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

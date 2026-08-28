@@ -1,0 +1,57 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "mote2",
+  "name": "Molybdenum ditelluride, Td phase",
+  "formula": "MoTe2",
+  "class": "compound",
+  "equilibrium_context": "Type-II Weyl semimetal below about 250 K, non-centrosymmetric",
+  "summary": "Contrasting case to WTe2: the same transition, but thermally rather than field-driven.",
+  "driven_states": [
+    {
+      "id": "ds_photoinduced_td_to_1tprime_transition",
+      "emergent_property": "Transition from the topologically non-trivial Td phase into the centrosymmetric, trivial 1T' phase within less than one picosecond; the signature is a dramatic change of the shear mode at 0.42 THz and the loss of second-harmonic intensity.",
+      "stability": "metastable",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "wavelength_um": 0.8,
+        "fluence_mJ_per_cm2": 2.0,
+        "pulse_duration_s": 1e-13,
+        "polarization": "linear"
+      },
+      "lifetime_s": 1e-12,
+      "evidence_level": "single_group",
+      "source": "Zhang, Wang, Li, Shi et al., Phys. Rev. X 9, 021036 (2019), doi:10.1103/PhysRevX.9.021036",
+      "caveat": "Here the alternative explanation is not merely conceivable, it is stated in the work itself: the fluence-dependent time-resolved second harmonic approximately coincides with the purely lattice-thermal curve, which the authors record as agreement with a lattice-thermal effect. It is therefore listed as thermal; within the registry the entry serves above all as a contrasting case to the field-driven, non-thermal WTe2 switch. Topology again inferred only via symmetry.",
+      "equivalent_equilibrium_state": "partial",
+      "mechanism": "thermal",
+      "threshold": {
+        "quantity": "fluence range; shear mode amplitude maximal at 1.5, mode disappears at 5",
+        "value": 1.5,
+        "unit": "mJ/cm^2",
+        "verified": true
+      },
+      "temperature_window_K": [
+        4,
+        250
+      ],
+      "measured_quantity": "time-resolved second harmonic, coherent phonon spectra"
+    }
+  ],
+  "sources": [
+    "Zhang et al., Phys. Rev. X 9, 021036 (2019), doi:10.1103/PhysRevX.9.021036"
+  ],
+  "gaps": [
+    "Thermal origin recorded by the authors themselves."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

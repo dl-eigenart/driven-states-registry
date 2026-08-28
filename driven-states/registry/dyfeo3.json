@@ -1,0 +1,57 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "dyfeo3",
+  "name": "Dysprosium orthoferrite",
+  "formula": "DyFeO3",
+  "class": "compound",
+  "equilibrium_context": "Antiferromagnet with competing antiferromagnetic and weakly ferromagnetic order, coupled via the Fe-Dy exchange interaction",
+  "driven_states": [
+    {
+      "id": "ds_phonon_driven_exchange_switch",
+      "emergent_property": "Resonant excitation of a lattice mode alters the fundamental exchange interaction between rare-earth orbitals and transition-metal spins. This permits coherent switching between the competing spin orders on a picosecond timescale, with a long-lived change.",
+      "stability": "driven_to_metastable",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 0.07,
+        "wavelength_um": 17.0,
+        "frequency_THz": 17.0,
+        "pulse_duration_s": 1e-13,
+        "polarization": "linear, mode-selective",
+        "driven_mode": "infrared-active phonon mode at 17 THz, modulates the Fe-Dy exchange"
+      },
+      "lifetime_s": 1e-09,
+      "evidence_level": "single_group",
+      "source": "Afanasiev, Hortensius, Ivanov et al., Nature Materials 20, 607 (2021), doi:10.1038/s41563-021-00922-7",
+      "caveat": "The system possesses both orders in the equilibrium phase diagram; the light shifts the balance, and no state forbidden in equilibrium arises. The classification as driven_to_metastable rests on the statement that the change is long-lived, not on a verified lifetime measurement.",
+      "equivalent_equilibrium_state": "partial",
+      "mechanism": "lattice_strain",
+      "threshold": {
+        "quantity": "switching only above a critical excitation amplitude",
+        "value": null,
+        "unit": "MV/cm",
+        "verified": false
+      },
+      "temperature_window_K": [
+        5,
+        50
+      ],
+      "measured_quantity": "magneto-optical detection of the spin order"
+    }
+  ],
+  "sources": [
+    "Afanasiev et al., Nature Materials 20, 607 (2021), doi:10.1038/s41563-021-00922-7"
+  ],
+  "gaps": [
+    "Lifetime not verified."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

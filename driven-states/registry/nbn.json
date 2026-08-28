@@ -1,0 +1,56 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "nbn",
+  "name": "Niobium nitride",
+  "formula": "NbN",
+  "class": "compound",
+  "equilibrium_context": "Tc about 15 K, conventional s-wave superconductor in the dirty limit",
+  "driven_states": [
+    {
+      "id": "ds_thz_gap_enhancement",
+      "emergent_property": "Intense narrow-band picosecond THz pulses just below and above the gap frequency transiently increase the superconducting energy gap. The effect is particularly pronounced near Tc and is attributed to a non-thermal electron distribution that persists for about 100 ps.",
+      "stability": "driven_to_metastable",
+      "drive": {
+        "type": "thz",
+        "photon_energy_eV": 0.003,
+        "wavelength_um": 400.0,
+        "frequency_THz": 0.75,
+        "pulse_duration_s": 1e-11
+      },
+      "lifetime_s": 1e-10,
+      "evidence_level": "single_group",
+      "source": "Beck et al., Phys. Rev. Lett. 110, 267003 (2013), doi:10.1103/PhysRevLett.110.267003",
+      "caveat": "The THz-driven gap enhancement in NbN itself has not been independently reproduced; the underlying Eliashberg mechanism, however, has been in the microwave range. This concerns enhancement of an existing condensate below Tc, not the creation of superconductivity above Tc. No increase of Tc reported, only an increase of the gap.",
+      "equivalent_equilibrium_state": "partial",
+      "mechanism": "electronic",
+      "host_state": "superconducting",
+      "threshold": {
+        "quantity": "frequency threshold relative to the gap frequency: enhancement below, pair breaking above",
+        "value": null,
+        "unit": "THz",
+        "verified": true
+      },
+      "temperature_window_K": [
+        8,
+        15
+      ],
+      "measured_quantity": "superconducting energy gap from the THz conductivity"
+    }
+  ],
+  "sources": [
+    "Beck et al., Phys. Rev. Lett. 110, 267003 (2013), doi:10.1103/PhysRevLett.110.267003"
+  ],
+  "gaps": [
+    "Field strength specified instead of fluence, value not verified."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

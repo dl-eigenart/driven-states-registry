@@ -1,0 +1,65 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "lesco",
+  "name": "Europium-doped lanthanum strontium cuprate",
+  "formula": "La1.675Eu0.2Sr0.125CuO4",
+  "class": "compound",
+  "equilibrium_context": "Not a three-dimensional superconductor in equilibrium: stripe order and the LTT phase suppress Tc to a few kelvin; no Josephson plasmon down to 10 K",
+  "summary": "The original case of light-induced superconductivity in cuprates (Fausti 2011). To date not reproduced by a second group.",
+  "driven_states": [
+    {
+      "id": "ds_midir_josephson_plasmon",
+      "emergent_property": "After resonant excitation of the in-plane Cu-O stretching mode, a Josephson plasma edge appears within one to two picoseconds at about 60 cm^-1 in the c-axis THz reflectivity; the imaginary conductivity adopts a 1/omega divergence, i.e. the signature of coherent interlayer transport.",
+      "stability": "driven_to_metastable",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 0.08,
+        "wavelength_um": 15.0,
+        "fluence_mJ_per_cm2": 1.0,
+        "pulse_duration_s": 1e-13,
+        "polarization": "E parallel to the CuO2 planes"
+      },
+      "lifetime_s": 1e-10,
+      "evidence_level": "single_group",
+      "source": "Fausti et al., Science 331, 189 (2011), doi:10.1126/science.1197294",
+      "caveat": "Optical evidence along c only. No transport, no magnetic-field evidence. The absolute change in reflectance is below one percent; extraction of the conductivity presupposes a homogeneously transformed surface layer above unchanged bulk and is therefore model-dependent. Since 2011 no independent reproduction on LESCO. The saturation critique of Dodge et al. addresses methodologically the same class of reconstruction.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "lattice_strain",
+      "host_state": "stripe-ordered insulator",
+      "threshold": {
+        "quantity": "no sharp threshold fluence; instead a saturation fluence with a maximum of the photosusceptibility at the phonon resonance at 15 micrometers",
+        "value": null,
+        "unit": "mJ/cm^2",
+        "verified": false
+      },
+      "switching_time_s": 2e-12,
+      "temperature_window_K": [
+        10,
+        20
+      ],
+      "further_sources": [
+        "Nicoletti et al., Phys. Rev. B 90, 100503 (2014), doi:10.1103/PhysRevB.90.100503",
+        "Zhang et al., Phys. Rev. X 14, 011036 (2024), doi:10.1103/PhysRevX.14.011036 (null result in LBCO)",
+        "Dodge, Lopez & Sahota, Phys. Rev. Lett. 130, 146002 (2023), doi:10.1103/PhysRevLett.130.146002 (methodological critique)"
+      ],
+      "measured_quantity": "c-axis THz reflectivity, and the optical conductivity reconstructed from it"
+    }
+  ],
+  "sources": [
+    "Fausti et al., Science 331, 189 (2011), doi:10.1126/science.1197294"
+  ],
+  "gaps": [
+    "Pulse duration estimated, not specified in the paper.",
+    "No independent reproduction since 2011."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

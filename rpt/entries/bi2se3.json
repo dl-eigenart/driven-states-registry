@@ -1,0 +1,299 @@
+{
+  "schema_version": "0.1",
+  "id": "bi2se3",
+  "name": "Bismuth selenide",
+  "formula": "Bi2Se3",
+  "class": "compound",
+  "summary": "Topological insulator and the cleanest evidence for the nonequilibrium extension: under mid-infrared drive, Floquet-Bloch states appear, that is, bands that do not exist in equilibrium. No order parameter is switched; instead the band structure itself is re-formed by the light field.",
+  "degrees_of_freedom": [
+    {
+      "id": "surface_state",
+      "kind": "topological",
+      "domain": {
+        "type": "discrete",
+        "values": [
+          "dirac_gapless",
+          "floquet_gapped"
+        ]
+      },
+      "description": "Surface state with spin-momentum locking"
+    },
+    {
+      "id": "dirac_gap",
+      "kind": "electronic",
+      "domain": {
+        "type": "continuous",
+        "min": 0,
+        "max": 0.1,
+        "unit": "eV"
+      },
+      "description": "Gap opened at the Dirac point, only under drive"
+    },
+    {
+      "id": "bulk_carrier_density",
+      "kind": "electronic",
+      "domain": {
+        "type": "continuous",
+        "min": 1e+22,
+        "max": 1e+26,
+        "unit": "m^-3"
+      },
+      "description": "Selenium vacancies dope the bulk undesirably n-type"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "mid_ir_drive",
+      "kind": "optical",
+      "range": {
+        "min": 0,
+        "max": 5,
+        "unit": "mJ/cm^2"
+      },
+      "latency_s": 1e-13,
+      "energy_cost": {
+        "model": "per_cycle",
+        "value": null,
+        "unit": "J"
+      },
+      "reversible": true,
+      "notes": "Photon energy 0.12 eV at 10 micrometers (Wang 2013); control measurements at 7.5 and 8 micrometers"
+    },
+    {
+      "id": "temperature",
+      "kind": "thermal",
+      "range": {
+        "min": 4,
+        "max": 300,
+        "unit": "K"
+      },
+      "latency_s": 1.0,
+      "energy_cost": {
+        "model": "continuous_power",
+        "value": null,
+        "unit": "W"
+      },
+      "reversible": true
+    },
+    {
+      "id": "gate_voltage",
+      "kind": "gate_voltage",
+      "range": {
+        "min": -50,
+        "max": 50,
+        "unit": "V"
+      },
+      "latency_s": 1e-11,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "reversible": true
+    }
+  ],
+  "outputs": [
+    {
+      "id": "arpes_band_structure",
+      "quantity": "Band structure of the surface",
+      "unit": "eV",
+      "readout": "spectroscopy",
+      "readout_latency_s": 1e-13,
+      "nondestructive": true
+    },
+    {
+      "id": "surface_conductivity",
+      "quantity": "Conductivity of the surface channel",
+      "unit": "S",
+      "readout": "transport",
+      "readout_latency_s": 1e-06,
+      "nondestructive": true
+    }
+  ],
+  "couplings": [
+    {
+      "id": "c_drive_floquet",
+      "from": "mid_ir_drive",
+      "to": "surface_state",
+      "relation": {
+        "type": "threshold",
+        "threshold": 1e-06,
+        "low": "dirac_gapless",
+        "high": "floquet_gapped"
+      },
+      "latency_s": 1e-13,
+      "energy_cost": {
+        "model": "per_cycle",
+        "value": null,
+        "unit": "J"
+      },
+      "confidence": "high",
+      "source": "Wang, Steinberg, Jarillo-Herrero & Gedik, Science 342, 453 (2013)",
+      "notes": "Floquet dressing has no physical threshold - the state exists as soon as the drive is running. The threshold of 1e-06 is purely a case distinction between drive on and drive off. In v0.1 this was incorrectly given as 0.5 mJ/cm^2, as if it were a real threshold."
+    },
+    {
+      "id": "c_drive_gap",
+      "from": "mid_ir_drive",
+      "to": "dirac_gap",
+      "relation": {
+        "type": "power",
+        "exponent": 1.0,
+        "scale": 0.13
+      },
+      "latency_s": 1e-13,
+      "energy_cost": {
+        "model": "per_cycle",
+        "value": null,
+        "unit": "J"
+      },
+      "validity": {
+        "condition": "2*kappa = sqrt(4V^2+(hbar*omega)^2) - hbar*omega, approximately 2V^2/(hbar*omega), hence proportional to E^2 and thus to the fluence; calibrated to 53 meV at 0.4 mJ/cm^2"
+      },
+      "confidence": "medium",
+      "source": "Wang, Steinberg, Jarillo-Herrero & Gedik, Science 342, 453 (2013), Eq. S1/S2, doi:10.1126/science.1239834",
+      "notes": "Exponent corrected from 0.5 to 1.0 relative to v0.1. The exponent 0.5 applies to the dynamical gap 2*Delta = 62 meV at the avoided crossing, not to the Dirac gap."
+    },
+    {
+      "id": "c_gap_arpes",
+      "from": "dirac_gap",
+      "to": "arpes_band_structure",
+      "relation": {
+        "type": "linear",
+        "gain": 1.0
+      },
+      "latency_s": 1e-13,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "confidence": "high",
+      "source": "Directly measured quantity in time-resolved ARPES"
+    },
+    {
+      "id": "c_gate_bulk",
+      "from": "gate_voltage",
+      "to": "bulk_carrier_density",
+      "relation": {
+        "type": "linear",
+        "gain": 2e+22
+      },
+      "latency_s": 1e-11,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "confidence": "low",
+      "source": "Device-dependent; in thick crystals the bulk can hardly be gated throughout"
+    },
+    {
+      "id": "c_bulk_sigma",
+      "from": "bulk_carrier_density",
+      "to": "surface_conductivity",
+      "relation": {
+        "type": "qualitative",
+        "direction": "decreases"
+      },
+      "latency_s": 1e-06,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "confidence": "high",
+      "source": "Bulk conduction short-circuits the surface channel; the central practical problem of this material"
+    }
+  ],
+  "states": [
+    {
+      "id": "ti_equilibrium",
+      "label": "topological insulator, gapless Dirac cone",
+      "stability": "equilibrium",
+      "lifetime_s": null,
+      "properties": {
+        "bulk_gap_eV": 0.3
+      }
+    },
+    {
+      "id": "floquet_state",
+      "label": "Floquet-Bloch state with opened Dirac gap",
+      "stability": "driven",
+      "lifetime_s": 2.5e-13,
+      "source": "Wang et al., Science 342, 453 (2013)"
+    }
+  ],
+  "driven_states": [
+    {
+      "id": "ds_floquet",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 0.12,
+        "fluence_mJ_per_cm2": 0.4,
+        "pulse_duration_s": 2.5e-13,
+        "polarization": "circular"
+      },
+      "emergent_property": "Floquet-Bloch sidebands. The Dirac gap of 53 +/- 4 meV at the Dirac point occurs ONLY under circular polarization (broken time reversal); the dynamical gap of 62 +/- 5 meV at the avoided crossing n = 0 / n = +/-1 occurs under LINEAR polarization. The two gaps belong to different polarizations and are not interchangeable.",
+      "host_state": "ti_equilibrium",
+      "lifetime_s": 2.5e-13,
+      "evidence_level": "single_group",
+      "source": "Wang, Steinberg, Jarillo-Herrero & Gedik, Science 342, 453 (2013)",
+      "notes": "Downgraded from established to single_group. The phenomenon is independently established - WSe2 (Aeschlimann et al. 2021, with an s-polarized test against Volkov contributions), topological insulator surfaces (Ito et al. 2023), graphene (two independent groups 2025), MnBi2Te4 (2024). On Bi2Se3 itself, however, all measurements come from the Gedik group (Wang 2013; Mahmood 2016). The entry describes a material, not the phenomenon - hence single_group. Polarization assignment made more precise after checking the sources: circular for 2*kappa, linear for 2*Delta.",
+      "stability": "driven",
+      "mechanism": "electronic",
+      "equivalent_equilibrium_state": "no",
+      "measured_quantity": "angle-resolved photoemission, Dirac gap and dynamical gap",
+      "temperature_window_K": [
+        10,
+        300
+      ]
+    },
+    {
+      "id": "ds_pure_floquet_bloch_s_pol",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 0.16,
+        "pulse_duration_s": 2.5e-13,
+        "polarization": "linear s"
+      },
+      "emergent_property": "Volkov-free Floquet-Bloch state: sidebands n = 0 and +/-1, hybridization gap at the avoided crossing of 68 meV at 11.5 mW pump power (Floquet parameter 0.42). The gap opens only perpendicular to the field direction.",
+      "host_state": "ti_equilibrium",
+      "lifetime_s": 2.5e-13,
+      "evidence_level": "single_group",
+      "source": "Mahmood et al., Nature Physics 12, 306 (2016), doi:10.1038/nphys3609",
+      "notes": "The methodological reference work on separating out Volkov contributions. Under s-polarized excitation the field lies purely in the plane, the first-order Volkov contribution vanishes exactly; what remains is Floquet. In addition, the avoided crossings are independent of Volkov effects, because Volkov states do not renormalize the band structure of the solid. Limitation: one group, one setup; 68 meV is close to the energy resolution; the temperature is not stated in the main text or the methods.",
+      "stability": "driven",
+      "mechanism": "electronic",
+      "equivalent_equilibrium_state": "no",
+      "measured_quantity": "angle-resolved photoemission, hybridization gap",
+      "temperature_window_K": [
+        10,
+        300
+      ]
+    }
+  ],
+  "gaps": [
+    "Lifetime equals the pulse duration (250 fs). A continuous-wave drive would heat the material; separating drive from heating is unresolved.",
+    "Bulk conduction through selenium vacancies masks the surface channel in transport. The interesting physics is accessible spectroscopically, but hardly electrically.",
+    "For Bi2Se3 itself there is no independent reproduction. All measurements come from the same group. The phenomenon is independently confirmed in other materials.",
+    "The edge c_gate_bulk is device-dependent and practically ineffective in thick crystals."
+  ],
+  "sources": [
+    "Wang, Steinberg, Jarillo-Herrero & Gedik, Science 342, 453 (2013), doi:10.1126/science.1239834",
+    "Mahmood et al., Nature Physics 12, 306 (2016), doi:10.1038/nphys3609 (same group)",
+    "Aeschlimann et al., Nano Lett. 21, 5028 (2021), doi:10.1021/acs.nanolett.1c00801 (independent, WSe2)",
+    "Ito et al., Nature 616, 696 (2023), doi:10.1038/s41586-023-05850-x",
+    "Zhang et al., Nature Physics 5, 438 (2009), doi:10.1038/nphys1270",
+    "Xia et al., Nature Physics 5, 398 (2009), doi:10.1038/nphys1274",
+    "Mahmood et al., Nature Physics 12, 306 (2016), doi:10.1038/nphys3609"
+  ],
+  "verification_status": "verified",
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

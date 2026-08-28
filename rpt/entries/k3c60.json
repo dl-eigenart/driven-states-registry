@@ -1,0 +1,296 @@
+{
+  "schema_version": "0.1",
+  "id": "k3c60",
+  "name": "Potassium-doped fullerene",
+  "formula": "K3C60",
+  "class": "compound",
+  "summary": "Carrier of the nonequilibrium extension. In equilibrium a superconductor with Tc = 20 K. Under mid-infrared drive the material shows superconductivity-like optical signatures far above Tc, which exist only during and shortly after the drive. A state that an equilibrium data set cannot in principle carry.",
+  "degrees_of_freedom": [
+    {
+      "id": "sc_order",
+      "kind": "electronic",
+      "domain": {
+        "type": "discrete",
+        "values": [
+          "normal",
+          "superconducting",
+          "driven_sc_like"
+        ]
+      }
+    },
+    {
+      "id": "phonon_amplitude",
+      "kind": "vibrational",
+      "domain": {
+        "type": "continuous",
+        "min": 0,
+        "max": 0.1,
+        "unit": "1"
+      },
+      "description": "Displacement of the resonantly driven intramolecular T1u mode"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "temperature",
+      "kind": "thermal",
+      "range": {
+        "min": 4,
+        "max": 300,
+        "unit": "K"
+      },
+      "latency_s": 1.0,
+      "energy_cost": {
+        "model": "continuous_power",
+        "value": null,
+        "unit": "W"
+      },
+      "reversible": true
+    },
+    {
+      "id": "mid_ir_drive",
+      "kind": "optical",
+      "range": {
+        "min": 0,
+        "max": 30,
+        "unit": "mJ/cm^2"
+      },
+      "latency_s": 1e-13,
+      "energy_cost": {
+        "model": "per_cycle",
+        "value": null,
+        "unit": "J"
+      },
+      "reversible": true,
+      "notes": "Resonant drive: Mitrano 2016 at 7.3 micrometers (0.17 eV), Budden 2021 at 10.6 micrometers (0.117 eV) and 30 mJ/cm^2"
+    }
+  ],
+  "outputs": [
+    {
+      "id": "optical_conductivity_gap",
+      "quantity": "Gap in the optical conductivity",
+      "unit": "meV",
+      "readout": "optical",
+      "readout_latency_s": 1e-13,
+      "nondestructive": true
+    },
+    {
+      "id": "resistivity",
+      "quantity": "resistivity",
+      "unit": "Ohm*m",
+      "readout": "transport",
+      "readout_latency_s": 1e-09,
+      "nondestructive": true
+    }
+  ],
+  "couplings": [
+    {
+      "id": "c_temp_sc",
+      "from": "temperature",
+      "to": "sc_order",
+      "relation": {
+        "type": "threshold",
+        "threshold": 20,
+        "low": "superconducting",
+        "high": "normal"
+      },
+      "latency_s": 1.0,
+      "energy_cost": {
+        "model": "continuous_power",
+        "value": null,
+        "unit": "W"
+      },
+      "confidence": "high",
+      "source": "Equilibrium Tc = 20 K"
+    },
+    {
+      "id": "c_drive_phonon",
+      "from": "mid_ir_drive",
+      "to": "phonon_amplitude",
+      "relation": {
+        "type": "linear",
+        "gain": 0.01
+      },
+      "latency_s": 1e-13,
+      "energy_cost": {
+        "model": "per_cycle",
+        "value": null,
+        "unit": "J"
+      },
+      "confidence": "medium",
+      "source": "Resonant excitation of the T1u mode",
+      "notes": "Order of magnitude; the amplitude is not measured directly but modelled."
+    },
+    {
+      "id": "c_phonon_sc",
+      "from": "phonon_amplitude",
+      "to": "sc_order",
+      "relation": {
+        "type": "threshold",
+        "threshold": 0.008,
+        "low": "normal",
+        "high": "driven_sc_like"
+      },
+      "latency_s": 1e-13,
+      "energy_cost": {
+        "model": "per_cycle",
+        "value": null,
+        "unit": "J"
+      },
+      "validity": {
+        "condition": "above the equilibrium Tc; a superconductivity-like fit succeeds up to 200 K, at 300 K only Drude",
+        "temperature_K": [
+          20,
+          200
+        ]
+      },
+      "confidence": "low",
+      "source": "Mitrano et al., Nature 530, 461 (2016)",
+      "notes": "Deliberately low. The optical signature has been reproduced, but its interpretation as superconductivity is disputed in the field. The threshold corresponds to a fluence of 0.8 mJ/cm^2."
+    },
+    {
+      "id": "c_sc_gap",
+      "from": "sc_order",
+      "to": "optical_conductivity_gap",
+      "relation": {
+        "type": "lookup",
+        "table": [
+          [
+            "normal",
+            0.0
+          ],
+          [
+            "superconducting",
+            6.0
+          ],
+          [
+            "driven_sc_like",
+            11.0
+          ]
+        ]
+      },
+      "latency_s": 1e-13,
+      "energy_cost": {
+        "model": "negligible",
+        "value": null,
+        "unit": "J"
+      },
+      "confidence": "medium",
+      "source": "Mitrano et al. (2016)",
+      "notes": "Values corrected and un-inverted relative to v0.1: at 11 meV the photoinduced gap is almost twice as large as the equilibrium gap of 6 meV."
+    }
+  ],
+  "states": [
+    {
+      "id": "normal",
+      "label": "normal conducting above 20 K",
+      "stability": "equilibrium",
+      "lifetime_s": null
+    },
+    {
+      "id": "sc_equilibrium",
+      "label": "superconducting below 20 K",
+      "stability": "equilibrium",
+      "lifetime_s": null,
+      "properties": {
+        "tc_K": 20
+      }
+    },
+    {
+      "id": "sc_driven",
+      "label": "driven superconductivity-like state",
+      "stability": "driven",
+      "lifetime_s": 3e-12,
+      "source": "Mitrano et al., Nature 530, 461 (2016)"
+    },
+    {
+      "id": "sc_metastable",
+      "label": "metastable photoinduced state under 10.6 micrometer drive, decay about 12 ns",
+      "stability": "metastable",
+      "lifetime_s": 1.2e-08,
+      "source": "Budden et al., Nature Physics 17, 611 (2021)"
+    }
+  ],
+  "driven_states": [
+    {
+      "id": "ds_light_sc",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 0.17,
+        "fluence_mJ_per_cm2": 1.0,
+        "pulse_duration_s": 1e-13,
+        "polarization": "unpolarized"
+      },
+      "emergent_property": "superconductivity-like optical conductivity above the equilibrium Tc",
+      "host_state": "normal",
+      "lifetime_s": 3e-12,
+      "threshold": {
+        "quantity": "fluence",
+        "value": 0.8,
+        "unit": "mJ/cm^2"
+      },
+      "evidence_level": "contested",
+      "source": "Mitrano et al., Nature 530, 461 (2016); Budden et al., Nature Physics 17, 611 (2021)",
+      "notes": "The most important entry for the nonequilibrium extension and at the same time the most uncertain. The measurement has been reproduced, the interpretation as genuine superconductivity is not generally accepted. Budden 2021 shows a direct transport result with vanishingly small resistance; the Meissner test, however, came out negative (only an upper bound chi_v > -0.1). Dodge et al. show that optical saturation can produce the same signature. evidence_level=contested is the honest classification here.",
+      "stability": "driven",
+      "mechanism": "unresolved",
+      "equivalent_equilibrium_state": "no",
+      "measured_quantity": "optical conductivity, gap structure",
+      "temperature_window_K": [
+        20,
+        200
+      ]
+    },
+    {
+      "id": "ds_10thz_resonance",
+      "drive": {
+        "type": "thz",
+        "photon_energy_eV": 0.041,
+        "fluence_mJ_per_cm2": 0.4,
+        "pulse_duration_s": 1e-12
+      },
+      "emergent_property": "Tunable excitation between 1 and 45 THz reveals a dominant energy scale: near 10 THz the photosusceptibility rises by two orders of magnitude. At these frequencies the metastable superconductivity-like phase is observed up to room temperature, from about 0.4 mJ/cm^2 onwards.",
+      "host_state": "normal",
+      "lifetime_s": 1e-11,
+      "threshold": {
+        "quantity": "fluence at 10 THz",
+        "value": 0.4,
+        "unit": "mJ/cm^2"
+      },
+      "evidence_level": "contested",
+      "source": "Rowe et al., Nature Physics 19, 1821 (2023), doi:10.1038/s41567-023-02235-9",
+      "notes": "Supplements the base entry with the drive-frequency resonance and the room-temperature statement. The rating remains contested: the negative Meissner test (Phys. Rev. Research 7, 043270 (2025)) and the saturation criticism by Dodge et al. concern the same material class and reconstruction methodology. The transport result of Wang et al., Nat. Commun. 14, 7233 (2023) points to granular rather than homogeneous superconductivity.",
+      "stability": "driven_to_metastable",
+      "mechanism": "unresolved",
+      "equivalent_equilibrium_state": "no",
+      "measured_quantity": "optical conductivity, photosusceptibility versus drive frequency",
+      "temperature_window_K": [
+        20,
+        300
+      ]
+    }
+  ],
+  "gaps": [
+    "No Meissner evidence. The test on K3C60 yielded only an upper bound (chi_v > -0.1). A transport result, by contrast, does exist (Budden 2021) - the phrase 'no transport evidence' from v0.1 was wrong.",
+    "The counterposition of Dodge, Lopez and Sahota - optical saturation distorts the photoconductivity depth profile and produces the signature - has not been resolved.",
+    "Lifetimes in the picosecond range rule out any technical use today. The entry is relevant as a state class, not as an application.",
+    "The edge c_drive_phonon is modelled, not measured."
+  ],
+  "sources": [
+    "Mitrano et al., Nature 530, 461 (2016), doi:10.1038/nature16522",
+    "Budden et al., Nature Physics 17, 611 (2021), doi:10.1038/s41567-020-01148-1",
+    "Dodge, Lopez & Sahota, arXiv:2210.01114 (counterposition: optical saturation)",
+    "Meissner test with a negative outcome: Phys. Rev. Research 7, 043270 (2025)",
+    "Rowe et al., Nature Physics 19, 1821 (2023), doi:10.1038/s41567-023-02235-9",
+    "Wang et al., Nat. Commun. 14, 7233 (2023), doi:10.1038/s41467-023-42989-7"
+  ],
+  "verification_status": "verified",
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

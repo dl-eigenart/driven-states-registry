@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "gdte3",
+  "name": "Gadolinium tritelluride",
+  "formula": "GdTe3",
+  "class": "compound",
+  "equilibrium_context": "Unidirectional charge density wave with coupled periodic lattice distortion, transition temperature about 380 K",
+  "driven_states": [
+    {
+      "id": "ds_metastable_cdw_without_pld",
+      "emergent_property": "Long-lived metastable CDW state WITHOUT lattice distortion at photoinduced interfaces. This state has no amplitude mode - a purely electronic CDW correlation that quantifies the electronic part of the CDW instability.",
+      "stability": "metastable",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "wavelength_um": 0.8,
+        "pulse_duration_s": 3e-14
+      },
+      "lifetime_s": 1e-11,
+      "evidence_level": "single_group",
+      "source": "Duan et al., npj Quantum Materials 10 (2025), doi:10.1038/s41535-025-00742-x",
+      "caveat": "The state is spatially confined to photoinduced interfaces, not to the bulk. The interpretation as an interface with inverted lattice distortion rests on the absence of the amplitude mode and on band-structure signatures, not on a direct structural measurement.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "electronic",
+      "switching_time_s": 1e-12,
+      "temperature_window_K": [
+        20,
+        300
+      ],
+      "measured_quantity": "time-resolved photoemission, absence of the amplitude mode",
+      "quenchable_by": "self-relaxation"
+    }
+  ],
+  "sources": [
+    "Duan et al., npj Quantum Materials 10 (2025), doi:10.1038/s41535-025-00742-x"
+  ],
+  "gaps": [
+    "Fluence not verified."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

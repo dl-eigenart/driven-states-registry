@@ -1,0 +1,58 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "sr2iro4",
+  "name": "Strontium iridate",
+  "formula": "Sr2IrO4",
+  "class": "compound",
+  "equilibrium_context": "Jeff=1/2 spin-orbit-coupled insulator, antiferromagnetic below about 240 K; structurally and electronically analogous to La2CuO4",
+  "summary": "Included in the register explicitly as a corrective case: the work refutes the widespread classification as a Mott insulator.",
+  "driven_states": [
+    {
+      "id": "ds_light_induced_metal",
+      "emergent_property": "Optical excitation closes the gap; in time-resolved ARPES, weakly renormalized electronic bands appear in the former gap region.",
+      "stability": "driven",
+      "host_state": "spin-orbit-coupled insulator",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "wavelength_um": 0.8,
+        "pulse_duration_s": 1e-13
+      },
+      "lifetime_s": 1e-11,
+      "switching_time_s": 5e-13,
+      "threshold": {
+        "quantity": "fluence",
+        "value": null,
+        "unit": "mJ/cm^2",
+        "verified": false
+      },
+      "temperature_window_K": [
+        80,
+        240
+      ],
+      "mechanism": "electronic",
+      "evidence_level": "single_group",
+      "source": "PNAS 121, e2323013121 (2024), doi:10.1073/pnas.2323013121",
+      "further_sources": [
+        "Dean et al., Nature Materials 15, 601 (2016), doi:10.1038/nmat4641"
+      ],
+      "caveat": "The most important negative finding of the register. Comparing the light-induced gap closing with the expected temperature and doping evolution of Mott gaps yields, according to the authors, clear evidence that the insulating state does NOT originate from Mott correlations. A correlated band insulator is proposed whose gap is sustained by antiferromagnetic correlations. Sr2IrO4 should therefore not be listed as a photoinduced Mott transition."
+    }
+  ],
+  "sources": [
+    "PNAS 121, e2323013121 (2024), doi:10.1073/pnas.2323013121"
+  ],
+  "gaps": [
+    "Photon energy and fluence not verified against the full text."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

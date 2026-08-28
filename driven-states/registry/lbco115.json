@@ -1,0 +1,58 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "lbco115",
+  "name": "Lanthanum barium cuprate, x = 0.115",
+  "formula": "La1.885Ba0.115CuO4",
+  "class": "compound",
+  "equilibrium_context": "Tc = 13 K, three-dimensional superconductivity strongly suppressed by stripe order; spin order at 40 K",
+  "driven_states": [
+    {
+      "id": "ds_nir_interlayer_coupling",
+      "emergent_property": "Near-infrared excitation blue-shifts the Josephson plasma resonance below Tc and creates, above Tc, a plasma edge that is absent in equilibrium, up to the spin-ordering temperature of 40 K. In a field of 7 T the transient interlayer phase coherence length grows by up to a factor of ten.",
+      "stability": "driven_to_metastable",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "wavelength_um": 0.8,
+        "pulse_duration_s": 1e-13,
+        "polarization": "E perpendicular to the CuO2 planes markedly more effective"
+      },
+      "lifetime_s": 1e-11,
+      "evidence_level": "contested",
+      "source": "Nicoletti et al., Phys. Rev. B 90, 100503 (2014), doi:10.1103/PhysRevB.90.100503",
+      "caveat": "Two independent groups (MPSD Hamburg, UCSD/BNL) report positive signatures, which is why reproduced would be defensible. Downgraded to contested because Zhang et al., using near-infrared pumping on the closely related composition x = 0.125, explicitly find no transient three-dimensional superconductivity. Cremin et al. themselves speak only of enhanced superconducting fluctuations. No transport, no Meissner evidence.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "mixed",
+      "host_state": "stripe-ordered, weakly superconducting",
+      "switching_time_s": 1e-12,
+      "temperature_window_K": [
+        5,
+        40
+      ],
+      "further_sources": [
+        "Casandruc et al., Phys. Rev. B 91, 174502 (2015), doi:10.1103/PhysRevB.91.174502",
+        "Nicoletti et al., Phys. Rev. Lett. 121, 267003 (2018), doi:10.1103/PhysRevLett.121.267003",
+        "Cremin et al., PNAS 116, 19875 (2019), doi:10.1073/pnas.1908368116 (independent group)",
+        "Counter-position: Zhang et al., Phys. Rev. X 14, 011036 (2024), doi:10.1103/PhysRevX.14.011036"
+      ],
+      "measured_quantity": "c-axis THz reflection; magnetic field dependence of the coherence length"
+    }
+  ],
+  "sources": [
+    "Nicoletti et al., Phys. Rev. B 90, 100503 (2014), doi:10.1103/PhysRevB.90.100503"
+  ],
+  "gaps": [
+    "Lifetime reported between 1e-11 s (MPSD) and more than 3e-10 s (Cremin), depending on the method.",
+    "Fluence values not verified."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

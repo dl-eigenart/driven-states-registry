@@ -1,0 +1,51 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "bi2212",
+  "name": "Yttrium-substituted bismuth strontium calcium cuprate",
+  "formula": "Bi2Sr2Y0.08Ca0.92Cu2O8",
+  "class": "compound",
+  "equilibrium_context": "Tc about 96 K at optimal doping; underdoped samples with a pseudogap above Tc",
+  "summary": "The most prominent cuprate WITHOUT a robust finding of photoinduced superconductivity, despite intensive study.",
+  "driven_states": [
+    {
+      "id": "ds_photoenhanced_antinodal_conductivity",
+      "emergent_property": "Ultrashort near-infrared excitation in the pseudogap regime produces an anomalous decrease of the charge carrier scattering rate: antinodal excitations evolve from gapped to delocalized quasiparticles, and the optical conductivity increases. NO condensate forms.",
+      "stability": "driven",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "wavelength_um": 0.8,
+        "pulse_duration_s": 1e-13
+      },
+      "lifetime_s": 1e-12,
+      "evidence_level": "single_group",
+      "source": "Cilento et al., Nat. Commun. 5, 4353 (2014), doi:10.1038/ncomms5353",
+      "caveat": "Explicitly NOT evidence of light-induced superconductivity, although it is occasionally miscited as such. Any Josephson plasma edge, any 1/omega divergence and any optical gap are absent. The entry is included in the registry as a corrective.",
+      "equivalent_equilibrium_state": "no",
+      "mechanism": "electronic",
+      "host_state": "pseudogap phase",
+      "switching_time_s": 1e-13,
+      "temperature_window_K": [
+        100,
+        300
+      ],
+      "measured_quantity": "optical conductivity, quasiparticle scattering rate"
+    }
+  ],
+  "sources": [
+    "Cilento et al., Nat. Commun. 5, 4353 (2014), doi:10.1038/ncomms5353"
+  ],
+  "gaps": [
+    "Fluence known only to order of magnitude."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}

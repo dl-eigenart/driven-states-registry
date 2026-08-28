@@ -1,0 +1,64 @@
+{
+  "schema_version": "0.1",
+  "entry_type": "registry",
+  "verification_status": "verified",
+  "id": "ndnio3",
+  "name": "Neodymium nickelate",
+  "formula": "NdNiO3",
+  "class": "compound",
+  "equilibrium_context": "Coupled insulator-metal and antiferromagnetic transition at about 200 K, strain-dependent in films",
+  "driven_states": [
+    {
+      "id": "ds_magnetically_driven_metal",
+      "emergent_property": "Above-band-gap excitation first erases the magnetic order (below 180 fs); only afterwards does the insulating phase collapse (450 fs), in step with the slowest optical phonon mode. The charge order melts along with it.",
+      "stability": "driven_to_metastable",
+      "host_state": "AF insulator with charge order",
+      "drive": {
+        "type": "optical_pulse",
+        "photon_energy_eV": 1.55,
+        "wavelength_um": 0.8,
+        "pulse_duration_s": 1e-13
+      },
+      "lifetime_s": 1e-07,
+      "lifetime_range_s": [
+        1e-09,
+        1e-06
+      ],
+      "switching_time_s": 4.5e-13,
+      "threshold": {
+        "quantity": "fluence",
+        "value": null,
+        "unit": "mJ/cm^2",
+        "verified": false
+      },
+      "temperature_window_K": [
+        10,
+        200
+      ],
+      "mechanism": "mixed",
+      "evidence_level": "reproduced",
+      "source": "Stoica et al., Phys. Rev. B 106, 165104 (2022), doi:10.1103/PhysRevB.106.165104",
+      "further_sources": [
+        "Caviglia et al., Phys. Rev. Lett. 108, 136801 (2012), doi:10.1103/PhysRevLett.108.136801 (mid-IR excitation of a substrate phonon mode produces, via interfacial strain, a long-lived increase of the conductivity by five orders of magnitude)",
+        "Struct. Dyn. 5, 064501 (2018), arXiv:1809.10939"
+      ],
+      "caveat": "Stoica et al. argue for a magnetically driven ordering of events (spin first), which is non-thermal. The subsequent transformation is, however, clearly first order with nucleation, growth and supercooling; the recovery is thermally and kinetically limited (Avrami). The Caviglia case is mechanistically cleanly non-thermal, because the substrate is pumped and not the sample - there, however, the final state is a strain-induced and not a photodoped metallic phase."
+    }
+  ],
+  "sources": [
+    "Stoica et al., Phys. Rev. B 106, 165104 (2022), doi:10.1103/PhysRevB.106.165104",
+    "Caviglia et al., Phys. Rev. Lett. 108, 136801 (2012), doi:10.1103/PhysRevLett.108.136801"
+  ],
+  "gaps": [
+    "Fluence threshold not verified.",
+    "The lifetime is nucleation-limited and therefore sample-dependent."
+  ],
+  "provenance": {
+    "compiled": "ai_assisted",
+    "compiled_on": "2026-08-20",
+    "source_check": "primary_literature",
+    "peer_reviewed": false,
+    "reviewer": null,
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte; every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+  }
+}
