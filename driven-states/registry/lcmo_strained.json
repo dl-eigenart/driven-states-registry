@@ -36,7 +36,7 @@
       "evidence_level": "single_group",
       "source": "Zhang et al., Nature Materials 15, 956 (2016), doi:10.1038/nmat4695",
       "further_sources": [
-        "Nature Materials 18 (2019), doi:10.1038/s41563-019-0533-y (multi-messenger nanoprobes of hidden magnetism)"
+        "McLeod et al., Nature Materials 19, 397 (2020), doi:10.1038/s41563-019-0533-y (multi-messenger nanoprobes of hidden magnetism in a strained manganite)"
       ],
       "caveat": "The single-shot methodology rules out cumulative heating - a strong argument against a purely thermal origin, and methodologically the cleanest demonstration of metastability in the registry. The authors, however, describe the mechanism as cooperative via magneto-lattice coupling, not as a purely electronic Mott collapse. The photosusceptibility is a strain-engineering effect, not an intrinsic material property - transferability to unstrained material is not established."
     }

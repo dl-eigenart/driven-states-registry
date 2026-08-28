@@ -20,10 +20,10 @@ topology.
 | Metric | Distribution |
 |---|---|
 | Evidence | 11 established · 13 reproduced · 49 single group · 9 contested |
-| Stability | 44 driven · 16 metastable · 12 driven-to-metastable |
-| Mechanism | 31 electronic · 16 mixed · 14 lattice/strain · 5 thermal · 4 unresolved · 2 field tunnelling |
+| Stability | 50 driven · 17 metastable · 15 driven-to-metastable |
+| Mechanism | 35 electronic · 17 mixed · 15 lattice/strain · 6 thermal · 6 unresolved · 3 field tunnelling |
 | Lifetime | 1e-13 s to 1e7 s — **20 orders of magnitude** |
-| Equilibrium equivalent | 50 no · 9 partial · 1 yes |
+| Equilibrium equivalent | 60 no · 9 partial · 1 yes · 12 not recorded |
 
 The distribution is itself a result: **49 of 82 states come from a single group.** That is the
 central weakness of the field, and no review article makes it as visible as a table that counts

@@ -23,7 +23,7 @@
       },
       "lifetime_s": 3e-13,
       "evidence_level": "single_group",
-      "source": "Kanda, Murotani, Matsuda et al., arXiv:2301.06072 (2023), doi:10.48550/arXiv.2301.06072",
+      "source": "Hirai, Yoshikawa, Kawaguchi, Hayashi, Okumura, Oka & Shimano, arXiv:2301.06072 (2023), doi:10.48550/arXiv.2301.06072",
       "caveat": "Preprint. No journal version traceable since January 2023 - this is itself an evidence signal, and the entry is weighted low accordingly. The double Weyl points are a model statement of the effective Floquet Hamiltonian, not a direct measurement; what is measured is only a helicity-dependent Hall conductivity, which, as in the Cd3As2 case from the same group, originates predominantly from resonant one-photon contributions.",
       "equivalent_equilibrium_state": "no",
       "mechanism": "electronic",
@@ -35,7 +35,7 @@
     }
   ],
   "sources": [
-    "Kanda et al., arXiv:2301.06072 (2023), doi:10.48550/arXiv.2301.06072"
+    "Hirai et al., arXiv:2301.06072 (2023), doi:10.48550/arXiv.2301.06072"
   ],
   "gaps": [
     "Preprint without a journal version since 2023. verification_status remains pending."

@@ -37,8 +37,11 @@ one, `driven-states/registry/tas2_1t.json` a rich one — and follow these rules
 
 ### Hard rules
 
-1. **No entry without a primary source carrying a verified DOI or arXiv identifier.** A test
-   enforces this. If you cannot verify the identifier, the entry does not go in.
+1. **No entry without a primary source carrying a resolvable DOI or arXiv identifier.** Tests
+   enforce this for both entry types. If you cannot resolve the identifier, the entry does not
+   go in. Resolving means asking Crossref or DataCite and comparing the returned title,
+   journal, volume, page and author list against your citation string — a DOI that resolves to
+   *some* paper is not a checked DOI. `scripts/check_dois.py` does this for the whole dataset.
 2. **Every driven state needs a `caveat`.** State what is *not* shown, what is contested, which
    counter-position exists. A test rejects caveats shorter than 40 characters. This field is the
    scientific value of the register; an entry without limitations is an advertisement.

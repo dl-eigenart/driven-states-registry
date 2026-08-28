@@ -38,7 +38,7 @@
       "source": "Miyano, Tanaka, Tomioka & Tokura, Phys. Rev. Lett. 78, 4257 (1997), doi:10.1103/PhysRevLett.78.4257",
       "further_sources": [
         "Fiebig et al., Science 280, 1925 (1998), doi:10.1126/science.280.5371.1925 (spatially resolved visualization)",
-        "Polli et al., Nature Materials 6, 643 (2007), doi:10.1038/nmat1846 (coherent orbital waves)"
+        "Polli, Rini, Wall, Schoenlein, Tomioka, Tokura, Cerullo & Cavalleri, Nature Materials 6, 643 (2007), doi:10.1038/nmat1979 (coherent orbital waves)"
       ],
       "caveat": "Miyano et al. explicitly rule out laser heating, via the dependence on photon energy and temperature, which contradicts a heating model - one of the cleanest non-thermal arguments in the field. However: the effect requires an applied bias field and is therefore, strictly speaking, photo-assisted field-driven. Without a field the state does not appear. In addition, phase coexistence acts as an amplifier - the transition is in part a percolation threshold, not a homogeneous Mott collapse."
     },

@@ -128,7 +128,7 @@
         "unit": "J"
       },
       "confidence": "high",
-      "source": "Wang, Steinberg, Jarillo-Herrero & Gedik, Science 342, 453 (2013)",
+      "source": "Wang, Steinberg, Jarillo-Herrero & Gedik, Science 342, 453 (2013), doi:10.1126/science.1239834",
       "notes": "Floquet dressing has no physical threshold - the state exists as soon as the drive is running. The threshold of 1e-06 is purely a case distinction between drive on and drive off. In v0.1 this was incorrectly given as 0.5 mJ/cm^2, as if it were a real threshold."
     },
     {
@@ -150,7 +150,7 @@
         "condition": "2*kappa = sqrt(4V^2+(hbar*omega)^2) - hbar*omega, approximately 2V^2/(hbar*omega), hence proportional to E^2 and thus to the fluence; calibrated to 53 meV at 0.4 mJ/cm^2"
       },
       "confidence": "medium",
-      "source": "Wang, Steinberg, Jarillo-Herrero & Gedik, Science 342, 453 (2013), Eq. S1/S2, doi:10.1126/science.1239834",
+      "source": "Wang, Steinberg, Jarillo-Herrero & Gedik, Science 342, 453 (2013), doi:10.1126/science.1239834, Eq. S1/S2, doi:10.1126/science.1239834",
       "notes": "Exponent corrected from 0.5 to 1.0 relative to v0.1. The exponent 0.5 applies to the dynamical gap 2*Delta = 62 meV at the avoided crossing, not to the Dirac gap."
     },
     {
@@ -237,7 +237,7 @@
       "host_state": "ti_equilibrium",
       "lifetime_s": 2.5e-13,
       "evidence_level": "single_group",
-      "source": "Wang, Steinberg, Jarillo-Herrero & Gedik, Science 342, 453 (2013)",
+      "source": "Wang, Steinberg, Jarillo-Herrero & Gedik, Science 342, 453 (2013), doi:10.1126/science.1239834",
       "notes": "Downgraded from established to single_group. The phenomenon is independently established - WSe2 (Aeschlimann et al. 2021, with an s-polarized test against Volkov contributions), topological insulator surfaces (Ito et al. 2023), graphene (two independent groups 2025), MnBi2Te4 (2024). On Bi2Se3 itself, however, all measurements come from the Gedik group (Wang 2013; Mahmood 2016). The entry describes a material, not the phenomenon - hence single_group. Polarization assignment made more precise after checking the sources: circular for 2*kappa, linear for 2*Delta.",
       "stability": "driven",
       "mechanism": "electronic",
@@ -279,7 +279,7 @@
     "The edge c_gate_bulk is device-dependent and practically ineffective in thick crystals."
   ],
   "sources": [
-    "Wang, Steinberg, Jarillo-Herrero & Gedik, Science 342, 453 (2013), doi:10.1126/science.1239834",
+    "Wang, Steinberg, Jarillo-Herrero & Gedik, Science 342, 453 (2013), doi:10.1126/science.1239834, doi:10.1126/science.1239834",
     "Mahmood et al., Nature Physics 12, 306 (2016), doi:10.1038/nphys3609 (same group)",
     "Aeschlimann et al., Nano Lett. 21, 5028 (2021), doi:10.1021/acs.nanolett.1c00801 (independent, WSe2)",
     "Ito et al., Nature 616, 696 (2023), doi:10.1038/s41586-023-05850-x",

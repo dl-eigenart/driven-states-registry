@@ -199,5 +199,39 @@ class TestRegistry(unittest.TestCase):
                 self.assertEqual(e["verification_status"], "pending", e["id"])
 
 
+class TestRptDrivenStates(unittest.TestCase):
+    """The same source rules, applied to the 12 full entries.
+
+    Until 28 August 2026 the rules above were enforced on the 54 registry files
+    only, while CONTRIBUTING.md claimed they held for every entry.  Three RPT
+    primary sources carried no identifier at all under that gap.  The RPT entries
+    use `notes` where the registry uses `caveat`; both are accepted here, because
+    what matters is that the limitation is written down, not what the field is
+    called.
+    """
+
+    def _states(self):
+        for eid, e in sorted(E.items()):
+            for d in e.get("driven_states", []):
+                yield eid, d
+
+    def test_every_source_has_a_doi_or_arxiv_id(self):
+        for eid, d in self._states():
+            s = d.get("source", "").lower()
+            self.assertTrue("doi:" in s or "arxiv" in s,
+                            "%s/%s without DOI: %s" % (eid, d["id"], d.get("source")))
+
+    def test_every_state_states_its_limitation(self):
+        for eid, d in self._states():
+            text = d.get("caveat") or d.get("notes") or ""
+            self.assertTrue(len(text) > 40,
+                            "%s/%s: neither caveat nor notes of substance" % (eid, d["id"]))
+
+    def test_every_state_records_what_was_measured(self):
+        for eid, d in self._states():
+            self.assertTrue((d.get("measured_quantity") or "").strip(),
+                            "%s/%s without measured_quantity" % (eid, d["id"]))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

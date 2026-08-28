@@ -230,7 +230,7 @@
         "unit": "mJ/cm^2"
       },
       "evidence_level": "contested",
-      "source": "Mitrano et al., Nature 530, 461 (2016); Budden et al., Nature Physics 17, 611 (2021)",
+      "source": "Mitrano et al., Nature 530, 461 (2016), doi:10.1038/nature16522; Budden et al., Nature Physics 17, 611 (2021), doi:10.1038/s41567-020-01148-1",
       "notes": "The most important entry for the nonequilibrium extension and at the same time the most uncertain. The measurement has been reproduced, the interpretation as genuine superconductivity is not generally accepted. Budden 2021 shows a direct transport result with vanishingly small resistance; the Meissner test, however, came out negative (only an upper bound chi_v > -0.1). Dodge et al. show that optical saturation can produce the same signature. evidence_level=contested is the honest classification here.",
       "stability": "driven",
       "mechanism": "unresolved",

@@ -263,7 +263,7 @@
         "condition": "above Tc, driving apical oxygen modes"
       },
       "confidence": "low",
-      "source": "Kaiser et al., Phys. Rev. B 89, 184516 (2014); Hu et al., Nature Materials 13, 705 (2014)"
+      "source": "Kaiser et al., Phys. Rev. B 89, 184516 (2014); Hu et al., Nature Materials 13, 705 (2014), doi:10.1038/nmat3963"
     },
     {
       "id": "c_coherence_plasma",
@@ -351,7 +351,7 @@
       "host_state": "normal",
       "lifetime_s": 1e-12,
       "evidence_level": "reproduced",
-      "source": "Hu et al., Nature Materials 13, 705 (2014)",
+      "source": "Hu et al., Nature Materials 13, 705 (2014), doi:10.1038/nmat3963",
       "notes": "Better documented than the K3C60 case, because the Josephson plasma edge is a more specific signal. The interpretation is nevertheless not conclusive.",
       "stability": "driven",
       "mechanism": "lattice_strain",
@@ -419,7 +419,7 @@
   "sources": [
     "Wu et al., Phys. Rev. Lett. 58, 908 (1987), doi:10.1103/PhysRevLett.58.908",
     "Jorgensen et al., Phys. Rev. B 41, 1863 (1990), doi:10.1103/PhysRevB.41.1863; Erratum Phys. Rev. B 42, 995 (1990)",
-    "Hu et al., Nature Materials 13, 705 (2014), doi:10.1038/nmat3963",
+    "Hu et al., Nature Materials 13, 705 (2014), doi:10.1038/nmat3963, doi:10.1038/nmat3963",
     "Kaiser et al., Phys. Rev. B 89, 184516 (2014), doi:10.1103/PhysRevB.89.184516",
     "Fausti et al., Science 331, 189 (2011) (precursor result in related cuprates)",
     "Fava et al., Nature 632, 75 (2024), doi:10.1038/s41586-024-07635-2",

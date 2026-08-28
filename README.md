@@ -32,8 +32,17 @@ either, although the dispute over light-induced superconductivity shows exactly 
 ## Provenance — read this first
 
 Literature search and field extraction were performed by **AI agents under human direction**.
-Every numerical value and citation was checked against the cited work and every DOI verified.
 **No entry has been reviewed by a domain expert.** `peer_reviewed: false` holds for all 82 states.
+
+On 28 August 2026 all 147 distinct identifiers in the dataset were resolved
+programmatically against Crossref and DataCite, and the returned title, journal, volume,
+page and author list compared against the citation string stored here. All 147 resolve.
+The pass found and fixed four errors: one DOI pointing to an entirely different paper, one
+wrong volume and year, one invented author list on a preprint, and one secondary reference
+labelled ambiguously. It also found that three primary sources in `rpt/entries/` carried no
+identifier at all, because the tests enforcing that rule read only `driven-states/registry/`.
+Both gaps are closed. This is stated rather than summarised as "verified" because the
+earlier wording claimed more than had been done.
 
 This is a structured, fully sourced starting point, not a reviewed reference. Every entry carries
 its sources so that any claim can be checked against the original. Corrections are the intended
@@ -44,8 +53,8 @@ path to improvement — see [CONTRIBUTING.md](CONTRIBUTING.md).
 | Metric | Distribution |
 |---|---|
 | Evidence | 11 established · 13 reproduced · **49 single group** · 9 contested |
-| Stability | 44 driven · 16 metastable · 12 driven-to-metastable |
-| Mechanism | 31 electronic · 16 mixed · 14 lattice/strain · 5 thermal · 4 unresolved · 2 field tunnelling |
+| Stability | 50 driven · 17 metastable · 15 driven-to-metastable |
+| Mechanism | 35 electronic · 17 mixed · 15 lattice/strain · 6 thermal · 6 unresolved · 3 field tunnelling |
 | Lifetime | 1e-13 s to 1e7 s — 20 orders of magnitude |
 
 The distribution is itself a finding. **Forty-nine of eighty-two states rest on a single group.**
