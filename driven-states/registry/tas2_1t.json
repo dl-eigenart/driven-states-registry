@@ -23,7 +23,7 @@
       "lifetime_s": 100000.0,
       "evidence_level": "established",
       "source": "Stojchevska et al., Science 344, 177 (2014), doi:10.1126/science.1241591",
-      "caveat": "The phenomenology is very well established and has been reproduced many times. The structure of the hidden state has only partly been clarified after the fact; the original interpretation as a topologically protected state is today regarded as outdated or unsupported. The precise charge and domain configuration within the layer remains contested.",
+      "caveat": "The phenomenology is very well established and has been reproduced many times. The in-plane charge and domain configuration was resolved by scanning tunnelling microscopy: chiral domain tiling intertwined with unpaired dislocations (Gerasimenko et al., npj Quantum Mater. 4, 32 (2019), doi:10.1038/s41535-019-0172-1). The original interpretation as a topologically protected state is contested but not superseded. No alternative mechanism for the dynamical pathway into the state has been validated, and the recent structural work addresses the equilibrium end state rather than the route into it. Defect-governed dynamics have been observed directly (Domröse et al., Nat. Mater. 22, 1345 (2023); Lee, Sutter et al., Nat. Phys. 22, 68 (2026)), while a competing phonon- and stacking-driven route is under investigation. Texture formation through photoexcitation and photodoping is not in dispute.",
       "equivalent_equilibrium_state": "no",
       "mechanism": "electronic",
       "host_state": "commensurate CDW, Mott insulator",
@@ -116,7 +116,7 @@
       "lifetime_s": 10000.0,
       "evidence_level": "reproduced",
       "source": "Stahl et al., Nat. Commun. 11, 1247 (2020), doi:10.1038/s41467-020-15079-1",
-      "caveat": "Concerns the stacking order, not the in-plane charge configuration. The hidden state is thereby partly clarified, not solved. Competing models - domain wall network versus altered stacking sequence - have not been decided between.",
+      "caveat": "Concerns the stacking order, not the in-plane charge configuration. The hidden state is thereby partly clarified, not solved. Competing models, domain wall network versus altered stacking sequence, have not been decided between. The X-ray result constrains the end state, not the pathway into it; whether the local stacking sequence is disrupted during switching is a separate open question.",
       "equivalent_equilibrium_state": "no",
       "mechanism": "mixed",
       "temperature_window_K": [
@@ -182,7 +182,8 @@
     "Lee, Sutter et al., Nature Physics 22, 68 (2026), doi:10.1038/s41567-025-03108-z"
   ],
   "gaps": [
-    "What the hidden state microscopically IS has, after twelve years, only been partly answered.",
+    "The in-plane structure of the hidden state is resolved by STM; whether the local interlayer stacking is disrupted during switching is not.",
+    "The dynamical pathway into the hidden state is unsettled. Defect-driven and phonon/stacking-driven accounts both have time-resolved support; neither has been validated against the other.",
     "Whether the current-, light- and THz-generated states are identical has not been clarified.",
     "The THz entry rests on a preprint."
   ],
