@@ -23,7 +23,7 @@
       "lifetime_s": 100000.0,
       "evidence_level": "established",
       "source": "Stojchevska et al., Science 344, 177 (2014), doi:10.1126/science.1241591",
-      "caveat": "The phenomenology is very well established and has been reproduced many times. The in-plane charge and domain configuration was resolved by scanning tunnelling microscopy: chiral domain tiling intertwined with unpaired dislocations (Gerasimenko et al., npj Quantum Mater. 4, 32 (2019), doi:10.1038/s41535-019-0172-1). The original interpretation as a topologically protected state is contested but not superseded. No alternative mechanism for the dynamical pathway into the state has been validated, and the recent structural work addresses the equilibrium end state rather than the route into it. Defect-governed dynamics have been observed directly (Domröse et al., Nat. Mater. 22, 1345 (2023); Lee, Sutter et al., Nat. Phys. 22, 68 (2026)), while a competing phonon- and stacking-driven route is under investigation. Texture formation through photoexcitation and photodoping is not in dispute.",
+      "caveat": "The phenomenology is very well established and has been reproduced many times. The in-plane charge and domain configuration was resolved by scanning tunnelling microscopy: chiral domain tiling intertwined with unpaired dislocations (Gerasimenko et al., npj Quantum Mater. 4, 32 (2019), doi:10.1038/s41535-019-0172-1). The original interpretation as a topologically protected state is contested but not superseded. No alternative mechanism for the dynamical pathway into the state has been validated, and the recent structural work addresses the equilibrium end state rather than the route into it. Two time-resolved diffraction studies of 1T-TaS2 report defect-mediated dynamics in other photoinduced transitions: a hexatic intermediate in the NC-to-IC transformation (Domröse et al., Nat. Mater. 22, 1345 (2023), doi:10.1038/s41563-023-01600-6) and a defect-unbinding transition to a CDW liquid (Lee, Sutter et al., Nat. Phys. 22, 68 (2026), doi:10.1038/s41567-025-03108-z). In both, the defects are inferred from the diffraction signature rather than imaged, and neither addresses the pathway into the long-lived hidden state. A competing phonon- and stacking-driven route is under investigation. Texture formation through photoexcitation and photodoping is not in dispute.",
       "equivalent_equilibrium_state": "no",
       "mechanism": "electronic",
       "host_state": "commensurate CDW, Mott insulator",
@@ -193,6 +193,6 @@
     "source_check": "primary_literature",
     "peer_reviewed": false,
     "reviewer": null,
-    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte (independent researcher); every numerical value and citation checked against the cited work and every DOI verified. Not reviewed by a domain expert. Corrections are welcome and are the intended path to improvement."
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte (independent researcher); every numerical value and citation checked against the cited work and every DOI verified. One entry has been revised after feedback from a domain expert; no entry has undergone peer review. Corrections are welcome and are the intended path to improvement."
   }
 }
