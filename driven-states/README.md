@@ -113,6 +113,13 @@ identifiers and caveats inside an English interface would exclude exactly that a
 
 ## Limits of this version
 
+- The six searched domains are all light-driven. The schema admits `current`,
+  `electric_field`, `ac_field`, `microwave` and `acoustic` drives, but no systematic
+  search was run for any of them. 79 of 82 states are driven by an optical or THz
+  field; the three remaining entries are incidental findings from the optical
+  searches, not the result of a search of their own. The drive-type distribution in
+  this version is therefore a property of the search strategy, not a finding about
+  the field.
 - Two entries stay `pending` because they rest on preprints without a journal version
   (SnS, bismuth). A test enforces this.
 - Microstructure — pinning, grain boundaries, defects — cannot be represented, though it
