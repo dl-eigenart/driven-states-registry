@@ -182,6 +182,7 @@
     "Lee, Sutter et al., Nature Physics 22, 68 (2026), doi:10.1038/s41567-025-03108-z"
   ],
   "gaps": [
+    "The system is complex enough that not all questions have reached consensus. Some interpretations recorded here are not consistent with earlier work on the same points; the entry reports the disagreement rather than settling it.",
     "The in-plane structure of the hidden state is resolved by STM; whether the local interlayer stacking is disrupted during switching is not.",
     "The dynamical pathway into the hidden state is unsettled. Defect-driven and phonon/stacking-driven accounts both have time-resolved support; neither has been validated against the other.",
     "Whether the current-, light- and THz-generated states are identical has not been clarified.",
@@ -193,6 +194,6 @@
     "source_check": "primary_literature",
     "peer_reviewed": false,
     "reviewer": null,
-    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte (independent researcher); every numerical value and citation checked against the cited work and every DOI verified. One entry has been revised after feedback from a domain expert; no entry has undergone peer review. Corrections are welcome and are the intended path to improvement."
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte (independent researcher); every numerical value and citation checked against the cited work and every DOI verified. The hidden-state statements in this entry were revised in September 2026 after comments by Dragan Mihailovic; that was correspondence, not peer review, and this entry has not undergone peer review. Corrections are welcome and are the intended path to improvement."
   }
 }
