@@ -1,5 +1,4 @@
-version: 0.1.2
-date-released: "2026-09-16"
+cff-version: 1.2.0
 title: Driven States Registry and Reactive Periodic Table
 message: If you use this dataset or software, please cite it as below.
 type: dataset
@@ -18,19 +17,24 @@ identifiers:
   - type: doi
     value: 10.5281/zenodo.22142491
     description: DOI of version 0.1.0
-version: 0.1.0
-date-released: "2026-08-20"
+  - type: doi
+    value: 10.5281/zenodo.22677116
+    description: DOI of version 0.1.1
+version: 0.1.2
+date-released: "2026-09-16"
 license: CC-BY-4.0
 license-url: https://creativecommons.org/licenses/by/4.0/
 abstract: >-
   An openly graded registry of material states that exist only while a drive is
   running - light-induced phases and Floquet-engineered bands - together with a
   machine-readable description layer for the controllability of matter. Version
-  0.1.0 records 82 driven states across 58 host materials from six domains, each
+  0.1.2 records 82 driven states across 58 host materials from six domains, each
   with drive parameters, lifetime, mechanism, an explicit evidence level and a
-  primary source with DOI. Compilation was AI-assisted under human direction and
-  checked against primary literature; no entry has been reviewed by a domain
-  expert.
+  primary source with DOI. The searched domains are light-driven throughout;
+  non-optical drives are admitted by the schema but not yet surveyed. Compilation
+  was AI-assisted under human direction and checked against primary literature. No
+  entry has undergone peer review; one entry was revised in September 2026 after
+  comments from a domain expert, which was correspondence, not review.
 keywords:
   - Floquet engineering
   - light-induced superconductivity
@@ -39,3 +43,4 @@ keywords:
   - non-equilibrium materials
   - materials database
   - FAIR data
+ 
