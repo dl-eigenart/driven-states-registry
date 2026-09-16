@@ -32,10 +32,10 @@ either, although the dispute over light-induced superconductivity shows exactly 
 
 ## Provenance — read this first
 
+Literature search and field extraction were performed by **AI agents under human direction**.
 **No entry has undergone peer review.** `peer_reviewed: false` holds for all 82 states.
 One entry was revised in September 2026 after comments from a domain expert; that was
 correspondence, not review.
-**No entry has been reviewed by a domain expert.** `peer_reviewed: false` holds for all 82 states.
 
 On 28 August 2026 all 147 distinct identifiers in the dataset were resolved
 programmatically against Crossref and DataCite, and the returned title, journal, volume,
