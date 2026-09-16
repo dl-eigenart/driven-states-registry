@@ -10,7 +10,8 @@ Two connected pieces of open infrastructure for **non-equilibrium materials**:
 - **[`driven-states/`](driven-states/)** — a registry of material states that exist *only while a
   drive is running*: light-induced phases and Floquet-engineered bands. 82 states across 58 host
   materials, each with drive parameters, lifetime, mechanism, an explicit evidence level and a
-  primary source with a verified DOI.
+  primary source with a verified DOI. The searched domains are light-driven
+  throughout; non-optical drives are admitted by the schema but not yet surveyed.
 - **[`rpt/`](rpt/)** — a machine-readable description layer for the **controllability** of matter,
   with an evaluator that propagates actuator values through a coupling graph and reports the
   critical path, energy costs and control-loop behaviour.
