@@ -20,6 +20,9 @@ identifiers:
   - type: doi
     value: 10.5281/zenodo.22677116
     description: DOI of version 0.1.1
+  - type: doi
+    value: 10.5281/zenodo.22788908
+    description: DOI of version 0.1.2
 version: 0.1.2
 date-released: "2026-09-16"
 license: CC-BY-4.0
@@ -43,4 +46,3 @@ keywords:
   - non-equilibrium materials
   - materials database
   - FAIR data
- 
