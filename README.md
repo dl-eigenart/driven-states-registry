@@ -110,7 +110,7 @@ because software and data collections are reused differently in research.
 
 See [CITATION.cff](CITATION.cff). Archived on Zenodo:
 
-> Leonforte, D. (2026). *Driven States Registry and Reactive Periodic Table* (v0.1.0)
+> Leonforte, D. (2026). *Driven States Registry and Reactive Periodic Table* (v0.1.2)
 > [Data set]. Zenodo. https://doi.org/10.5281/zenodo.22142491
 
 Two DOIs exist. **10.5281/zenodo.22142490** is the concept DOI and always resolves to the
