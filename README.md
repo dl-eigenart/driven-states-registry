@@ -111,11 +111,11 @@ because software and data collections are reused differently in research.
 See [CITATION.cff](CITATION.cff). Archived on Zenodo:
 
 > Leonforte, D. (2026). *Driven States Registry and Reactive Periodic Table* (v0.1.2)
-> [Data set]. Zenodo. https://doi.org/10.5281/zenodo.22142491
+> [Data set]. Zenodo. https://doi.org/10.5281/zenodo.22788908
 
-Two DOIs exist. **10.5281/zenodo.22142490** is the concept DOI and always resolves to the
-latest version - cite this one unless you depend on a specific snapshot.
-**10.5281/zenodo.22142491** points to v0.1.0 and will never change.
+**10.5281/zenodo.22142490** is the concept DOI and always resolves to the latest version.
+Cite this one unless you depend on a specific snapshot. Every version also carries its own
+DOI that never changes; for v0.1.2 that is **10.5281/zenodo.22788908**.
 
 ## Language
 
