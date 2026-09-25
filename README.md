@@ -41,7 +41,7 @@ On 28 August 2026 all 147 distinct identifiers in the dataset were resolved
 programmatically against Crossref and DataCite, and the returned title, journal, volume,
 page and author list compared against the citation string stored here. All 147 resolve.
 The pass found and fixed four errors: one DOI pointing to an entirely different paper, one
-wrong volume and year, one invented author list on a preprint, and one secondary reference
+wrong volume and year, one preprint carrying the author list of a different paper, and one secondary reference
 labelled ambiguously. It also found that three primary sources in `rpt/entries/` carried no
 identifier at all, because the tests enforcing that rule read only `driven-states/registry/`.
 Both gaps are closed. This is stated rather than summarised as "verified" because the
