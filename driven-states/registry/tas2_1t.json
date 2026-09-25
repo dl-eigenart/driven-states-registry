@@ -194,6 +194,6 @@
     "source_check": "primary_literature",
     "peer_reviewed": false,
     "reviewer": null,
-    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte (independent researcher); every numerical value and citation checked against the cited work and every DOI verified. The hidden-state statements in this entry were revised in September 2026 after comments by Dragan Mihailovic; that was correspondence, not peer review, and this entry has not undergone peer review. Corrections are welcome and are the intended path to improvement."
+    "notes": "Literature search and field extraction by AI agents under the direction of D. Leonforte (independent researcher). All DOI and arXiv identifiers were resolved against Crossref and DataCite and compared with the stored citation strings in August and September 2026. The hidden-state statements in this entry were revised in September 2026 after comments by Dragan Mihailovic; that was correspondence, not peer review, and this entry has not undergone peer review. Corrections are welcome and are the intended path to improvement."
   }
 }

@@ -145,9 +145,10 @@ code{font-family:var(--mono); font-size:12.5px; background:#f2f2ef; padding:1px 
   <div class="stats" id="stats"></div>
   <div class="prov">
     <b>Provenance.</b> Literature search and field extraction were performed by AI agents under
-    human direction. Every numerical value and citation was checked against the cited work and
-    every DOI verified — but <b>no entry has been reviewed by a domain expert.</b>
-    <code>peer_reviewed: false</code> holds for all 82 states. Treat this as a structured,
+    human direction. All DOI and arXiv identifiers were resolved against Crossref and DataCite and
+    compared with the stored citation strings — but <b>no entry has undergone peer review.</b>
+    <code>peer_reviewed: false</code> holds for all 82 states. One entry was revised in September
+    2026 after comments from a domain expert; that was correspondence, not review. Treat this as a structured,
     fully sourced starting point, not as a reviewed reference. Corrections are the intended path
     to improvement; each entry carries its sources so any claim can be checked at the source.
   </div>
@@ -468,7 +469,7 @@ function renderDetail(){
       '<tr><td class="k">Source check</td><td>' + esc(e.provenance.source_check.replace(/_/g,' ')) + '</td></tr>' +
       '<tr><td class="k">Peer reviewed</td><td>' + (e.provenance.peer_reviewed ?
         esc(e.provenance.reviewer || 'yes') :
-        '<b style="color:var(--ev-single)">no</b> — not reviewed by a domain expert') + '</td></tr>' +
+        '<b style="color:var(--ev-single)">no</b> — not peer reviewed') + '</td></tr>' +
       '</table></section>' : ''}
     <section><h4>Primary source</h4><ul class="src"><li>${esc(d.source||'')}</li></ul></section>
     <section><h4>All sources for this material</h4><ul class="src">${

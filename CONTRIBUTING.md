@@ -6,9 +6,10 @@ than letting it stand.
 
 ## What this project is, and what it is not
 
-Every entry was compiled with AI assistance under human direction, checked against the cited
-primary literature, and carries a verified DOI. **No entry has been reviewed by a domain
-expert.** `peer_reviewed: false` is true for all of them. The registry is a structured, fully
+Every entry was compiled with AI assistance under human direction and carries a DOI or arXiv
+identifier that has been resolved against Crossref or DataCite and compared with its citation
+string. **No entry has undergone peer review.** `peer_reviewed: false` is true for all of them;
+one entry was revised after comments from a domain expert, which was correspondence, not review. The registry is a structured, fully
 sourced starting point — not a reviewed reference. It is only useful if it stays honest about
 that.
 
